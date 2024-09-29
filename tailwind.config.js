@@ -27,7 +27,11 @@ module.exports = {
         'warning-content': '#161102',
         'error': '#be123c',
         'error-content': '#f8d5d6',
-      }
+      },
+      fontFamily: {
+        'ff-clan': ['FF Clan Pro', 'sans-serif'],
+        sans: ['FF Clan Pro', 'sans-serif'],
+      },
     },
   },
   plugins: [require("daisyui")],

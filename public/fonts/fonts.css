@@ -1,49 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  @font-face {
+/* fonts.css */
+@font-face {
     font-family: 'FF Clan Pro';
-    src: url('/fonts/FFClanProRegular.woff2') format('woff2');
+    src: url('FFClanProRegular.woff2') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: 'FF Clan Pro';
-    src: url('/fonts/FFClanProItalic.woff2') format('woff2');
+    src: url('FFClanProItalic.woff2') format('truetype');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: 'FF Clan Pro';
-    src: url('/fonts/FFClanProBold.woff2') format('woff2');
+    src: url('FFClanProBold.woff2') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: 'FF Clan Pro';
-    src: url('/fonts/FFClanProMedium.woff2') format('woff2');
+    src: url('FFClanProMedium.woff2') format('truetype');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: 'FF Clan Pro';
-    src: url('/fonts/FFClanProUltIt.woff2') format('woff2');
+    src: url('FFClanProUltIt.woff2') format('truetype');
     font-weight: 900;
     font-style: italic;
     font-display: swap;
-  }
-
-  body {
-    @apply font-sans;
-  }
 }
