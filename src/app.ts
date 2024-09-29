@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import { setupDatabase } from './config/database';
+import homeRouter from './routes/home'; // Importieren Sie den Home-Router
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,9 +22,7 @@ app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
 // Routes
-app.get('/', (req, res) => {
-  res.render('pages/home', { title: 'Home' });
-});
+app.use('/', homeRouter); // Verwenden Sie den Home-Router
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

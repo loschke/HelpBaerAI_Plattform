@@ -10,7 +10,7 @@
     <main class="flex-grow">
         <div class="container mx-auto px-4 py-10 lg:py-20">
             <div class="text-center mb-16">
-                <h1 class="text-5xl md:text-7xl font-ff-clan mb-4">
+                <h1 class="text-5xl md:text-7xl font-ff-clan mb-4 text-white">
                     <span class="text-primary font-black">HelpBärAI</span><br>
                     Dein bärenstarkes AI Team
                 </h1>
@@ -24,12 +24,29 @@
 
             <h2 class="text-3xl font-bold mb-8 text-center">Dürfen wir vorstellen ...</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <%- include('../partials/ai-assistant-card', { title: 'Website-Analyse-Assistent', description: 'Durchleuchtet und optimiert Ihre Website von A bis Z.', image: '/placeholder.svg?height=200&width=400', alt: 'Webbert' }) %>
-                <%- include('../partials/ai-assistant-card', { title: 'Text-Analyse-Assistent', description: 'Untersucht und bewertet Ihre Texte für maximale Wirkung.', image: '/placeholder.svg?height=200&width=400', alt: 'Schlaubert' }) %>
-                <%- include('../partials/ai-assistant-card', { title: 'Bild-Erstellungs-Assistent', description: 'Verwandelt Ihre Ideen in coole visuelle Inhalte.', image: '/placeholder.svg?height=200&width=400', alt: 'Kritzelbert' }) %>
-                <%- include('../partials/ai-assistant-card', { title: 'Bild-Analyse-Assistent', description: 'Entschlüsselt die Botschaften und Potenziale Ihrer Bilder.', image: '/placeholder.svg?height=200&width=400', alt: 'Pixelbert' }) %>
-                <%- include('../partials/ai-assistant-card', { title: 'Copywriter & Storyteller-Assistent', description: 'Formt Ihre Unternehmensbotschaft in fesselnde Geschichten.', image: '/placeholder.svg?height=200&width=400', alt: 'Storybert' }) %>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <% aiAssistants.forEach(assistant => { %>
+                    <%- include('../partials/ai-assistant-card', { 
+                        ...assistant, 
+                        imageClass: 'aspect-square object-cover',
+                        buttonText: assistant.buttonText || 'Mehr erfahren',
+                        buttonLink: assistant.buttonLink || '#',
+                        task: assistant.task || 'Allgemeiner Assistent'
+                    }) %>
+                <% }); %>
+                <div class="card shadow-xl bg-info">
+                    <figure>
+                        <img src="images/neubert.png" alt="Dein eigener AI-Assistent" class="w-full">
+                    </figure>
+                    <div class="card-body text-info-content">
+                        <p class="text-sm font-semibold text-white mb-2">Dein eigener AI-Assistent</p>
+                        <h2 class="card-title text-black">Corporate Assistant</h2>
+                        <p>Beschreibung</p>
+                        <div class="card-actions justify-start mt-4">
+                            <button class="btn btn-secondary">Ich möchte einen Assistenten</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

@@ -1,10 +1,13 @@
-<div class="card bg-base-200 shadow-xl">
-    <figure><img src="<%= image %>" alt="<%= alt %>" class="w-full h-48 object-cover" /></figure>
+<div class="card bg-base-300 shadow-xl">
+    <figure>
+        <img src="<%= image %>" alt="<%= alt %>" class="w-full <%= imageClass %>">
+    </figure>
     <div class="card-body">
-        <h2 class="card-title"><%= title %></h2>
+        <p class="text-sm font-semibold text-white mb-2"><%= task %></p>
+        <h2 class="card-title text-primary mb-2"><%= title %></h2>
         <p><%= description %></p>
-        <div class="card-actions justify-end">
-            <button class="btn btn-primary">Starten</button>
+        <div class="card-actions justify-start mt-4">
+            <a href="<%= buttonLink %>" class="btn"><%= buttonText %></a>
         </div>
     </div>
 </div>
