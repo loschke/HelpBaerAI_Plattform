@@ -17,10 +17,12 @@ async function setupDatabase() {
       email TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL,
       is_verified BOOLEAN DEFAULT 0,
+      is_admin BOOLEAN DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
+  
   await db.close();
 }
 

@@ -1,37 +1,34 @@
-import { openDb } from '../config/database';
+import { Database } from 'sqlite';
+import bcrypt from 'bcryptjs';
 
 interface User {
   id?: number;
   username: string;
   email: string;
   password: string;
-  is_verified: boolean;
-  created_at?: string;
-  updated_at?: string;
+  isVerified: boolean;
+  isAdmin: boolean; // Neue Eigenschaft
 }
 
-async function createUser(user: Omit<User, 'id' | 'created_at' | 'updated_at'>): Promise<number> {
-  const db = await openDb();
+async function createUser(db: Database, user: User): Promise<number> {
+  const hashedPassword = await bcrypt.hash(user.password, 10);
   const result = await db.run(
-    'INSERT INTO users (username, email, password, is_verified) VALUES (?, ?, ?, ?)',
-    [user.username, user.email, user.password, user.is_verified]
+    'INSERT INTO users (username, email, password, is_verified, is_admin) VALUES (?, ?, ?, ?, ?)',
+    [user.username, user.email, hashedPassword, user.isVerified, user.isAdmin || false]
   );
-  await db.close();
   return result.lastID!;
 }
 
-async function getUserById(id: number): Promise<User | undefined> {
-  const db = await openDb();
-  const user = await db.get<User>('SELECT * FROM users WHERE id = ?', [id]);
-  await db.close();
-  return user;
+async function getUserByEmail(db: Database, email: string): Promise<User | undefined> {
+  return db.get('SELECT * FROM users WHERE email = ?', [email]);
 }
 
-async function getUserByEmail(email: string): Promise<User | undefined> {
-  const db = await openDb();
-  const user = await db.get<User>('SELECT * FROM users WHERE email = ?', [email]);
-  await db.close();
-  return user;
+async function verifyUser(db: Database, userId: number): Promise<void> {
+  await db.run('UPDATE users SET is_verified = 1 WHERE id = ?', [userId]);
 }
 
-export { User, createUser, getUserById, getUserByEmail };
+async function getUserById(db: Database, id: number): Promise<User | undefined> {
+  return db.get('SELECT * FROM users WHERE id = ?', [id]);
+}
+
+export { User, createUser, getUserByEmail, verifyUser, getUserById };

@@ -5,6 +5,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import { setupDatabase } from './config/database';
 import homeRouter from './routes/home'; // Importieren Sie den Home-Router
+import authRouter from './routes/auth'; // Importieren Sie den Auth-Router
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,6 +24,7 @@ app.set('view engine', 'ejs');
 
 // Routes
 app.use('/', homeRouter); // Verwenden Sie den Home-Router
+app.use('/auth', authRouter); // Verwenden Sie den Auth-Router
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
