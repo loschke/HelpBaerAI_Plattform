@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="helpbaerai">
+<head>
+    <%- include('../partials/head') %>
+    <title>Registrierung erfolgreich | HelpBärAI</title>
+</head>
+<body class="bg-base-100 text-base-content flex flex-col min-h-screen">
+    <%- include('../partials/header') %>
+    
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="max-w-md mx-auto bg-base-200 p-8 rounded-lg shadow-lg">
+            <h1 class="text-3xl font-bold mb-8 text-center text-success">Registrierung fast fertig</h1>
+            <p class="mb-4">
+                Wir haben dir eine <strong class="text-white">Bestätigungs-E-Mail</strong> an die von dir angegebene E-Mail-Adresse gesendet. 
+                Bitte klicke auf den Link in dieser E-Mail, um dein <strong class="text-white">Konto zu aktivieren</strong>.
+            </p>
+            <p class="mb-6">
+                <strong>Wichtiger Hinweis:</strong> Falls du die E-Mail nicht in deinem Posteingang findest, 
+                überprüfe bitte auch deinen Spam-Ordner.
+            </p>
+            <p class="text-center">
+                <a href="/auth/login" class="btn btn-primary">Direkt zum Login</a>
+            </p>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>

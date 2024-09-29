@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="helpbaerai">
+<head>
+    <%- include('../partials/head') %>
+    <title>Profil | HelpBärAI</title>
+</head>
+<body class="bg-base-100 text-base-content flex flex-col min-h-screen">
+    <%- include('../partials/header') %>
+    
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="max-w-2xl mx-auto bg-base-200 p-8 rounded-lg shadow-lg">
+            <h1 class="text-3xl font-bold mb-8 text-center text-primary">Mein Profil</h1>
+            <% if (locals.user) { %>
+                <div class="space-y-4">
+                    <p><strong>Name:</strong> <%= user.firstname %></p>
+                    <p><strong>E-Mail:</strong> <%= user.email %></p>
+                    <p><strong>Status:</strong> <%= user.isVerified ? 'Verifiziert' : 'Nicht verifiziert' %></p>
+                </div>
+                <div class="mt-8">
+                    <a href="/auth/logout" class="btn btn-primary">Ausloggen</a>
+                </div>
+            <% } else { %>
+                <p class="text-center">Benutzerinformationen konnten nicht geladen werden.</p>
+            <% } %>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>

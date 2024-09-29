@@ -28,4 +28,22 @@ async function sendVerificationEmail(email: string, userId: number) {
   await transporter.sendMail(mailOptions);
 }
 
-export { sendVerificationEmail };
+async function sendPasswordResetEmail(email: string, resetToken: string) {
+  const resetLink = `http://localhost:3000/auth/reset-password/${resetToken}`;
+
+  const mailOptions = {
+    from: '"Rico von HelpBärAI" <agent@kvix.de>',
+    to: email,
+    subject: 'Reset Your Password',
+    html: `
+      <h1>Password Reset Request</h1>
+      <p>You have requested to reset your password. Please click the link below to set a new password:</p>
+      <a href="${resetLink}">Reset Password</a>
+      <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+    `
+  };
+
+  await transporter.sendMail(mailOptions);
+}
+
+export { sendVerificationEmail, sendPasswordResetEmail };

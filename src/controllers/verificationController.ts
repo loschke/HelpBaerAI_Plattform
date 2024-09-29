@@ -8,7 +8,7 @@ async function verifyEmail(req: Request, res: Response) {
   try {
     const db = await openDb();
     await verifyUser(db, userId);
-    res.redirect('/login');
+    res.redirect('/auth/login');
   } catch (error) {
     console.error('Verification error:', error);
     res.status(500).json({ message: 'An error occurred during verification' });

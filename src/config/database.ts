@@ -10,14 +10,18 @@ async function openDb() {
 
 async function setupDatabase() {
   const db = await openDb();
+  
+  // Create users table if it doesn't exist, including reset-related columns
   await db.exec(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      username TEXT UNIQUE NOT NULL,
+      firstname TEXT UNIQUE NOT NULL,
       email TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL,
       is_verified BOOLEAN DEFAULT 0,
       is_admin BOOLEAN DEFAULT 0,
+      reset_token TEXT,
+      reset_token_expiry INTEGER,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )

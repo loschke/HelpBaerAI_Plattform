@@ -14,9 +14,21 @@
                 </ul>
             </div>
             <div class="navbar-end">
-                <a href="/login" class="btn btn-primary text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
-                    Ich möchte ausprobieren
-                </a>
+                <% if (locals.user) { %>
+                    <a href="/profile" class="text-primary-content px-4 py-2 rounded hover:text-primary">
+                        Mein Profil
+                    </a>
+                    <a href="/auth/logout" class="btn btn-primary text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
+                        Logout
+                    </a>
+                <% } else { %>
+                    <a href="/auth/login" class="text-primary-content px-4 py-2 rounded hover:text-primary">
+                        Login
+                    </a>
+                    <a href="/auth/register" class="btn btn-primary text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
+                        Ich möchte ausprobieren
+                    </a>
+                <% } %>
                 <div class="dropdown dropdown-end lg:hidden">
                     <label tabindex="0" class="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,6 +39,13 @@
                         <li><a href="#" class="hover:text-primary">Über HelpBärAI</a></li>
                         <li><a href="#" class="hover:text-primary">KI erfahren</a></li>
                         <li><a href="#" class="hover:text-primary">queonext.de</a></li>
+                        <% if (locals.user) { %>
+                            <li><a href="/profile" class="hover:text-primary">Mein Profil</a></li>
+                            <li><a href="/auth/logout" class="hover:text-primary">Logout</a></li>
+                        <% } else { %>
+                            <li><a href="/auth/login" class="hover:text-primary">Login</a></li>
+                            <li><a href="/auth/register" class="hover:text-primary">Registrieren</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
