@@ -5,8 +5,18 @@ module.exports = {
     "./src/**/*.{ts,js}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'base-100': '#1b252f',
+        'base-content': '#cccfd1',
+        'primary': '#fa186b',
+        'primary-content': '#ffffff',
+      }
+    },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["dark"],
+  },
 }
 

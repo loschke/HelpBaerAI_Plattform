@@ -1,14 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" data-theme="dark" class="h-full">
 <head>
     <%- include('../partials/head') %>
 </head>
-<body>
+<body class="bg-base-100 text-base-content flex flex-col min-h-screen">
     <%- include('../partials/header') %>
-    <main>
-        <h1><%= title %></h1>
-        <p>Welcome to our user registration and management system!</p>
+    
+    <!-- START Main -->     
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 py-10 lg:py-20">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">
+                    <span class="text-primary">HelpBärAI</span><br>
+                    Dein bärenstarkes AI Team
+                </h1>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">
+                    Stellen Sie sich vor, Ihre alltäglichen Herausforderungen lösen sich in Luft auf. Zeitraubende Analysen? Geschichte. Kreative Blockaden? Vergangenheit. Unstrukturierte Datenflut? Ein Kinderspiel.
+                </p>
+                <button class="btn btn-primary text-primary-content px-8 py-3 text-lg">
+                    Jetzt Demo & Test vereinbaren
+                </button>
+            </div>
+
+            <h2 class="text-3xl font-bold mb-8 text-center">Dürfen wir vorstellen ...</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <%- include('../partials/ai-assistant-card', { title: 'Website-Analyse-Assistent', description: 'Durchleuchtet und optimiert Ihre Website von A bis Z.', image: '/placeholder.svg?height=200&width=400', alt: 'Webbert' }) %>
+                <%- include('../partials/ai-assistant-card', { title: 'Text-Analyse-Assistent', description: 'Untersucht und bewertet Ihre Texte für maximale Wirkung.', image: '/placeholder.svg?height=200&width=400', alt: 'Schlaubert' }) %>
+                <%- include('../partials/ai-assistant-card', { title: 'Bild-Erstellungs-Assistent', description: 'Verwandelt Ihre Ideen in coole visuelle Inhalte.', image: '/placeholder.svg?height=200&width=400', alt: 'Kritzelbert' }) %>
+                <%- include('../partials/ai-assistant-card', { title: 'Bild-Analyse-Assistent', description: 'Entschlüsselt die Botschaften und Potenziale Ihrer Bilder.', image: '/placeholder.svg?height=200&width=400', alt: 'Pixelbert' }) %>
+                <%- include('../partials/ai-assistant-card', { title: 'Copywriter & Storyteller-Assistent', description: 'Formt Ihre Unternehmensbotschaft in fesselnde Geschichten.', image: '/placeholder.svg?height=200&width=400', alt: 'Storybert' }) %>
+            </div>
+        </div>
     </main>
+    <!-- END Main -->
+
     <%- include('../partials/footer') %>
 </body>
 </html>
