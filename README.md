@@ -73,3 +73,58 @@ Unser Projekt verwendet einen modernen, Node.js-basierten Stack mit Fokus auf Ty
 - **EJS**: Ermöglicht die einfache Erstellung von dynamischen Webseiten mit wiederverwendbaren Komponenten.
 
 Diese Kombination von Technologien ermöglicht eine effiziente Entwicklung, gute Wartbarkeit und hohe Sicherheitsstandards für unser Nutzerregistrierungs- und Verwaltungssystem.
+
+## Installation und Setup
+
+1. Repository klonen:
+   ```bash
+   git clone [repository-url]
+   cd [project-directory]
+   ```
+
+2. Abhängigkeiten installieren:
+   ```bash
+   npm install
+   ```
+
+3. Umgebungsvariablen konfigurieren:
+   - Erstellen Sie eine `.env`-Datei im Wurzelverzeichnis
+   - Fügen Sie notwendige Umgebungsvariablen hinzu (siehe `.env.example`)
+
+4. Datenbank initialisieren:
+   ```bash
+   npm run db:init
+   ```
+
+5. Anwendung starten:
+   ```bash
+   npm run dev
+   ```
+
+## Projektstruktur
+
+```
+src/
+├── controllers/    # Request handler
+├── middleware/     # Custom middleware
+├── models/         # Datenmodelle und Datenbankzugriff
+├── routes/         # API-Routen
+├── services/       # Geschäftslogik
+├── types/          # TypeScript-Typdefinitionen
+├
+```
+
+## Skripte
+
+- `npm run dev`: Startet den Entwicklungsserver
+- `npm run build`: Kompiliert TypeScript zu JavaScript
+- `npm start`: Startet die Anwendung in Produktion
+- `npm test`: Führt Tests aus
+
+## Beitragen
+
+Wir freuen uns über Beiträge! Bitte lesen Sie unsere Beitragsrichtlinien in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Lizenz
+
+Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
