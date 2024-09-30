@@ -1,3 +1,9 @@
+interface Operation {
+  name: string;
+  description: string;
+  sampleTextFile: string; // Add this line
+}
+
 interface AIAssistant {
   title: string;
   description: string;
@@ -6,6 +12,7 @@ interface AIAssistant {
   task: string;
   buttonText?: string;
   buttonLink?: string;
+  operations?: Operation[];
 }
 
 const aiAssistants: AIAssistant[] = [
@@ -16,7 +23,7 @@ const aiAssistants: AIAssistant[] = [
     alt: 'Storybert',
     task: 'Website-Optimierung',
     buttonText: 'Mit Storybert optimieren',
-    buttonLink: '/storybert'
+    buttonLink: 'storybert'
   },
   {
     title: 'SEO-Assistent',
@@ -25,7 +32,34 @@ const aiAssistants: AIAssistant[] = [
     alt: 'Webbert',
     task: 'SEO-Analyse',
     buttonText: 'SEO verbessern',
-    buttonLink: '/seo-assistent'
+    buttonLink: '/seo-assistent',
+    operations: [
+      {
+        name: 'Kürzen',
+        description: 'Reduziert den Text auf die wesentlichen Informationen, ohne den Kerninhalt zu verlieren.',
+        sampleTextFile: '/sample-texts/seo-assistant-shorten.txt'
+      },
+      {
+        name: 'Erweitern',
+        description: 'Fügt zusätzliche relevante Informationen hinzu, um den Text ausführlicher und detaillierter zu gestalten.',
+        sampleTextFile: '/sample-texts/seo-assistant-expand.txt'
+      },
+      {
+        name: 'Zusammenfassen',
+        description: 'Erstellt eine prägnante Zusammenfassung der Hauptpunkte des Textes. Diese Funktion hilft Ihnen, schnell die Kernaussagen längerer Texte zu erfassen oder übersichtliche Inhaltsangaben zu erstellen.',
+        sampleTextFile: '/sample-texts/seo-assistant-summarize.txt'
+      },
+      {   
+        name: 'Optimieren',
+        description: 'Verbessert die Lesbarkeit und Struktur des Textes für eine bessere Benutzererfahrung. Diese Funktion kann die Satzstruktur verbessern, Wortwiederholungen reduzieren und den Lesefluss optimieren.',
+        sampleTextFile: '/sample-texts/seo-assistant-optimize.txt'
+      },
+      {
+        name: 'Analysieren',
+        description: 'Führt eine detaillierte Analyse des Textes durch, um Verbesserungspotenziale aufzuzeigen. Dies kann Aspekte wie Lesbarkeit, SEO-Optimierung, Zielgruppenrelevanz und inhaltliche Kohärenz umfassen.',
+        sampleTextFile: '/sample-texts/seo-assistant-analyze.txt'
+      }
+    ]
   },
   {
     title: 'Bild-Erstellungs-Assistent',
@@ -34,7 +68,8 @@ const aiAssistants: AIAssistant[] = [
     alt: 'Projektbert',
     task: 'Bildgenerierung',
     buttonText: 'Bilder erstellen',
-    buttonLink: '/bild-erstellung'
+    buttonLink: '/bild-erstellung',
+    operations: []
   },
   {
     title: 'Bild-Analyse-Assistent',
@@ -43,7 +78,8 @@ const aiAssistants: AIAssistant[] = [
     alt: 'Pixelbert',
     task: 'Bildanalyse',
     buttonText: 'Bilder analysieren',
-    buttonLink: '/bild-analyse'
+    buttonLink: '/bild-analyse',
+    operations: []
   },
   {
     title: 'Storyteller-Assistent',
@@ -52,7 +88,8 @@ const aiAssistants: AIAssistant[] = [
     alt: 'Kritzelbert',
     task: 'Content-Erstellung',
     buttonText: 'Story entwickeln',
-    buttonLink: '/storyteller'
+    buttonLink: '/storyteller',
+    operations: []
   },
   {
     title: 'Kreativbert',
@@ -61,7 +98,8 @@ const aiAssistants: AIAssistant[] = [
     alt: 'Kreativbert',
     task: 'Kreative Lösungen',
     buttonText: 'Ideen generieren',
-    buttonLink: '/kreativbert'
+    buttonLink: '/kreativbert',
+    operations: []
   },
   {
     title: 'queonext Agents',
@@ -70,7 +108,8 @@ const aiAssistants: AIAssistant[] = [
     alt: 'queonext Corporate Assistant',
     task: 'Unternehmensberatung',
     buttonText: 'Unternehmen beraten',
-    buttonLink: '/queonext-agents'
+    buttonLink: '/queonext-agents',
+    operations: []
   }
 ];
 

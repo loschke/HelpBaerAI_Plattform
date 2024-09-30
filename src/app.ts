@@ -9,6 +9,8 @@ import { getUserById } from './models/User';
 import homeRouter from './routes/home';
 import authRouter from './routes/auth';
 import profileRouter from './routes/profile';
+import assistantsRouter from './routes/assistants';
+import sampleTextRouter from './routes/sample-text';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -64,6 +66,8 @@ app.set('view engine', 'ejs');
 app.use('/', homeRouter);
 app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
+app.use('/', assistantsRouter);
+app.use('/api/sample-text', sampleTextRouter);
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
