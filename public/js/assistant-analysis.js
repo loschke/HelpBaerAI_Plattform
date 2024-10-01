@@ -256,6 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     responseContainer.classList.remove('hidden');
                     scrollToResponse();
                 }
+            }).finally(() => {
+                assistantForm.hideLoadingAnimation();
             });
         });
     } else {

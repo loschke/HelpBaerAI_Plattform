@@ -35,6 +35,8 @@ class AIAssistantForm {
             console.log('Form submitted, calling sendDataToWebhook');
             this.sendDataToWebhook();
         });
+
+        this.loadingAnimation = document.getElementById('loadingAnimation');
     }
 
     async initWebhookUrl() {
@@ -100,12 +102,15 @@ class AIAssistantForm {
 
     async sendDataToWebhook() {
         console.log('Sending data to webhook');
+        this.showLoadingAnimation();
+
         if (!this.webhookUrl) {
             console.error('Webhook URL not initialized. Retrying initialization...');
             try {
                 await this.initWebhookUrl();
             } catch (error) {
                 console.error('Failed to initialize webhook URL:', error);
+                this.hideLoadingAnimation();
                 return;
             }
         }
@@ -134,6 +139,20 @@ class AIAssistantForm {
         } catch (error) {
             console.error('Error:', error);
             this.handleWebhookError(error);
+        } finally {
+            this.hideLoadingAnimation();
+        }
+    }
+
+    showLoadingAnimation() {
+        if (this.loadingAnimation) {
+            this.loadingAnimation.classList.remove('hidden');
+        }
+    }
+
+    hideLoadingAnimation() {
+        if (this.loadingAnimation) {
+            this.loadingAnimation.classList.add('hidden');
         }
     }
 
