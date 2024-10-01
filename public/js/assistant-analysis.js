@@ -236,3 +236,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+function toggleAdvancedSettings() {
+    const advancedSettings = document.getElementById('advancedSettings');
+    const toggleButton = document.getElementById('advancedSettingsToggle');
+    const icon = toggleButton.querySelector('svg');
+
+    advancedSettings.classList.toggle('hidden');
+    icon.classList.toggle('rotate-180');
+}
+
+// Add this line to the existing DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code ...
+
+    const advancedSettingsToggle = document.getElementById('advancedSettingsToggle');
+    advancedSettingsToggle?.addEventListener('click', toggleAdvancedSettings);
+});
