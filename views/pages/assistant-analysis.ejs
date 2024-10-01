@@ -61,7 +61,7 @@
                 
                 <div class="flex flex-wrap gap-2 mb-6">
                     <% assistant.operations.forEach(operation => { %>
-                        <button class="btn btn-primary flex-1"><%= operation.name %></button>
+                        <button class="btn bg-base-300 flex-1"><%= operation.name %></button>
                     <% }); %>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="collapse-content"> 
                                     <p><%= operation.description %></p>
-                                    <button class="btn btn-primary btn-sm mt-2 load-sample-text" data-filename="<%= operation.sampleTextFile.split('/').pop() %>">
+                                    <button class="btn bg-info btn-sm mt-2 load-sample-text" data-filename="<%= operation.sampleTextFile.split('/').pop() %>">
                                         Mustertext einfügen
                                     </button>
                                 </div>
