@@ -11,6 +11,7 @@ import authRouter from './routes/auth';
 import profileRouter from './routes/profile';
 import assistantsRouter from './routes/assistants';
 import sampleTextRouter from './routes/sample-text';
+import apiRouter from './routes/api';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -68,6 +69,7 @@ app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
 app.use('/', assistantsRouter);
 app.use('/api/sample-text', sampleTextRouter);
+app.use('/api', apiRouter);
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

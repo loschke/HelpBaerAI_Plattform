@@ -3,18 +3,18 @@
 <head>
     <%- include('../partials/head') %>
     <title>HelpBärAI - <%= assistant.title %></title>
-    <script src="/js/ai-assistant.js" defer></script>
+    <script src="/js/assistant-analysis.js" defer></script>
 </head>
 <body class="bg-base-100 text-base-content flex flex-col min-h-screen">
     <%- include('../partials/header') %>
 
     <div class="flex-grow flex">
         <main class="flex-grow p-4 lg:p-8 flex justify-center">
-            <div class="w-full max-w-4xl">
+            <div class="w-full max-w-4xl"> <!-- Added container with max-width -->
                 <h1 class="text-3xl font-bold mb-4 text-center"><%= assistant.title %></h1>
                 <p class="mb-6 text-center"><%= assistant.description %></p>
                 
-                <div class="ai-assistant-form" data-assistant="<%= assistant.title %>">
+                <div class="mb-6">
                     <div class="tabs tabs-boxed mb-4">
                         <a class="tab tab-active" id="textTab">Text eingeben</a>
                         <a class="tab" id="urlTab">URL eingeben</a>
@@ -52,47 +52,17 @@
                             </button>
                         </div>
                     </div>
-
-                    <div class="relative mb-6">
-                        <input type="text" placeholder="Weitere Anforderungen oder Hinweise" class="input input-bordered w-full pr-16" id="additionalRequirements" maxlength="100" />
-                        <div class="absolute bottom-2 right-2 text-sm text-gray-500" id="additionalCharCounter">0 / 100</div>
-                    </div>
-
-                    <div class="collapse collapse-arrow mb-4">
-                        <input type="checkbox" />
-                        <div class="collapse-title text-xl font-medium">
-                            Erweiterte Einstellungen
-                        </div>
-                        <div class="collapse-content">
-                            <select id="language" class="select select-bordered w-full mb-2">
-                                <option disabled selected>Ausgabesprache wählen</option>
-                                <option value="de">Deutsch</option>
-                                <option value="en">Englisch</option>
-                            </select>
-
-                            <select id="outputFormat" class="select select-bordered w-full mb-2">
-                                <option disabled selected>Antwortformat wählen</option>
-                                <option value="text">Text</option>
-                                <option value="html">HTML</option>
-                                <option value="markdown">Markdown</option>
-                            </select>
-
-                            <select id="model" class="select select-bordered w-full">
-                                <option disabled selected>Sprachmodell wählen (optional)</option>
-                                <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-                                <option value="gpt-4">GPT-4</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <% assistant.operations.forEach(operation => { %>
-                            <button class="btn bg-base-300 flex-1 operation-btn" data-operation="<%= operation.name %>"><%= operation.name %></button>
-                        <% }); %>
-                    </div>
-
-                    <div id="analysisResult" class="mt-6 p-4 bg-base-200 rounded-lg hidden"></div>
-                    <div id="errorMessage" class="mt-6 p-4 bg-error text-error-content rounded-lg hidden"></div>
+                </div>
+                
+                <div class="relative mb-6">
+                    <input type="text" placeholder="Weitere Anforderungen oder Hinweise" class="input input-bordered w-full pr-16" id="additionalRequirements" maxlength="100" />
+                    <div class="absolute bottom-2 right-2 text-sm text-gray-500" id="additionalCharCounter">0 / 100</div>
+                </div>
+                
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <% assistant.operations.forEach(operation => { %>
+                        <button class="btn bg-base-300 flex-1"><%= operation.name %></button>
+                    <% }); %>
                 </div>
             </div>
         </main>

@@ -1,0 +1,56 @@
+<div class="ai-assistant-form" data-assistant="<%= assistant.title %>">
+  <div class="tabs mb-4">
+    <a class="tab tab-lifted tab-active" id="textTab">Text</a>
+    <a class="tab tab-lifted" id="urlTab">URL</a>
+  </div>
+
+  <div id="textInput">
+    <textarea id="analysisTextarea" class="textarea textarea-bordered w-full mb-4" rows="5" placeholder="Geben Sie hier Ihren Text ein..."></textarea>
+  </div>
+
+  <div id="urlInput" class="hidden">
+    <input type="url" id="urlInputField" placeholder="https://www.beispiel.de" class="input input-bordered w-full mb-4" />
+  </div>
+
+  <input type="text" id="additionalRequirements" placeholder="Weitere Anforderungen oder Hinweise" class="input input-bordered w-full mb-4" />
+
+
+  <div class="flex flex-wrap gap-2 mb-6">
+    <% assistant.operations.forEach(operation => { %>
+      <button class="btn bg-base-300 flex-1 operation-btn" data-operation="<%= operation.name %>"><%= operation.name %></button>
+    <% }); %>
+  </div>
+
+  <div class="collapse collapse-arrow mb-4">
+    <input type="checkbox" />
+    <div class="collapse-title text-xl font-medium">
+      Erweiterte Einstellungen
+    </div>
+    <div class="collapse-content">
+      <select id="language" class="select select-bordered w-full mb-2">
+        <option disabled selected>Ausgabesprache wählen</option>
+        <option value="de">Deutsch</option>
+        <option value="en">Englisch</option>
+        <!-- Weitere Sprachen hier -->
+      </select>
+
+      <select id="outputFormat" class="select select-bordered w-full mb-2">
+        <option disabled selected>Antwortformat wählen</option>
+        <option value="text">Text</option>
+        <option value="html">HTML</option>
+        <option value="markdown">Markdown</option>
+      </select>
+
+      <select id="model" class="select select-bordered w-full">
+        <option disabled selected>Sprachmodell wählen (optional)</option>
+        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+        <option value="gpt-4">GPT-4</option>
+        <!-- Weitere Modelle hier -->
+      </select>
+    </div>
+  </div>
+
+
+  <div id="analysisResult" class="mt-6 p-4 bg-base-200 rounded-lg hidden"></div>
+  <div id="errorMessage" class="mt-6 p-4 bg-error text-error-content rounded-lg hidden"></div>
+</div>

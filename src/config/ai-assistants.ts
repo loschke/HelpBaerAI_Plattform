@@ -1,7 +1,8 @@
 interface Operation {
   name: string;
   description: string;
-  sampleTextFile: string; // Add this line
+  sampleTextFile: string;
+  model: string; // Hinzugefügt
 }
 
 interface AIAssistant {
@@ -37,27 +38,32 @@ const aiAssistants: AIAssistant[] = [
       {
         name: 'Kürzen',
         description: 'Reduziert den Text auf die wesentlichen Informationen, ohne den Kerninhalt zu verlieren.',
-        sampleTextFile: '/sample-texts/seo-assistant-shorten.txt'
+        sampleTextFile: '/sample-texts/seo-assistant-shorten.txt',
+        model: 'gpt-3.5-turbo'
       },
       {
         name: 'Erweitern',
         description: 'Fügt zusätzliche relevante Informationen hinzu, um den Text ausführlicher und detaillierter zu gestalten.',
-        sampleTextFile: '/sample-texts/seo-assistant-expand.txt'
+        sampleTextFile: '/sample-texts/seo-assistant-expand.txt',
+        model: 'gpt-3.5-turbo'
       },
       {
         name: 'Zusammenfassen',
         description: 'Erstellt eine prägnante Zusammenfassung der Hauptpunkte des Textes. Diese Funktion hilft Ihnen, schnell die Kernaussagen längerer Texte zu erfassen oder übersichtliche Inhaltsangaben zu erstellen.',
-        sampleTextFile: '/sample-texts/seo-assistant-summarize.txt'
+        sampleTextFile: '/sample-texts/seo-assistant-summarize.txt',
+        model: 'gpt-3.5-turbo'
       },
       {   
         name: 'Optimieren',
         description: 'Verbessert die Lesbarkeit und Struktur des Textes für eine bessere Benutzererfahrung. Diese Funktion kann die Satzstruktur verbessern, Wortwiederholungen reduzieren und den Lesefluss optimieren.',
-        sampleTextFile: '/sample-texts/seo-assistant-optimize.txt'
+        sampleTextFile: '/sample-texts/seo-assistant-optimize.txt',
+        model: 'gpt-3.5-turbo'
       },
       {
         name: 'Analysieren',
         description: 'Führt eine detaillierte Analyse des Textes durch, um Verbesserungspotenziale aufzuzeigen. Dies kann Aspekte wie Lesbarkeit, SEO-Optimierung, Zielgruppenrelevanz und inhaltliche Kohärenz umfassen.',
-        sampleTextFile: '/sample-texts/seo-assistant-analyze.txt'
+        sampleTextFile: '/sample-texts/seo-assistant-analyze.txt',
+        model: 'gpt-3.5-turbo'
       }
     ]
   },
