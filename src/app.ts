@@ -11,6 +11,10 @@ import authRouter from './routes/auth';
 import profileRouter from './routes/profile';
 import assistantsRouter from './routes/assistants';
 import sampleTextRouter from './routes/sample-text';
+import dotenv from 'dotenv';
+dotenv.config();
+import webhookRoutes from './routes/webhook';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,6 +28,7 @@ app.use(
         scriptSrc: ["'self'", "'unsafe-inline'"],
         styleSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", "data:", "https:"],
+        connectSrc: ["'self'", "https://hook.eu2.make.com"]
       },
     },
   })
@@ -87,5 +92,13 @@ setupDatabase().then(() => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+// Register webhook routes
+app.use('/api', webhookRoutes);
+
+// CORS configuration
+app.use(cors({
+  origin: 'https://hook.eu2.make.com'
+}));
 
 export default app;

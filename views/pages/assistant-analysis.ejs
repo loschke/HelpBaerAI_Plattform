@@ -3,7 +3,7 @@
 <head>
     <%- include('../partials/head') %>
     <title>HelpBärAI - <%= assistant.title %></title>
-    <script src="/js/assistant-analysis.js" defer></script>
+    <script type="module" src="/js/assistant-analysis.js"></script>
 </head>
 <body class="bg-base-100 text-base-content flex flex-col min-h-screen">
     <%- include('../partials/header') %>
@@ -14,7 +14,9 @@
                 <h1 class="text-3xl font-bold mb-4 text-center"><%= assistant.title %></h1>
                 <p class="mb-6 text-center"><%= assistant.description %></p>
                 
-                <%- include('../partials/ai-assistant-form', { assistant: assistant }) %>
+                <form id="analysisForm">
+                    <%- include('../partials/ai-assistant-form', { assistant: assistant }) %>
+                </form>
             </div>
         </main>
         

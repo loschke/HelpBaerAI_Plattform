@@ -1,21 +1,23 @@
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  // Configure your email service here
-  host: 'smtp.strato.de',
-  port: 587,
-  secure: false,
+  host: process.env.EMAIL_HOST,
+  port: parseInt(process.env.EMAIL_PORT || '587', 10),
+  secure: process.env.EMAIL_SECURE === 'true',
   auth: {
-    user: 'agent@kvix.de',
-    pass: 'PDCxGrb.M.U&68p'
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
 async function sendVerificationEmail(email: string, userId: number) {
-  const verificationLink = `http://localhost:3000/auth/verify/${userId}`;
+  const verificationLink = `${process.env.APP_URL}/auth/verify/${userId}`;
 
   const mailOptions = {
-    from: '"Rico von HelpBärAI" <agent@kvix.de>',
+    from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM_ADDRESS}>`,
     to: email,
     subject: 'Verify Your Email',
     html: `
@@ -29,10 +31,10 @@ async function sendVerificationEmail(email: string, userId: number) {
 }
 
 async function sendPasswordResetEmail(email: string, resetToken: string) {
-  const resetLink = `http://localhost:3000/auth/reset-password/${resetToken}`;
+  const resetLink = `${process.env.APP_URL}/auth/reset-password/${resetToken}`;
 
   const mailOptions = {
-    from: '"Rico von HelpBärAI" <agent@kvix.de>',
+    from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM_ADDRESS}>`,
     to: email,
     subject: 'Reset Your Password',
     html: `

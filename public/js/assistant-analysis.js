@@ -1,3 +1,5 @@
+import AIAssistantForm from './ai-assistant-webhook.js';
+
 let isSidepanelOpen = false;
 
 function toggleSidepanel() {
@@ -35,24 +37,6 @@ function switchTab(tab) {
         urlTab?.classList.add('tab-active');
     }
 }
-
-// Event listeners
-document.addEventListener('DOMContentLoaded', () => {
-    const toggleButton = document.getElementById('toggleSidepanel');
-    const textTab = document.getElementById('textTab');
-    const urlTab = document.getElementById('urlTab');
-
-    toggleButton?.addEventListener('click', toggleSidepanel);
-    textTab?.addEventListener('click', () => switchTab('text'));
-    urlTab?.addEventListener('click', () => switchTab('url'));
-
-    // Ensure sidepanel is initially closed
-    const sidepanel = document.getElementById('sidepanel');
-    const sidepanelContent = document.getElementById('sidepanel-content');
-    sidepanel.classList.add('w-12');
-    sidepanel.classList.remove('sm:w-full', 'md:w-1/2', 'lg:max-w-1/2');
-    sidepanelContent.classList.add('hidden');
-});
 
 function pasteFromClipboard() {
     navigator.clipboard.readText()
@@ -119,22 +103,6 @@ function toggleIcons() {
     }
 }
 
-// Event listeners
-document.addEventListener('DOMContentLoaded', () => {
-    const pasteButton = document.getElementById('paste-clipboard');
-    const clearButton = document.getElementById('clear-textarea');
-    const textarea = document.getElementById('analysisTextarea');
-
-    pasteButton?.addEventListener('click', pasteFromClipboard);
-    clearButton?.addEventListener('click', clearTextarea);
-
-    textarea?.addEventListener('input', updateCharCounter);
-
-    // Initialize char counter and icon visibility
-    updateCharCounter();
-    toggleIcons(); // Add this line to ensure correct initial state
-});
-
 function updateAdditionalCharCounter() {
     const input = document.getElementById('additionalRequirements');
     const charCounter = document.getElementById('additionalCharCounter');
@@ -143,17 +111,6 @@ function updateAdditionalCharCounter() {
         charCounter.textContent = `${currentLength} / 100`;
     }
 }
-
-// Fügen Sie diese Zeilen am Ende der bestehenden DOMContentLoaded Event-Listener-Funktion hinzu
-document.addEventListener('DOMContentLoaded', () => {
-    // ... bestehender Code ...
-
-    const additionalInput = document.getElementById('additionalRequirements');
-    additionalInput?.addEventListener('input', updateAdditionalCharCounter);
-
-    // Initialisieren Sie den Zeichenzähler für das zusätzliche Eingabefeld
-    updateAdditionalCharCounter();
-});
 
 function pasteUrlFromClipboard() {
     navigator.clipboard.readText()
@@ -193,22 +150,6 @@ function toggleUrlIcons() {
     }
 }
 
-// Fügen Sie diese Zeilen zur bestehenden DOMContentLoaded Event-Listener-Funktion hinzu
-document.addEventListener('DOMContentLoaded', () => {
-    // ... bestehender Code ...
-
-    const pasteUrlButton = document.getElementById('paste-url');
-    const clearUrlButton = document.getElementById('clear-url');
-    const urlInput = document.getElementById('urlInputField');
-
-    pasteUrlButton?.addEventListener('click', pasteUrlFromClipboard);
-    clearUrlButton?.addEventListener('click', clearUrlInput);
-    urlInput?.addEventListener('input', toggleUrlIcons);
-
-    // Initialize icon visibility for URL input
-    toggleUrlIcons();
-});
-
 function loadSampleText(filename) {
     fetch(`/api/sample-text/${filename}`)
         .then(response => response.json())
@@ -223,20 +164,6 @@ function loadSampleText(filename) {
         .catch(error => console.error('Error loading sample text:', error));
 }
 
-// Fügen Sie dies innerhalb des bestehenden DOMContentLoaded Event Listeners hinzu
-document.addEventListener('DOMContentLoaded', () => {
-    // ... bestehender Code ...
-
-    // Event-Listener für Beispieltext-Buttons hinzufügen
-    const sampleTextButtons = document.querySelectorAll('.load-sample-text');
-    sampleTextButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filename = button.dataset.filename;
-            loadSampleText(filename);
-        });
-    });
-});
-
 function toggleAdvancedSettings() {
     const advancedSettings = document.getElementById('advancedSettings');
     const toggleButton = document.getElementById('advancedSettingsToggle');
@@ -246,10 +173,95 @@ function toggleAdvancedSettings() {
     icon.classList.toggle('rotate-180');
 }
 
-// Add this line to the existing DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code ...
+function scrollToResponse() {
+    const responseContainer = document.getElementById('webhookResponse');
+    if (responseContainer) {
+        responseContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded event fired');
+    const toggleButton = document.getElementById('toggleSidepanel');
+    const textTab = document.getElementById('textTab');
+    const urlTab = document.getElementById('urlTab');
+    const pasteButton = document.getElementById('paste-clipboard');
+    const clearButton = document.getElementById('clear-textarea');
+    const textarea = document.getElementById('analysisTextarea');
+    const additionalInput = document.getElementById('additionalRequirements');
+    const pasteUrlButton = document.getElementById('paste-url');
+    const clearUrlButton = document.getElementById('clear-url');
+    const urlInput = document.getElementById('urlInputField');
     const advancedSettingsToggle = document.getElementById('advancedSettingsToggle');
+
+    toggleButton?.addEventListener('click', toggleSidepanel);
+    textTab?.addEventListener('click', () => switchTab('text'));
+    urlTab?.addEventListener('click', () => switchTab('url'));
+    pasteButton?.addEventListener('click', pasteFromClipboard);
+    clearButton?.addEventListener('click', clearTextarea);
+    textarea?.addEventListener('input', updateCharCounter);
+    additionalInput?.addEventListener('input', updateAdditionalCharCounter);
+    pasteUrlButton?.addEventListener('click', pasteUrlFromClipboard);
+    clearUrlButton?.addEventListener('click', clearUrlInput);
+    urlInput?.addEventListener('input', toggleUrlIcons);
     advancedSettingsToggle?.addEventListener('click', toggleAdvancedSettings);
+
+    // Ensure sidepanel is initially closed
+    const sidepanel = document.getElementById('sidepanel');
+    const sidepanelContent = document.getElementById('sidepanel-content');
+    sidepanel.classList.add('w-12');
+    sidepanel.classList.remove('sm:w-full', 'md:w-1/2', 'lg:max-w-1/2');
+    sidepanelContent.classList.add('hidden');
+
+    // Initialize char counter and icon visibility
+    updateCharCounter();
+    toggleIcons();
+    updateAdditionalCharCounter();
+    toggleUrlIcons();
+
+    // Event-Listener für Beispieltext-Buttons hinzufügen
+    const sampleTextButtons = document.querySelectorAll('.load-sample-text');
+    sampleTextButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filename = button.dataset.filename;
+            loadSampleText(filename);
+        });
+    });
+
+    // Initialize AIAssistantForm
+    const form = document.getElementById('analysisForm');
+    if (form) {
+        console.log('Analysis form found');
+        const assistantForm = new AIAssistantForm('analysisForm');
+        console.log('AIAssistantForm initialized:', assistantForm);
+
+        // Extend the handleWebhookResponse method to scroll to the response
+        const originalHandleWebhookResponse = assistantForm.handleWebhookResponse;
+        assistantForm.handleWebhookResponse = (result) => {
+            console.log('Custom handleWebhookResponse called');
+            originalHandleWebhookResponse.call(assistantForm, result);
+            scrollToResponse();
+        };
+
+        // Add submit event listener to the form
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Form submitted');
+            assistantForm.sendDataToWebhook().catch(error => {
+                console.error('Error sending data to webhook:', error);
+                // Display error message to the user
+                const responseContainer = document.getElementById('webhookResponse');
+                if (responseContainer) {
+                    responseContainer.innerHTML = `<div class="text-error">Error: ${error.message}</div>`;
+                    responseContainer.classList.remove('hidden');
+                    scrollToResponse();
+                }
+            });
+        });
+    } else {
+        console.error('Analysis form not found');
+    }
 });
+
+// Add this line at the end of the file
+console.log('assistant-analysis.js loaded');

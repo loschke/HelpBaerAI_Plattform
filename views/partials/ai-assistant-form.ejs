@@ -45,7 +45,11 @@
 
 <div class="flex flex-wrap gap-2 mb-6">
     <% assistant.operations.forEach(operation => { %>
-        <button class="btn bg-base-300 flex-1"><%= operation.name %></button>
+        <button class="btn bg-base-300 flex-1" 
+                data-operation-id="<%= operation.id %>" 
+                data-language-model="<%= operation.languageModel %>">
+            <%= operation.name %>
+        </button>
     <% }); %>
 </div>
 
@@ -62,20 +66,21 @@
             <div>
                 <label for="outputLanguage" class="block text-sm font-medium text-base-content">Ausgabesprache</label>
                 <select id="outputLanguage" name="outputLanguage" class="select select-bordered w-full max-w-xs">
-                    <option value="de">Deutsch</option>
+                    <option value="de" selected>Deutsch</option>
                     <option value="en">Englisch</option>
                 </select>
             </div>
             <div>
                 <label for="outputFormat" class="block text-sm font-medium text-base-content">Ausgabeformat</label>
                 <select id="outputFormat" name="outputFormat" class="select select-bordered w-full max-w-xs">
-                    <option value="html">HTML</option>
+                    <option value="html" selected>HTML</option>
                     <option value="markdown">Markdown</option>
                 </select>
             </div>
             <div>
                 <label for="languageModel" class="block text-sm font-medium text-base-content">Sprachmodell</label>
                 <select id="languageModel" name="languageModel" class="select select-bordered w-full max-w-xs">
+                    <option value="" selected> Sprachmodell auswählen</option>
                     <option value="gpt4o">GPT4o</option>
                     <option value="gpt4mini">GPT4mini</option>
                     <option value="gemini15pro">Gemini 1.5 Pro</option>
@@ -85,4 +90,9 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Am Ende des Formulars, vor dem schließenden </form> Tag -->
+<div id="webhookResponse" class="mt-6 p-4 bg-base-200 rounded-lg hidden">
+    <!-- Die Antwort wird hier dynamisch eingefügt -->
 </div>
