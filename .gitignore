@@ -7,10 +7,6 @@ dist/
 # Environment variables
 .env
 
-# Prompt templates
-prompts
-sample-texts
-
 # Logs
 *.log
 npm-debug.log*
