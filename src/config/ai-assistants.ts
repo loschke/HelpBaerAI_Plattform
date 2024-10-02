@@ -3,6 +3,7 @@ interface Operation {
   name: string;
   description: string;
   sampleTextFile: string;
+  promptTemplate: string;
   languageModel: string; // Add this line
 }
 
@@ -41,6 +42,7 @@ const aiAssistants: AIAssistant[] = [
         name: 'Kürzen',
         description: 'Reduziert den Text auf die wesentlichen Informationen, ohne den Kerninhalt zu verlieren.',
         sampleTextFile: '/sample-texts/seo-assistant-shorten.txt',
+        promptTemplate: '/prompts/text-shorten.md',
         languageModel: 'gpt4o' // Add this line
       },
       {
@@ -48,6 +50,7 @@ const aiAssistants: AIAssistant[] = [
         name: 'Erweitern',
         description: 'Fügt zusätzliche relevante Informationen hinzu, um den Text ausführlicher und detaillierter zu gestalten.',
         sampleTextFile: '/sample-texts/seo-assistant-expand.txt',
+        promptTemplate: '/prompts/text-expand.md',
         languageModel: 'gpt4mini' // Add this line
       },
       {
@@ -55,20 +58,23 @@ const aiAssistants: AIAssistant[] = [
         name: 'Zusammenfassen',
         description: 'Erstellt eine prägnante Zusammenfassung der Hauptpunkte des Textes. Diese Funktion hilft Ihnen, schnell die Kernaussagen längerer Texte zu erfassen oder übersichtliche Inhaltsangaben zu erstellen.',
         sampleTextFile: '/sample-texts/seo-assistant-summarize.txt',
+        promptTemplate: '/prompts/summarize.md',
         languageModel: 'gemini15pro' // Add this line
       },
       {   
-        id: 'optimize',
-        name: 'Optimieren',
-        description: 'Verbessert die Lesbarkeit und Struktur des Textes für eine bessere Benutzererfahrung. Diese Funktion kann die Satzstruktur verbessern, Wortwiederholungen reduzieren und den Lesefluss optimieren.',
+        id: 'insights',
+        name: 'Key insights',
+        description: 'Extrahiert die wichtigsten Informationen aus dem Text und gibt sie als Liste wieder.',
         sampleTextFile: '/sample-texts/seo-assistant-optimize.txt',
+        promptTemplate: '/prompts/key-insights.md',
         languageModel: 'claudesonnet' // Add this line
       },
       {
-        id: 'analyze',
-        name: 'Analysieren',
-        description: 'Führt eine detaillierte Analyse des Textes durch, um Verbesserungspotenziale aufzuzeigen. Dies kann Aspekte wie Lesbarkeit, SEO-Optimierung, Zielgruppenrelevanz und inhaltliche Kohärenz umfassen.',
+        id: 'sentiment',
+        name: 'Sentiment',
+        description: 'Analysiert den Text und gibt die Stimmung des Textes wieder.',
         sampleTextFile: '/sample-texts/seo-assistant-analyze.txt',
+        promptTemplate: '/prompts/sentiment.md',
         languageModel: 'llama32' // Add this line
       }
     ]

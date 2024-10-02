@@ -47,7 +47,8 @@
     <% assistant.operations.forEach(operation => { %>
         <button class="btn bg-base-300 flex-1" 
                 data-operation-id="<%= operation.id %>" 
-                data-language-model="<%= operation.languageModel %>">
+                data-language-model="<%= operation.languageModel %>"
+                data-prompt-template="<%= operation.promptTemplate %>">
             <%= operation.name %>
         </button>
     <% }); %>

@@ -22,6 +22,7 @@ class AIAssistantForm {
         this.activeTab = 'text';
         this.selectedOperationId = null;
         this.selectedLanguageModel = null;
+        this.promptTemplateContent = null;
 
         this.initEventListeners();
         this.initWebhookUrl().then(() => {
@@ -37,6 +38,11 @@ class AIAssistantForm {
         });
 
         this.loadingAnimation = document.getElementById('loadingAnimation');
+
+        this.handleOperationClick = this.handleOperationClick.bind(this);
+        this.operationButtons.forEach(button => {
+            button.addEventListener('click', this.handleOperationClick);
+        });
     }
 
     async initWebhookUrl() {
@@ -61,7 +67,7 @@ class AIAssistantForm {
         this.urlTab.addEventListener('click', () => this.switchTab('url'));
 
         this.operationButtons.forEach(button => {
-            button.addEventListener('click', (e) => this.handleOperationClick(e));
+            button.addEventListener('click', this.handleOperationClick.bind(this));
         });
     }
 
@@ -77,12 +83,39 @@ class AIAssistantForm {
         }
     }
 
-    handleOperationClick(e) {
+    async handleOperationClick(e) {
+        console.log('Operation button clicked');
         const button = e.target.closest('button');
         if (button) {
             this.selectedOperationId = button.dataset.operationId;
             this.selectedLanguageModel = button.dataset.languageModel;
+            const promptTemplatePath = button.dataset.promptTemplate;
+            console.log('Prompt template path:', promptTemplatePath);
+            if (promptTemplatePath) {
+                this.promptTemplateContent = await this.readPromptTemplate(promptTemplatePath);
+                console.log('Prompt template content set:', !!this.promptTemplateContent);
+                console.log('Prompt template content preview:', this.promptTemplateContent?.substring(0, 100));
+            } else {
+                this.promptTemplateContent = null;
+                console.log('No prompt template path provided');
+            }
             console.log(`Selected operation: ${this.selectedOperationId}, Language model: ${this.selectedLanguageModel}`);
+        }
+    }
+
+    async readPromptTemplate(templatePath) {
+        try {
+            console.log('Attempting to read prompt template:', templatePath);
+            const response = await fetch(templatePath);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const content = await response.text();
+            console.log('Prompt template content:', content.substring(0, 100) + '...'); // Log first 100 characters
+            return content;
+        } catch (error) {
+            console.error('Error reading prompt template:', error);
+            return null;
         }
     }
 
@@ -94,7 +127,8 @@ class AIAssistantForm {
             outputLanguage: this.outputLanguage.value,
             outputFormat: this.outputFormat.value,
             operationId: this.selectedOperationId,
-            languageModel: this.languageModel.value || this.selectedLanguageModel
+            languageModel: this.languageModel.value || this.selectedLanguageModel,
+            promptTemplate: this.promptTemplateContent || 'No prompt template loaded'
         };
         console.log('Form data:', formData);
         return formData;
