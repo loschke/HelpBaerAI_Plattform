@@ -243,21 +243,29 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollToResponse();
         };
 
-        // Add submit event listener to the form
+        // Prevent default form submission
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log('Form submitted');
-            assistantForm.sendDataToWebhook().catch(error => {
-                console.error('Error sending data to webhook:', error);
-                // Display error message to the user
-                const responseContainer = document.getElementById('webhookResponse');
-                if (responseContainer) {
-                    responseContainer.innerHTML = `<div class="text-error">Error: ${error.message}</div>`;
-                    responseContainer.classList.remove('hidden');
-                    scrollToResponse();
-                }
-            }).finally(() => {
-                assistantForm.hideLoadingAnimation();
+        });
+
+        // Add click event listeners to operation buttons
+        const operationButtons = form.querySelectorAll('button[data-operation-id]');
+        operationButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Operation button clicked');
+                assistantForm.sendDataToWebhook().catch(error => {
+                    console.error('Error sending data to webhook:', error);
+                    // Display error message to the user
+                    const responseContainer = document.getElementById('webhookResponse');
+                    if (responseContainer) {
+                        responseContainer.innerHTML = `<div class="text-error">Error: ${error.message}</div>`;
+                        responseContainer.classList.remove('hidden');
+                        scrollToResponse();
+                    }
+                }).finally(() => {
+                    assistantForm.hideLoadingAnimation();
+                });
             });
         });
     } else {
