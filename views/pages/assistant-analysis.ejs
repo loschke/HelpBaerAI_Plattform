@@ -11,8 +11,7 @@
     <div class="flex-grow flex">
         <main class="flex-grow p-4 lg:p-8 flex justify-center">
             <div class="w-full max-w-4xl">
-                <h1 class="text-3xl font-bold mb-4 text-center"><%= assistant.title %></h1>
-                <p class="mb-6 text-center"><%= assistant.description %></p>
+                <h1 class="text-3xl font-bold mb-4"><%= assistant.task %></h1>
                 
                 <form id="analysisForm">
                     <%- include('../partials/ai-assistant-form', { assistant: assistant }) %>
@@ -28,18 +27,19 @@
                     </svg>
                 </button>
                 <div class="flex-grow overflow-y-auto p-4 hidden" id="sidepanel-content">
-                    <img src="<%= assistant.image %>" alt="<%= assistant.alt %>" class="w-24 h-24 rounded-full mx-auto mb-4">
-                    <p class="text-sm mb-4 text-center"><%= assistant.description %></p>
+                    <img src="<%= assistant.image %>" alt="<%= assistant.alt %>" class="w-24 h-24 rounded-full mb-4">
+                    <h3 class="text-xl font-bold mb-4"><%= assistant.title %></h3>
+                    <!--<p class="text-lg mb-4"><%= assistant.description %></p>-->
                     <div class="join join-vertical w-full">
                         <% assistant.operations.forEach((operation, index) => { %>
                             <div class="collapse collapse-arrow join-item border border-base-300">
                                 <input type="radio" name="my-accordion-4" <%= index === 0 ? 'checked="checked"' : '' %> /> 
-                                <div class="collapse-title text-xl font-medium">
+                                <div class="collapse-title text-lg font-medium">
                                     <%= operation.name %>
                                 </div>
-                                <div class="collapse-content"> 
+                                <div class="collapse-content bg-base-300 p-4"> 
                                     <p><%= operation.description %></p>
-                                    <button class="btn bg-info btn-sm mt-2 load-sample-text" data-filename="<%= operation.sampleTextFile.split('/').pop() %>">
+                                    <button class="btn bg-base-100 btn-sm mt-2 load-sample-text" data-filename="<%= operation.sampleTextFile.split('/').pop() %>">
                                         Mustertext einfügen
                                     </button>
                                 </div>

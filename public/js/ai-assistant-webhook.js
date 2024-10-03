@@ -127,8 +127,7 @@ class AIAssistantForm {
             outputLanguage: this.outputLanguage.value,
             outputFormat: this.outputFormat.value,
             operationId: this.selectedOperationId,
-            languageModel: this.languageModel.value || this.selectedLanguageModel,
-            promptTemplate: this.promptTemplateContent || 'No prompt template loaded'
+            languageModel: this.languageModel.value || this.selectedLanguageModel
         };
         console.log('Form data:', formData);
         return formData;
@@ -155,13 +154,12 @@ class AIAssistantForm {
 
         try {
             console.log('Sending fetch request...');
-            const response = await fetch(this.webhookUrl, {
+            const response = await fetch(`/assistants/${this.getAssistantId()}/process`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
-                mode: 'cors'
             });
             console.log('Received response:', response);
             if (!response.ok) {
@@ -176,6 +174,12 @@ class AIAssistantForm {
         } finally {
             this.hideLoadingAnimation();
         }
+    }
+
+    getAssistantId() {
+        // Extrahieren Sie die Assistant-ID aus der URL
+        const pathParts = window.location.pathname.split('/');
+        return pathParts[pathParts.length - 1];
     }
 
     showLoadingAnimation() {
@@ -199,21 +203,22 @@ class AIAssistantForm {
         const responseContainer = document.getElementById('webhookResponse');
         console.log('Response container:', responseContainer);
         if (responseContainer) {
-            // Clear previous content
-            responseContainer.innerHTML = '';
-
-            // Create content based on the response
-            const content = document.createElement('div');
-            content.innerHTML = `
-                <h4 class="font-semibold mb-2">Analysis Result:</h4>
-                <div class="bg-base-300 p-4 rounded overflow-x-auto">
-                    ${this.formatResponseContent(result)}
-                </div>
+            responseContainer.innerHTML = `
+                <h3>Role:</h3>
+                <p>${result.role}</p>
+                <h3>Task:</h3>
+                <p>${result.task}</p>
+                <h3>Instruction:</h3>
+                <p>${result.instruction}</p>
+                <h3>Follow-up:</h3>
+                <p>${result.followUp}</p>
+                <h3>Output Format:</h3>
+                <p>${result.outputFormat}</p>
+                <h3>Language Handling:</h3>
+                <p>${result.languageHandling}</p>
+                <h3>General Instructions:</h3>
+                <p>${result.generalInstructions}</p>
             `;
-
-            responseContainer.appendChild(content);
-
-            // Show the response container
             responseContainer.classList.remove('hidden');
             console.log('Hidden class removed from response container');
         } else {

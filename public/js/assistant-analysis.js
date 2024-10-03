@@ -235,25 +235,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const assistantForm = new AIAssistantForm('analysisForm');
         console.log('AIAssistantForm initialized:', assistantForm);
 
-        // Extend the handleWebhookResponse method to scroll to the response
-        const originalHandleWebhookResponse = assistantForm.handleWebhookResponse;
-        assistantForm.handleWebhookResponse = (result) => {
-            console.log('Custom handleWebhookResponse called');
-            originalHandleWebhookResponse.call(assistantForm, result);
-            scrollToResponse();
-        };
-
-        // Prevent default form submission
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-        });
-
         // Add click event listeners to operation buttons
         const operationButtons = form.querySelectorAll('button[data-operation-id]');
         operationButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 console.log('Operation button clicked');
+                const operationId = button.getAttribute('data-operation-id');
+                const languageModel = button.getAttribute('data-language-model');
+                
+                assistantForm.selectedOperationId = operationId;
+                assistantForm.selectedLanguageModel = languageModel;
+                
                 assistantForm.sendDataToWebhook().catch(error => {
                     console.error('Error sending data to webhook:', error);
                     // Display error message to the user

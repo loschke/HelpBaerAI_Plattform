@@ -1,10 +1,12 @@
+import { PROMPT_KEYS } from './prompt-keys';
+
 interface Operation {
   id: string;
   name: string;
   description: string;
   sampleTextFile: string;
-  promptTemplate: string;
-  languageModel: string; // Add this line
+  promptKey: string;
+  languageModel: string;
 }
 
 interface AIAssistant {
@@ -20,6 +22,73 @@ interface AIAssistant {
 
 const aiAssistants: AIAssistant[] = [
   {
+    title: 'Schlaubert',
+    description: 'Schlaubert untersucht und optimiert deine Texte mit KI-Technologie. Er analysiert Stil, Intention und Argumentation für maximale Wirkung und liefert wertvolle Verbesserungsvorschläge.',
+    image: '/images/schlaubert.png',
+    alt: 'Schlaubert - Analyse & Bewertung',
+    task: 'Analyse & Bewertung',
+    buttonText: 'Analysen starten',
+    buttonLink: '/analysis-evaluation',
+    "operations": [
+      {
+        "id": "tone-of-voice",
+        "name": "Schreibstil",
+        "description": "Überprüft den Tonfall des Textes und gibt Empfehlungen für eine ansprechende und einprägsame Sprache. Diese Analyse identifiziert den vorherrschenden Schreibstil (z.B. formell, informell, humorvoll, ernst) und bewertet, ob dieser zum Zielpublikum und Zweck des Textes passt. Sie gibt konkrete Vorschläge zur Verbesserung des Tonfalls, um die Wirkung des Textes zu optimieren.",
+        "sampleTextFile": "/sample-texts/schlaubert-tone-of-voice.txt",
+        "promptKey": PROMPT_KEYS.TONE_OF_VOICE,
+        "languageModel": "anthropic/claude-3.5-sonnet"
+      },
+      {
+        "id": "intention",
+        "name": "Intention",
+        "description": "Überprüft den Zweck des Textes und gibt Empfehlungen für eine klare und prägnante Botschaft. Diese Analyse identifiziert das Hauptziel des Textes (z.B. informieren, überzeugen, unterhalten) und bewertet, wie effektiv dieses Ziel erreicht wird. Sie bietet Vorschläge zur Verbesserung der Klarheit und Wirksamkeit der Kernbotschaft, um sicherzustellen, dass die Intention des Autors beim Leser ankommt.",
+        "sampleTextFile": "/sample-texts/schlaubert-intention.txt",
+        "promptKey": PROMPT_KEYS.INTENTION,
+        "languageModel": "anthropic/claude-3.5-sonnet"
+      },
+      {
+        "id": "bias",
+        "name": "Bias",
+        "description": "Überprüft den Text auf unbewusste Voreingenommenheit oder Vorurteile und gibt Empfehlungen für eine ausgewogene und faire Darstellung. Diese Analyse identifiziert mögliche Formen von Bias, wie z.B. geschlechtsspezifische, kulturelle oder sozioökonomische Vorurteile. Sie bietet Vorschläge zur Neutralisierung von Bias und zur Förderung einer inklusiven Sprache, die alle Leser respektvoll anspricht.",
+        "sampleTextFile": "/sample-texts/schlaubert-bias.txt",
+        "promptKey": PROMPT_KEYS.BIAS,
+        "languageModel": "anthropic/claude-3.5-sonnet"
+      },
+      {
+        "id": "ethics",
+        "name": "Ethik",
+        "description": "Überprüft den Text auf ethische Implikationen und gibt Empfehlungen für eine moralisch vertretbare und verantwortungsvolle Kommunikation. Diese Analyse untersucht den Inhalt auf potenzielle ethische Probleme wie Falschdarstellungen, Manipulation oder die Verletzung von Persönlichkeitsrechten. Sie bietet Vorschläge zur Verbesserung der ethischen Integrität des Textes und zur Förderung einer vertrauenswürdigen Kommunikation.",
+        "sampleTextFile": "/sample-texts/schlaubert-ethics.txt",
+        "promptKey": PROMPT_KEYS.ETHICS,
+        "languageModel": "anthropic/claude-3.5-sonnet"
+      },
+      {
+        "id": "sentiment",
+        "name": "Stimmung",
+        "description": "Analysiert den Text und gibt die Stimmung des Textes wieder. Diese Analyse identifiziert die vorherrschende emotionale Tönung des Textes (z.B. positiv, negativ, neutral) und bewertet deren Konsistenz und Angemessenheit im Kontext. Sie bietet Einblicke in die emotionale Wirkung auf den Leser und gibt Empfehlungen zur Optimierung der Stimmung, um die gewünschte Reaktion beim Zielpublikum zu erzielen.",
+        "sampleTextFile": "/sample-texts/schlaubert-sentiment.txt",
+        "promptKey": PROMPT_KEYS.SENTIMENT,
+        "languageModel": "anthropic/claude-3.5-sonnet"
+      },
+      {
+        "id": "argumentation",
+        "name": "Argumentation",
+        "description": "Analysiert den Text und gibt die Argumentation des Textes wieder. Diese Analyse untersucht die logische Struktur und Überzeugungskraft der präsentierten Argumente. Sie identifiziert Prämissen, Schlussfolgerungen und potenzielle logische Fehlschlüsse. Die Analyse bietet Vorschläge zur Verbesserung der Argumentation, um eine kohärente und überzeugende Darstellung zu gewährleisten.",
+        "sampleTextFile": "/sample-texts/schlaubert-argumentation.txt",
+        "promptKey": PROMPT_KEYS.ARGUMENTATION,
+        "languageModel": "anthropic/claude-3.5-sonnet"
+      },
+      {
+        "id": "emotion",
+        "name": "Emotion",
+        "description": "Analysiert den Text und gibt die Emotion des Textes wieder. Diese Analyse identifiziert und kategorisiert die im Text ausgedrückten oder evozierten Emotionen (z.B. Freude, Trauer, Ärger, Überraschung). Sie bewertet die Intensität und Angemessenheit der emotionalen Aspekte im Kontext des Textziels und der Zielgruppe. Die Analyse bietet Einblicke in die emotionale Wirkung auf den Leser und gibt Empfehlungen zur effektiven Nutzung emotionaler Elemente in der Kommunikation.",
+        "sampleTextFile": "/sample-texts/schlaubert-emotion.txt",
+        "promptKey": PROMPT_KEYS.EMOTION,
+        "languageModel": "anthropic/claude-3.5-sonnet"
+      }
+    ]
+  },
+  {
     title: 'Storybert',
     description: 'Durchleuchtet und optimiert Ihre Website von A bis Z.',
     image: '/images/storybert.png',
@@ -27,57 +96,6 @@ const aiAssistants: AIAssistant[] = [
     task: 'Website-Optimierung',
     buttonText: 'Mit Storybert optimieren',
     buttonLink: 'storybert'
-  },
-  {
-    title: 'SEO-Assistent',
-    description: 'Untersucht und bewertet Ihre Texte für maximale Wirkung.',
-    image: '/images/webbert.png',
-    alt: 'Webbert',
-    task: 'SEO-Analyse',
-    buttonText: 'SEO verbessern',
-    buttonLink: '/seo-assistent',
-    operations: [
-      {
-        id: 'shorten',
-        name: 'Kürzen',
-        description: 'Reduziert den Text auf die wesentlichen Informationen, ohne den Kerninhalt zu verlieren.',
-        sampleTextFile: '/sample-texts/seo-assistant-shorten.txt',
-        promptTemplate: '/prompts/text-shorten.md',
-        languageModel: 'gpt4o' // Add this line
-      },
-      {
-        id: 'expand',
-        name: 'Erweitern',
-        description: 'Fügt zusätzliche relevante Informationen hinzu, um den Text ausführlicher und detaillierter zu gestalten.',
-        sampleTextFile: '/sample-texts/seo-assistant-expand.txt',
-        promptTemplate: '/prompts/text-expand.md',
-        languageModel: 'gpt4mini' // Add this line
-      },
-      {
-        id: 'summarize',
-        name: 'Zusammenfassen',
-        description: 'Erstellt eine prägnante Zusammenfassung der Hauptpunkte des Textes. Diese Funktion hilft Ihnen, schnell die Kernaussagen längerer Texte zu erfassen oder übersichtliche Inhaltsangaben zu erstellen.',
-        sampleTextFile: '/sample-texts/seo-assistant-summarize.txt',
-        promptTemplate: '/prompts/summarize.md',
-        languageModel: 'gemini15pro' // Add this line
-      },
-      {   
-        id: 'insights',
-        name: 'Key insights',
-        description: 'Extrahiert die wichtigsten Informationen aus dem Text und gibt sie als Liste wieder.',
-        sampleTextFile: '/sample-texts/seo-assistant-optimize.txt',
-        promptTemplate: '/prompts/key-insights.md',
-        languageModel: 'claudesonnet' // Add this line
-      },
-      {
-        id: 'sentiment',
-        name: 'Sentiment',
-        description: 'Analysiert den Text und gibt die Stimmung des Textes wieder.',
-        sampleTextFile: '/sample-texts/seo-assistant-analyze.txt',
-        promptTemplate: '/prompts/sentiment.md',
-        languageModel: 'llama32' // Add this line
-      }
-    ]
   },
   {
     title: 'Bild-Erstellungs-Assistent',

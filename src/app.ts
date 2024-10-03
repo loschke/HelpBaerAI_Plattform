@@ -71,6 +71,7 @@ app.set('view engine', 'ejs');
 app.use('/', homeRouter);
 app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
+app.use('/assistants', assistantsRouter);
 app.use('/', assistantsRouter);
 app.use('/api/sample-text', sampleTextRouter);
 

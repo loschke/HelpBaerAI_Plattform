@@ -5,7 +5,7 @@
     </div>
     
     <div id="textInput" class="relative">
-        <textarea class="textarea textarea-bordered w-full h-64 p-6 pr-16" placeholder="Geben Sie hier Ihren Text ein..." id="analysisTextarea" maxlength="2000"></textarea>
+        <textarea class="textarea textarea-bordered w-full h-64 p-6 pr-16" placeholder="Gib deinen Text hier ein oder nutze einen Beispieltext aus der Hilfesektion..." id="analysisTextarea" maxlength="2000"></textarea>
         <div class="absolute top-2 right-2 flex space-x-2">
             <i class="btn btn-ghost btn-sm p-1" id="paste-clipboard">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -39,13 +39,13 @@
 </div>
 
 <div class="relative mb-6">
-    <input type="text" placeholder="Weitere Anforderungen oder Hinweise" class="input input-bordered w-full pr-16" id="additionalRequirements" maxlength="100" />
+    <input type="text" placeholder="Optional: Schwerpunkt oder Fokus der Bearbeitung" class="input input-bordered w-full pr-16" id="additionalRequirements" maxlength="100" />
     <div class="absolute bottom-2 right-2 text-sm text-gray-500" id="additionalCharCounter">0 / 100</div>
 </div>
 
 <div class="flex flex-wrap gap-2 mb-6">
     <% assistant.operations.forEach(operation => { %>
-        <button class="btn bg-base-300 flex-1" 
+        <button class="btn bg-gray-700 flex-1 font-ff-clan font-bold" 
                 data-operation-id="<%= operation.id %>" 
                 data-language-model="<%= operation.languageModel %>"
                 data-prompt-template="<%= operation.promptTemplate %>">
