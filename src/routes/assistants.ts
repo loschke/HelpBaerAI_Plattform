@@ -27,7 +27,7 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
   console.log('Received assistantId:', req.params.assistantId);
   
   const { assistantId } = req.params;
-  const { operationId, tabType, content, additionalInstructions, outputLanguage, outputFormat, languageModel, promptTemplate } = req.body;
+  const { operationId, tabType, content, mainFocus, outputLanguage, outputFormat, languageModel, promptTemplate } = req.body;
 
   console.log('Received promptTemplate:', promptTemplate);
 
@@ -60,11 +60,12 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
       promptTemplate: finalPromptTemplate,
       tabType,  // Hier fügen wir den Tab-Typ hinzu
       userInput: content,
-      additionalInstructions,
+      mainFocus,
       outputLanguage,
       outputFormat,
       languageModel: languageModel || operation.languageModel,
-      operationId
+      operationId,
+      makeBranch: req.body.makeBranch // Neue Zeile
     };
 
     console.log('Prepared data for client:', preparedData);

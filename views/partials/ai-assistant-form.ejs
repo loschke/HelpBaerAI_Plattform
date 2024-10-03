@@ -39,8 +39,8 @@
 </div>
 
 <div class="relative mb-6">
-    <input type="text" placeholder="Optional: Schwerpunkt oder Fokus der Bearbeitung" class="input input-bordered w-full pr-16" id="additionalRequirements" maxlength="100" />
-    <div class="absolute bottom-2 right-2 text-sm text-gray-500" id="additionalCharCounter">0 / 100</div>
+    <input type="text" placeholder="Optional: Schwerpunkt oder Fokus der Bearbeitung" class="input input-bordered w-full pr-16" id="mainFocus" maxlength="100" />
+    <div class="absolute bottom-2 right-2 text-sm text-gray-500" id="mainFocusCharCounter">0 / 100</div>
 </div>
 
 <div class="flex flex-wrap gap-2 mb-6">
@@ -48,7 +48,8 @@
         <button class="btn bg-gray-700 flex-1 font-ff-clan font-bold" 
                 data-operation-id="<%= operation.id %>" 
                 data-language-model="<%= operation.languageModel %>"
-                data-prompt-template="<%= operation.promptTemplate %>">
+                data-prompt-template="<%= operation.promptTemplate %>"
+                data-make-branch="<%= operation.makeBranch %>">
             <%= operation.name %>
         </button>
     <% }); %>

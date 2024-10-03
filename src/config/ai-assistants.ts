@@ -7,6 +7,7 @@ interface Operation {
   sampleTextFile: string;
   promptKey: string;
   languageModel: string;
+  makeBranch: string; // New field added
 }
 
 interface AIAssistant {
@@ -36,7 +37,8 @@ const aiAssistants: AIAssistant[] = [
         "description": "Überprüft den Tonfall des Textes und gibt Empfehlungen für eine ansprechende und einprägsame Sprache. Diese Analyse identifiziert den vorherrschenden Schreibstil (z.B. formell, informell, humorvoll, ernst) und bewertet, ob dieser zum Zielpublikum und Zweck des Textes passt. Sie gibt konkrete Vorschläge zur Verbesserung des Tonfalls, um die Wirkung des Textes zu optimieren.",
         "sampleTextFile": "/sample-texts/schlaubert-tone-of-voice.txt",
         "promptKey": PROMPT_KEYS.TONE_OF_VOICE,
-        "languageModel": "anthropic/claude-3.5-sonnet"
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "testOps"
       },
       {
         "id": "intention",
@@ -44,7 +46,8 @@ const aiAssistants: AIAssistant[] = [
         "description": "Überprüft den Zweck des Textes und gibt Empfehlungen für eine klare und prägnante Botschaft. Diese Analyse identifiziert das Hauptziel des Textes (z.B. informieren, überzeugen, unterhalten) und bewertet, wie effektiv dieses Ziel erreicht wird. Sie bietet Vorschläge zur Verbesserung der Klarheit und Wirksamkeit der Kernbotschaft, um sicherzustellen, dass die Intention des Autors beim Leser ankommt.",
         "sampleTextFile": "/sample-texts/schlaubert-intention.txt",
         "promptKey": PROMPT_KEYS.INTENTION,
-        "languageModel": "anthropic/claude-3.5-sonnet"
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "testOps"
       },
       {
         "id": "bias",
@@ -52,7 +55,8 @@ const aiAssistants: AIAssistant[] = [
         "description": "Überprüft den Text auf unbewusste Voreingenommenheit oder Vorurteile und gibt Empfehlungen für eine ausgewogene und faire Darstellung. Diese Analyse identifiziert mögliche Formen von Bias, wie z.B. geschlechtsspezifische, kulturelle oder sozioökonomische Vorurteile. Sie bietet Vorschläge zur Neutralisierung von Bias und zur Förderung einer inklusiven Sprache, die alle Leser respektvoll anspricht.",
         "sampleTextFile": "/sample-texts/schlaubert-bias.txt",
         "promptKey": PROMPT_KEYS.BIAS,
-        "languageModel": "anthropic/claude-3.5-sonnet"
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "testOps"
       },
       {
         "id": "ethics",
@@ -60,7 +64,8 @@ const aiAssistants: AIAssistant[] = [
         "description": "Überprüft den Text auf ethische Implikationen und gibt Empfehlungen für eine moralisch vertretbare und verantwortungsvolle Kommunikation. Diese Analyse untersucht den Inhalt auf potenzielle ethische Probleme wie Falschdarstellungen, Manipulation oder die Verletzung von Persönlichkeitsrechten. Sie bietet Vorschläge zur Verbesserung der ethischen Integrität des Textes und zur Förderung einer vertrauenswürdigen Kommunikation.",
         "sampleTextFile": "/sample-texts/schlaubert-ethics.txt",
         "promptKey": PROMPT_KEYS.ETHICS,
-        "languageModel": "anthropic/claude-3.5-sonnet"
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "testOps"
       },
       {
         "id": "sentiment",
@@ -68,7 +73,8 @@ const aiAssistants: AIAssistant[] = [
         "description": "Analysiert den Text und gibt die Stimmung des Textes wieder. Diese Analyse identifiziert die vorherrschende emotionale Tönung des Textes (z.B. positiv, negativ, neutral) und bewertet deren Konsistenz und Angemessenheit im Kontext. Sie bietet Einblicke in die emotionale Wirkung auf den Leser und gibt Empfehlungen zur Optimierung der Stimmung, um die gewünschte Reaktion beim Zielpublikum zu erzielen.",
         "sampleTextFile": "/sample-texts/schlaubert-sentiment.txt",
         "promptKey": PROMPT_KEYS.SENTIMENT,
-        "languageModel": "anthropic/claude-3.5-sonnet"
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "testOps"
       },
       {
         "id": "argumentation",
@@ -76,7 +82,8 @@ const aiAssistants: AIAssistant[] = [
         "description": "Analysiert den Text und gibt die Argumentation des Textes wieder. Diese Analyse untersucht die logische Struktur und Überzeugungskraft der präsentierten Argumente. Sie identifiziert Prämissen, Schlussfolgerungen und potenzielle logische Fehlschlüsse. Die Analyse bietet Vorschläge zur Verbesserung der Argumentation, um eine kohärente und überzeugende Darstellung zu gewährleisten.",
         "sampleTextFile": "/sample-texts/schlaubert-argumentation.txt",
         "promptKey": PROMPT_KEYS.ARGUMENTATION,
-        "languageModel": "anthropic/claude-3.5-sonnet"
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "testOps"
       },
       {
         "id": "emotion",
@@ -84,7 +91,8 @@ const aiAssistants: AIAssistant[] = [
         "description": "Analysiert den Text und gibt die Emotion des Textes wieder. Diese Analyse identifiziert und kategorisiert die im Text ausgedrückten oder evozierten Emotionen (z.B. Freude, Trauer, Ärger, Überraschung). Sie bewertet die Intensität und Angemessenheit der emotionalen Aspekte im Kontext des Textziels und der Zielgruppe. Die Analyse bietet Einblicke in die emotionale Wirkung auf den Leser und gibt Empfehlungen zur effektiven Nutzung emotionaler Elemente in der Kommunikation.",
         "sampleTextFile": "/sample-texts/schlaubert-emotion.txt",
         "promptKey": PROMPT_KEYS.EMOTION,
-        "languageModel": "anthropic/claude-3.5-sonnet"
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "emotion-branch" // New field added
       }
     ]
   },

@@ -13,7 +13,7 @@ class AIAssistantForm {
         this.urlInput = document.getElementById('urlInput');
         this.analysisTextarea = document.getElementById('analysisTextarea');
         this.urlInputField = document.getElementById('urlInputField');
-        this.additionalRequirements = document.getElementById('additionalRequirements');
+        this.mainFocus = document.getElementById('mainFocus');
         this.outputLanguage = document.getElementById('outputLanguage');
         this.outputFormat = document.getElementById('outputFormat');
         this.languageModel = document.getElementById('languageModel');
@@ -123,12 +123,13 @@ class AIAssistantForm {
         const formData = {
             tabType: this.activeTab,  // Hier fügen wir den Tab-Typ hinzu
             content: this.activeTab === 'text' ? this.analysisTextarea.value : this.urlInputField.value,
-            additionalInstructions: this.additionalRequirements.value,
+            mainFocus: this.mainFocus.value,
             outputLanguage: this.outputLanguage.value,
             outputFormat: this.outputFormat.value,
             operationId: this.selectedOperationId,
             languageModel: this.languageModel.value || this.selectedLanguageModel,
-            promptTemplate: this.promptTemplateContent
+            promptTemplate: this.promptTemplateContent,
+            makeBranch: this.selectedMakeBranch // Neue Zeile
         };
         console.log('Form data:', formData);
         return formData;

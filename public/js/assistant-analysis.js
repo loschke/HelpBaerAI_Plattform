@@ -104,8 +104,8 @@ function toggleIcons() {
 }
 
 function updateAdditionalCharCounter() {
-    const input = document.getElementById('additionalRequirements');
-    const charCounter = document.getElementById('additionalCharCounter');
+    const input = document.getElementById('mainFocus');
+    const charCounter = document.getElementById('mainFocusCharCounter');
     if (input && charCounter) {
         const currentLength = input.value.length;
         charCounter.textContent = `${currentLength} / 100`;
@@ -243,9 +243,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Operation button clicked');
                 const operationId = button.getAttribute('data-operation-id');
                 const languageModel = button.getAttribute('data-language-model');
+                const makeBranch = button.getAttribute('data-make-branch');
                 
                 assistantForm.selectedOperationId = operationId;
                 assistantForm.selectedLanguageModel = languageModel;
+                assistantForm.selectedMakeBranch = makeBranch;
                 
                 assistantForm.sendDataToWebhook().catch(error => {
                     console.error('Error sending data to webhook:', error);
@@ -259,3 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Add this line at the end of the file
 console.log('assistant-analysis.js loaded');
+
+// Update the character counter for mainFocus
+const mainFocusInput = document.getElementById('mainFocus');
+const mainFocusCharCounter = document.getElementById('mainFocusCharCounter');
+
+if (mainFocusInput && mainFocusCharCounter) {
+    mainFocusInput.addEventListener('input', function() {
+        const remainingChars = 100 - this.value.length;
+        mainFocusCharCounter.textContent = `${this.value.length} / 100`;
+    });
+}
