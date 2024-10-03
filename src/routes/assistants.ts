@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import aiAssistants from '../config/ai-assistants';
 import { getPromptTemplate } from '../services/prompt-service';
+import fetch from 'node-fetch';
 
 const router = Router();
 
@@ -21,9 +22,14 @@ router.get('/:assistantId', (req: Request, res: Response) => {
   }
 });
 
-router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Response) => {
+router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Response): Promise<void> => {
+  console.log('Received request body:', req.body);
+  console.log('Received assistantId:', req.params.assistantId);
+  
   const { assistantId } = req.params;
-  const { operationId, text, outputFormat, language } = req.body;
+  const { operationId, tabType, content, additionalInstructions, outputLanguage, outputFormat, languageModel, promptTemplate } = req.body;
+
+  console.log('Received promptTemplate:', promptTemplate);
 
   const assistant = aiAssistants.find(a => a.buttonLink === `/${assistantId}`);
   if (!assistant) {
@@ -37,22 +43,61 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
     return;
   }
 
-  const promptTemplate = await getPromptTemplate(operation.promptKey);
+  try {
+    let finalPromptTemplate;
+    if (promptTemplate) {
+      console.log('Using client-provided promptTemplate');
+      finalPromptTemplate = promptTemplate;
+    } else {
+      console.log('Fetching promptTemplate from server');
+      finalPromptTemplate = await getPromptTemplate(operation.promptKey);
+    }
 
-  // Hier würden Sie die Logik implementieren, um das Sprachmodell mit den Prompts aufzurufen
-  // Beispiel:
-  // const result = await callLanguageModel(operation.languageModel, promptTemplate, text, outputFormat, language);
+    console.log('Final promptTemplate:', finalPromptTemplate);
 
-  // Für dieses Beispiel geben wir einfach die Prompts zurück
-  res.json({
-    role: promptTemplate.role,
-    task: promptTemplate.task,
-    instruction: promptTemplate.instruction,
-    followUp: promptTemplate.followUp,
-    outputFormat: promptTemplate.outputFormat,
-    languageHandling: promptTemplate.languageHandling,
-    generalInstructions: promptTemplate.generalInstructions
-  });
+    // Vorbereiten der Daten für die Rückgabe an den Client
+    const preparedData = {
+      promptTemplate: finalPromptTemplate,
+      tabType,  // Hier fügen wir den Tab-Typ hinzu
+      userInput: content,
+      additionalInstructions,
+      outputLanguage,
+      outputFormat,
+      languageModel: languageModel || operation.languageModel,
+      operationId
+    };
+
+    console.log('Prepared data for client:', preparedData);
+
+    // Senden der Daten an den externen Webhook
+    const webhookUrl = process.env.AI_ASSISTANT_WEBHOOK_URL;
+    console.log('Webhook URL:', webhookUrl);
+
+    if (webhookUrl) {
+      const webhookResponse = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(preparedData),
+      });
+
+      if (!webhookResponse.ok) {
+        throw new Error(`Webhook error! status: ${webhookResponse.status}`);
+      }
+
+      const webhookResult = await webhookResponse.json();
+
+      // Rückgabe der Webhook-Antwort an den Client
+      res.json(webhookResult);
+    } else {
+      console.error('Webhook URL is not defined in environment variables');
+      // Hier könnten Sie eine alternative Aktion durchführen oder einen Fehler werfen
+    }
+  } catch (error) {
+    console.error('Error processing request:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }));
 
 export default router;

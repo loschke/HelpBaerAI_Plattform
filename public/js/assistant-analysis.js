@@ -249,15 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 assistantForm.sendDataToWebhook().catch(error => {
                     console.error('Error sending data to webhook:', error);
-                    // Display error message to the user
-                    const responseContainer = document.getElementById('webhookResponse');
-                    if (responseContainer) {
-                        responseContainer.innerHTML = `<div class="text-error">Error: ${error.message}</div>`;
-                        responseContainer.classList.remove('hidden');
-                        scrollToResponse();
-                    }
-                }).finally(() => {
-                    assistantForm.hideLoadingAnimation();
                 });
             });
         });

@@ -121,13 +121,14 @@ class AIAssistantForm {
 
     getFormData() {
         const formData = {
-            tabType: this.activeTab,
+            tabType: this.activeTab,  // Hier fügen wir den Tab-Typ hinzu
             content: this.activeTab === 'text' ? this.analysisTextarea.value : this.urlInputField.value,
             additionalInstructions: this.additionalRequirements.value,
             outputLanguage: this.outputLanguage.value,
             outputFormat: this.outputFormat.value,
             operationId: this.selectedOperationId,
-            languageModel: this.languageModel.value || this.selectedLanguageModel
+            languageModel: this.languageModel.value || this.selectedLanguageModel,
+            promptTemplate: this.promptTemplateContent
         };
         console.log('Form data:', formData);
         return formData;
@@ -137,23 +138,10 @@ class AIAssistantForm {
         console.log('Sending data to webhook');
         this.showLoadingAnimation();
 
-        if (!this.webhookUrl) {
-            console.error('Webhook URL not initialized. Retrying initialization...');
-            try {
-                await this.initWebhookUrl();
-            } catch (error) {
-                console.error('Failed to initialize webhook URL:', error);
-                this.hideLoadingAnimation();
-                return;
-            }
-        }
-
         const data = this.getFormData();
         console.log('Data to be sent:', data);
-        console.log('Webhook URL:', this.webhookUrl);
 
         try {
-            console.log('Sending fetch request...');
             const response = await fetch(`/assistants/${this.getAssistantId()}/process`, {
                 method: 'POST',
                 headers: {
@@ -161,10 +149,14 @@ class AIAssistantForm {
                 },
                 body: JSON.stringify(data),
             });
-            console.log('Received response:', response);
+
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
+
             const result = await response.json();
             console.log('Success:', result);
             this.handleWebhookResponse(result);
@@ -201,42 +193,18 @@ class AIAssistantForm {
 
     displayResponse(result) {
         const responseContainer = document.getElementById('webhookResponse');
-        console.log('Response container:', responseContainer);
         if (responseContainer) {
-            responseContainer.innerHTML = `
-                <h3>Role:</h3>
-                <p>${result.role}</p>
-                <h3>Task:</h3>
-                <p>${result.task}</p>
-                <h3>Instruction:</h3>
-                <p>${result.instruction}</p>
-                <h3>Follow-up:</h3>
-                <p>${result.followUp}</p>
-                <h3>Output Format:</h3>
-                <p>${result.outputFormat}</p>
-                <h3>Language Handling:</h3>
-                <p>${result.languageHandling}</p>
-                <h3>General Instructions:</h3>
-                <p>${result.generalInstructions}</p>
-            `;
+            responseContainer.innerHTML = this.formatResponseContent(result);
             responseContainer.classList.remove('hidden');
-            console.log('Hidden class removed from response container');
         } else {
             console.error('Response container not found');
         }
     }
 
     formatResponseContent(result) {
-        console.log('Formatting response content:', result);
-        if (typeof result === 'string') {
-            return result;
-        } else if (result.content) {
-            return result.content;
-        } else if (typeof result === 'object') {
-            return `<pre>${JSON.stringify(result, null, 2)}</pre>`;
-        } else {
-            return 'Unexpected response format';
-        }
+        // Implementieren Sie hier die Logik zur Formatierung der Webhook-Antwort
+        // Dies hängt von der Struktur der Antwort ab, die Sie vom externen Webhook erhalten
+        return `<pre>${JSON.stringify(result, null, 2)}</pre>`;
     }
 
     handleWebhookError(error) {
@@ -252,4 +220,4 @@ class AIAssistantForm {
 console.log('AIAssistantForm class defined');
 
 // Export the class for use in other files
-export default AIAssistantForm;
+export default AIAssistantForm

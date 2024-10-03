@@ -1,6 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 
+const basePath = path.join(__dirname, '..', 'prompts');
+
 interface PromptTemplate {
   role: string;
   task: string;
@@ -21,7 +23,6 @@ async function readPromptFile(filePath: string): Promise<string> {
 }
 
 export async function getPromptTemplate(operationKey: string): Promise<PromptTemplate> {
-  const basePath = path.join(__dirname, '..', 'prompts');
   const operationPath = path.join(basePath, 'operations', operationKey);
   const sharedPath = path.join(basePath, 'shared');
 

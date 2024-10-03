@@ -22,10 +22,10 @@ interface AIAssistant {
 
 const aiAssistants: AIAssistant[] = [
   {
-    title: 'Schlaubert',
+    title: 'Schlaubärt',
     description: 'Schlaubert untersucht und optimiert deine Texte mit KI-Technologie. Er analysiert Stil, Intention und Argumentation für maximale Wirkung und liefert wertvolle Verbesserungsvorschläge.',
     image: '/images/schlaubert.png',
-    alt: 'Schlaubert - Analyse & Bewertung',
+    alt: 'Schlaubärt - Analyse & Bewertung',
     task: 'Analyse & Bewertung',
     buttonText: 'Analysen starten',
     buttonLink: '/analysis-evaluation',
