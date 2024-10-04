@@ -5,7 +5,7 @@
     <title>HelpBärAI - <%= assistant.title %></title>
     <script type="module" src="/js/assistant-analysis.js"></script>
 </head>
-<body class="bg-base-100 text-base-content flex flex-col min-h-screen">
+<body class="bg-base-100 text-base-content flex flex-col min-h-screen <%= locals.user ? 'user-logged-in' : '' %>">
     <%- include('../partials/header') %>
 
     <div class="flex-grow flex">
@@ -51,6 +51,7 @@
         </aside>
     </div>
 
+    <%- include('../partials/login-popup') %>
     <%- include('../partials/footer') %>
 </body>
 </html>

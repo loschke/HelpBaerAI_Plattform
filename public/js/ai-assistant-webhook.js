@@ -17,7 +17,7 @@ class AIAssistantForm {
         this.outputLanguage = document.getElementById('outputLanguage');
         this.outputFormat = document.getElementById('outputFormat');
         this.languageModel = document.getElementById('languageModel');
-        this.operationButtons = document.querySelectorAll('.btn[data-operation-id]');
+        this.operationButtons = document.querySelectorAll('.operation-button');
 
         this.activeTab = 'text';
         this.selectedOperationId = null;
@@ -41,8 +41,12 @@ class AIAssistantForm {
 
         this.handleOperationClick = this.handleOperationClick.bind(this);
         this.operationButtons.forEach(button => {
-            button.addEventListener('click', this.handleOperationClick);
+            button.addEventListener('click', this.handleOperationClick.bind(this));
         });
+
+        this.loginPopup = document.getElementById('loginPopup');
+        this.closePopupButton = document.getElementById('closePopup');
+        this.closePopupButton.addEventListener('click', this.hideLoginPopup.bind(this));
     }
 
     async initWebhookUrl() {
@@ -87,19 +91,13 @@ class AIAssistantForm {
         console.log('Operation button clicked');
         const button = e.target.closest('button');
         if (button) {
-            this.selectedOperationId = button.dataset.operationId;
-            this.selectedLanguageModel = button.dataset.languageModel;
-            const promptTemplatePath = button.dataset.promptTemplate;
-            console.log('Prompt template path:', promptTemplatePath);
-            if (promptTemplatePath) {
-                this.promptTemplateContent = await this.readPromptTemplate(promptTemplatePath);
-                console.log('Prompt template content set:', !!this.promptTemplateContent);
-                console.log('Prompt template content preview:', this.promptTemplateContent?.substring(0, 100));
+            e.preventDefault();
+            if (!this.isUserLoggedIn()) {
+                this.showLoginPopup();
             } else {
-                this.promptTemplateContent = null;
-                console.log('No prompt template path provided');
+                // Führen Sie hier die gewünschte Aktion für eingeloggte Benutzer aus
+                console.log('Operation für eingeloggten Benutzer ausführen');
             }
-            console.log(`Selected operation: ${this.selectedOperationId}, Language model: ${this.selectedLanguageModel}`);
         }
     }
 
@@ -137,6 +135,10 @@ class AIAssistantForm {
 
     async sendDataToWebhook() {
         console.log('Sending data to webhook');
+        if (!this.isUserLoggedIn()) {
+            this.showLoginPopup();
+            return;
+        }
         this.showLoadingAnimation();
 
         const data = this.getFormData();
@@ -215,6 +217,18 @@ class AIAssistantForm {
             responseContainer.innerHTML = `<div class="text-error">Error: ${error.message}</div>`;
             responseContainer.classList.remove('hidden');
         }
+    }
+
+    isUserLoggedIn() {
+        return document.body.classList.contains('user-logged-in');
+    }
+
+    showLoginPopup() {
+        this.loginPopup.style.display = 'flex';
+    }
+
+    hideLoginPopup() {
+        this.loginPopup.style.display = 'none';
     }
 }
 

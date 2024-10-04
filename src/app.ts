@@ -44,21 +44,33 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'your-secret-key',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: process.env.NODE_ENV === 'production' }
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
 }));
 
 // Middleware to make user data available to all views
 app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.log('Session ID:', req.sessionID);
+  console.log('Session data:', req.session);
+  
   if (req.session && req.session.userId) {
+    console.log('User ID from session:', req.session.userId);
     try {
       const db = await openDb();
       const user = await getUserById(db, req.session.userId);
       if (user) {
+        console.log('User found:', user.email);
         res.locals.user = user;
+      } else {
+        console.log('User not found for ID:', req.session.userId);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
+  } else {
+    console.log('No user ID in session');
   }
   next();
 });

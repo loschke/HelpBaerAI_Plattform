@@ -2,6 +2,8 @@ import { Router, Request, Response, NextFunction } from 'express';
 import aiAssistants from '../config/ai-assistants';
 import { getPromptTemplate } from '../services/prompt-service';
 import fetch from 'node-fetch';
+import { openDb } from '../config/database';
+import { getUserById } from '../models/User';
 
 const router = Router();
 
@@ -11,16 +13,32 @@ const asyncHandler = (fn: AsyncRouteHandler) => (req: Request, res: Response, ne
   return Promise.resolve(fn(req, res, next)).catch(next);
 };
 
-router.get('/:assistantId', (req: Request, res: Response) => {
+router.get('/:assistantId', asyncHandler(async (req: Request, res: Response) => {
+  console.log('Session ID in assistants route:', req.sessionID);
+  console.log('Session data in assistants route:', req.session);
+
   const assistantId = req.params.assistantId;
   const assistant = aiAssistants.find(a => a.buttonLink === `/${assistantId}`);
 
   if (assistant) {
-    res.render('pages/assistant-analysis', { assistant });
+    let user = null;
+    if (req.session && req.session.userId) {
+      console.log('User ID from session in assistants route:', req.session.userId);
+      const db = await openDb();
+      user = await getUserById(db, req.session.userId);
+      console.log('User found in assistants route:', user ? user.email : 'Not found');
+    } else {
+      console.log('No user ID in session for assistants route');
+    }
+
+    res.render('pages/assistant-analysis', { 
+      assistant,
+      user: user
+    });
   } else {
     res.status(404).render('pages/error', { message: 'Assistant not found' });
   }
-});
+}));
 
 router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   console.log('Received request body:', req.body);
