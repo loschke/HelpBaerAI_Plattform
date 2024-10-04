@@ -16,6 +16,8 @@
                 <form id="analysisForm">
                     <%- include('../partials/ai-assistant-form', { assistant: assistant }) %>
                 </form>
+
+                <%- include('../partials/webhook-response') %>
             </div>
         </main>
         
@@ -51,6 +53,7 @@
         </aside>
     </div>
 
+    <%- include('../partials/loading-animation') %>
     <%- include('../partials/login-popup') %>
     <%- include('../partials/footer') %>
 </body>
