@@ -145,6 +145,20 @@ class AIAssistantForm {
         console.log('Data to be sent:', data);
 
         try {
+            // Log the operation start
+            const logResponse = await fetch('/api/log-operation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    operationId: this.selectedOperationId,
+                    formData: JSON.stringify(data),
+                }),
+            });
+            const logResult = await logResponse.json();
+            const logId = logResult.id;
+
             const response = await fetch(`/assistants/${this.getAssistantId()}/process`, {
                 method: 'POST',
                 headers: {
@@ -162,6 +176,19 @@ class AIAssistantForm {
 
             const result = await response.json();
             console.log('Success:', result);
+
+            // Update the log with success status and response
+            await fetch(`/api/update-log/${logId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    success: true,
+                    response: JSON.stringify(result),
+                }),
+            });
+
             this.handleWebhookResponse(result);
         } catch (error) {
             console.error('Error:', error);

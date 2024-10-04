@@ -4,6 +4,7 @@ import { getPromptTemplate } from '../services/prompt-service';
 import fetch from 'node-fetch';
 import { openDb } from '../config/database';
 import { getUserById } from '../models/User';
+import { createOperationLog, updateOperationLogSuccess } from '../models/OperationLog';
 
 const router = Router();
 
@@ -117,6 +118,37 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
     console.error('Error processing request:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
+}));
+
+router.post('/api/log-operation', asyncHandler(async (req: Request, res: Response) => {
+  const { operationId, formData } = req.body;
+  const userId = req.session?.userId;
+
+  if (!userId) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
+  const db = await openDb();
+  const log = await createOperationLog(db, {
+    userId,
+    operationId,
+    formData,
+    timestamp: new Date().toISOString(),
+    success: false,
+  });
+
+  res.json({ id: log.id });
+}));
+
+router.put('/api/update-log/:id', asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { success, response } = req.body;
+
+  const db = await openDb();
+  await updateOperationLogSuccess(db, parseInt(id), success, response);
+
+  res.json({ success: true });
 }));
 
 export default router;

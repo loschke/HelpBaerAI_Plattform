@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import { setupDatabase, openDb } from './config/database';
+import { openDb } from './config/database';
 import { getUserById } from './models/User';
 import homeRouter from './routes/home';
 import authRouter from './routes/auth';
@@ -90,20 +90,16 @@ app.use('/api/sample-text', sampleTextRouter);
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err.stack);
-  console.log('Attempting to render error page at:', path.join(__dirname, '../views/pages/error.ejs'));
-  res.status(500).render('pages/error', { title: 'Error', message: 'Something went wrong!' });
+  res.status(500).send('Something broke!');
 });
 
 // Initialize the database
-setupDatabase().then(() => {
-  console.log('Database initialized');
-}).catch(err => {
-  console.error('Failed to initialize database:', err);
-  process.exit(1);
-});
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+openDb().then(() => {
+  app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
+}).catch((err: Error) => {
+  console.error('Failed to open database:', err);
 });
 
 // Register webhook routes
