@@ -37,11 +37,15 @@
                             <div class="collapse collapse-arrow join-item border border-base-300">
                                 <input type="radio" name="my-accordion-4" <%= index === 0 ? 'checked="checked"' : '' %> /> 
                                 <div class="collapse-title text-lg font-medium">
-                                    <%= operation.name %> <small class="text-xs text-gray-500">(<%= operation.creditCost %> Credits)</small></small>
+                                    <%= operation.name %>
                                 </div>
                                 <div class="collapse-content bg-base-300 p-4"> 
-                                    <p><%= operation.description %></p>
-                                    <button class="btn bg-base-100 btn-sm mt-2 load-sample-text" data-filename="<%= operation.sampleTextFile.split('/').pop() %>">
+                                    <p class="mb-2"><%= operation.description %></p>
+                                    <ul class="list-disc list-inside text-sm">
+                                        <li>Kosten: <%= operation.creditCost %> Credits</li>
+                                        <li>Dauer: <%= operation.estimatedTotalTime %></li>
+                                    </ul>
+                                    <button class="btn bg-base-100 btn-sm mt-4 load-sample-text" data-filename="<%= operation.sampleTextFile.split('/').pop() %>">
                                         Mustertext einfügen
                                     </button>
                                 </div>

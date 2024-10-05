@@ -9,6 +9,7 @@ interface Operation {
   languageModel: string;
   makeBranch: string;
   creditCost: number;
+  estimatedTotalTime: string;
 }
 
 interface AIAssistant {
@@ -40,7 +41,8 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.TONE_OF_VOICE,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 6
+        "creditCost": 6,
+        "estimatedTotalTime": "ca. 25-35 sek (Text) | ca. 30-45 sek (URL)"
       },
       {
         "id": "intention",
@@ -50,7 +52,8 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.INTENTION,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 6
+        "creditCost": 6,
+        "estimatedTotalTime": "ca. 25-35 sek (Text) | ca. 30-45 sek (URL)"
       },
       {
         "id": "bias",
@@ -60,7 +63,8 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.BIAS,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 6
+        "creditCost": 6,
+        "estimatedTotalTime": "ca. 25-35 sek (Text) | ca. 30-45 sek (URL)"
       },
       {
         "id": "ethics",
@@ -70,7 +74,8 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.ETHICS,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 6
+        "creditCost": 6,
+        "estimatedTotalTime": "ca. 25-35 sek (Text) | ca. 30-45 sek (URL)"
       },
       {
         "id": "sentiment",
@@ -80,7 +85,8 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.SENTIMENT,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 6
+        "creditCost": 6,
+        "estimatedTotalTime": "ca. 25-35 sek (Text) | ca. 30-45 sek (URL)"
       },
       {
         "id": "argumentation",
@@ -90,7 +96,8 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.ARGUMENTATION,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 6
+        "creditCost": 6,
+        "estimatedTotalTime": "ca. 25-35 sek (Text) | ca. 30-45 sek (URL)"
       },
       {
         "id": "emotion",
@@ -100,7 +107,8 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.EMOTION,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 6
+        "creditCost": 6,
+        "estimatedTotalTime": "ca. 25-35 sek (Text) | ca. 30-45 sek (URL)"
       }
     ]
   },
