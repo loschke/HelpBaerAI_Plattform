@@ -145,20 +145,6 @@ class AIAssistantForm {
         console.log('Data to be sent:', data);
 
         try {
-            // Log the operation start
-            const logResponse = await fetch('/api/log-operation', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    operationId: this.selectedOperationId,
-                    formData: JSON.stringify(data),
-                }),
-            });
-            const logResult = await logResponse.json();
-            const logId = logResult.id;
-
             const response = await fetch(`/assistants/${this.getAssistantId()}/process`, {
                 method: 'POST',
                 headers: {
@@ -167,34 +153,30 @@ class AIAssistantForm {
                 body: JSON.stringify(data),
             });
 
-            console.log('Response status:', response.status);
-            console.log('Response headers:', response.headers);
-
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorData = await response.json();
+                if (response.status === 403 && errorData.error === 'Insufficient credits') {
+                    this.displayError('Sie haben nicht genügend Credits für diese Operation.');
+                } else {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+            } else {
+                const result = await response.json();
+                this.handleWebhookResponse(result);
             }
-
-            const result = await response.json();
-            console.log('Success:', result);
-
-            // Update the log with success status and response
-            await fetch(`/api/update-log/${logId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    success: true,
-                    response: JSON.stringify(result),
-                }),
-            });
-
-            this.handleWebhookResponse(result);
         } catch (error) {
             console.error('Error:', error);
-            this.handleWebhookError(error);
+            this.displayError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
         } finally {
             this.hideLoadingAnimation();
+        }
+    }
+
+    displayError(message) {
+        const errorContainer = document.getElementById('errorContainer');
+        if (errorContainer) {
+            errorContainer.textContent = message;
+            errorContainer.classList.remove('hidden');
         }
     }
 

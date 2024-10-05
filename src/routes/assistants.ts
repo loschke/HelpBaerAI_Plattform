@@ -7,7 +7,8 @@ import { getUserById } from '../models/User';
 import { createOperationLog, updateOperationLogSuccess } from '../models/OperationLog';
 import { parseString, OptionsV2 } from 'xml2js';
 import { promisify } from 'util';
-import config from '../config/model-costs'; // Ändern Sie den Import-Pfad entsprechend der tatsächlichen Lage Ihrer Konfigurationsdatei
+import config from '../config/model-costs'; 
+import {getUserCredits, updateUserCredits, logOperation } from '../services/creditService';
 
 const parseXml = promisify<string, OptionsV2, WebhookResponse | null>((xmlString, options, callback) => {
   // Extrahieren Sie den Inhalt des output-Elements vor dem Parsen
@@ -80,13 +81,18 @@ router.get('/:assistantId', asyncHandler(async (req: Request, res: Response) => 
 }));
 
 router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Response): Promise<void> => {
+  console.log('Processing request...');
   console.log('Received request body:', req.body);
   console.log('Received assistantId:', req.params.assistantId);
   
   const { assistantId } = req.params;
   const { operationId, tabType, content, mainFocus, outputLanguage, outputFormat, languageModel, promptTemplate } = req.body;
+  const userId = req.session?.userId;
 
-  console.log('Received promptTemplate:', promptTemplate);
+  if (!userId) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
 
   const assistant = aiAssistants.find(a => a.buttonLink === `/${assistantId}`);
   if (!assistant) {
@@ -97,6 +103,16 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
   const operation = assistant.operations?.find(op => op.id === operationId);
   if (!operation) {
     res.status(404).json({ error: 'Operation not found' });
+    return;
+  }
+
+  // Check user credits
+  const userCredits = await getUserCredits(userId);
+  console.log('User credits:', userCredits);
+  console.log('Operation cost:', operation.creditCost);
+  if (userCredits < operation.creditCost) {
+    console.log('Insufficient credits');
+    res.status(403).json({ error: 'Insufficient credits' });
     return;
   }
 
@@ -171,8 +187,27 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
         }
       };
 
-      // Senden der formatierten Daten an den Client
-      res.json(parsedResult);
+      // If the operation was successful, update credits and log the operation
+      await updateUserCredits(userId, userCredits - operation.creditCost);
+      try {
+        await logOperation(
+          userId, 
+          operationId, 
+          preparedData, // Senden der tatsächlichen formData
+          result.response.output, // Senden der Webhook-Antwort
+          operation.creditCost
+        );
+      } catch (logError) {
+        console.error('Failed to log operation:', logError);
+        // Entscheiden Sie hier, ob Sie den Fehler ignorieren oder die Anfrage abbrechen möchten
+      }
+
+      // Include the remaining credits in the response
+      const updatedCredits = await getUserCredits(userId);
+      res.json({
+        ...parsedResult,
+        remainingCredits: updatedCredits
+      });
     } else {
       console.error('Webhook URL is not defined in environment variables');
       res.status(500).json({ error: 'Webhook URL is not configured' });
@@ -195,13 +230,14 @@ router.post('/api/log-operation', asyncHandler(async (req: Request, res: Respons
   const db = await openDb();
   const log = await createOperationLog(db, {
     userId,
-    operationId,
-    formData,
-    timestamp: new Date().toISOString(),
+    operationId, // Entfernen Sie 'any'
+    formData, // Entfernen Sie 'any'
+    timestamp: new Date().toISOString(), // Verwenden Sie einen tatsächlichen Zeitstempel
     success: false,
+    creditsUsed: 0
   });
 
-  res.json({ id: log.id });
+  res.json({ id: log });
 }));
 
 router.put('/api/update-log/:id', asyncHandler(async (req: Request, res: Response) => {
@@ -209,7 +245,7 @@ router.put('/api/update-log/:id', asyncHandler(async (req: Request, res: Respons
   const { success, response } = req.body;
 
   const db = await openDb();
-  await updateOperationLogSuccess(db, parseInt(id), success, response);
+  await updateOperationLogSuccess(db, parseInt(id), success, response, 0);
 
   res.json({ success: true });
 }));

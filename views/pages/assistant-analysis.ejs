@@ -7,7 +7,7 @@
 </head>
 <body class="bg-base-100 text-base-content flex flex-col min-h-screen <%= locals.user ? 'user-logged-in' : '' %>">
     <%- include('../partials/header') %>
-
+    <div id="errorContainer" class="hidden bg-primary  text-white px-4 py-3 rounded relative mb-4 text-center" role="alert"></div>    
     <div class="flex-grow flex">
         <main class="flex-grow p-4 lg:p-8 flex justify-center">
             <div class="w-full max-w-4xl">
@@ -20,7 +20,7 @@
                 <%- include('../partials/webhook-response') %>
             </div>
         </main>
-        
+           
         <aside class="w-12 bg-base-200 transition-all duration-300 ease-in-out overflow-hidden sm:w-full md:w-1/2 lg:max-w-1/2" id="sidepanel">
             <div class="flex flex-col h-full">
                 <button class="btn bg-info self-end p-2" id="toggleSidepanel" title="Hilfe anzeigen/ausblenden">
@@ -53,8 +53,11 @@
         </aside>
     </div>
 
+
+
     <%- include('../partials/loading-animation') %>
     <%- include('../partials/login-popup') %>
     <%- include('../partials/footer') %>
+
 </body>
 </html>

@@ -38,6 +38,7 @@ export async function openDb(): Promise<Database> {
       timestamp TEXT NOT NULL,
       success INTEGER NOT NULL,
       response TEXT,
+      creditsUsed INTEGER NOT NULL,
       FOREIGN KEY (userId) REFERENCES users(id)
     )
   `);

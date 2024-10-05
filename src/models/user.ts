@@ -40,8 +40,8 @@ export async function createUser(db: Database, user: Omit<User, 'id'>): Promise<
   const hashedPassword = await bcrypt.hash(user.password, 10);
   console.log('Creating user with hashed password:', hashedPassword);
   const result = await db.run(
-    'INSERT INTO users (firstname, email, password, is_verified, is_admin) VALUES (?, ?, ?, ?, ?)',
-    [user.firstname, user.email, hashedPassword, user.isVerified ? 1 : 0, user.isAdmin ? 1 : 0]
+    'INSERT INTO users (firstname, email, password, is_verified, is_admin, Credits) VALUES (?, ?, ?, ?, ?, ?)',
+    [user.firstname, user.email, hashedPassword, user.isVerified ? 1 : 0, user.isAdmin ? 1 : 0, user.credits]
   );
   return result.lastID!;
 }

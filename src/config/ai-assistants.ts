@@ -7,7 +7,8 @@ interface Operation {
   sampleTextFile: string;
   promptKey: string;
   languageModel: string;
-  makeBranch: string; // New field added
+  makeBranch: string;
+  creditCost: number;
 }
 
 interface AIAssistant {
@@ -38,7 +39,8 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-tone-of-voice.txt",
         "promptKey": PROMPT_KEYS.TONE_OF_VOICE,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps"
+        "makeBranch": "mainOps",
+        "creditCost": 10
       },
       {
         "id": "intention",
@@ -47,7 +49,8 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-intention.txt",
         "promptKey": PROMPT_KEYS.INTENTION,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps"
+        "makeBranch": "mainOps",
+        "creditCost": 10
       },
       {
         "id": "bias",
@@ -56,7 +59,8 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-bias.txt",
         "promptKey": PROMPT_KEYS.BIAS,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps"
+        "makeBranch": "mainOps",
+        "creditCost": 10
       },
       {
         "id": "ethics",
@@ -65,7 +69,8 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-ethics.txt",
         "promptKey": PROMPT_KEYS.ETHICS,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps"
+        "makeBranch": "mainOps",
+        "creditCost": 10
       },
       {
         "id": "sentiment",
@@ -74,7 +79,8 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-sentiment.txt",
         "promptKey": PROMPT_KEYS.SENTIMENT,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps"
+        "makeBranch": "mainOps",
+        "creditCost": 10
       },
       {
         "id": "argumentation",
@@ -83,7 +89,8 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-argumentation.txt",
         "promptKey": PROMPT_KEYS.ARGUMENTATION,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps"
+        "makeBranch": "mainOps",
+        "creditCost": 10
       },
       {
         "id": "emotion",
@@ -92,7 +99,8 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-emotion.txt",
         "promptKey": PROMPT_KEYS.EMOTION,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps"
+        "makeBranch": "mainOps",
+        "creditCost": 10
       }
     ]
   },
@@ -103,7 +111,8 @@ const aiAssistants: AIAssistant[] = [
     alt: 'Storybert',
     task: 'Website-Optimierung',
     buttonText: 'Mit Storybert optimieren',
-    buttonLink: 'storybert'
+    buttonLink: 'storybert',
+    operations: []
   },
   {
     title: 'Bild-Erstellungs-Assistent',
