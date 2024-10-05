@@ -40,7 +40,7 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.TONE_OF_VOICE,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 10
+        "creditCost": 6
       },
       {
         "id": "intention",
@@ -50,7 +50,7 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.INTENTION,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 10
+        "creditCost": 6
       },
       {
         "id": "bias",
@@ -60,7 +60,7 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.BIAS,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 10
+        "creditCost": 6
       },
       {
         "id": "ethics",
@@ -70,7 +70,7 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.ETHICS,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 10
+        "creditCost": 6
       },
       {
         "id": "sentiment",
@@ -80,7 +80,7 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.SENTIMENT,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 10
+        "creditCost": 6
       },
       {
         "id": "argumentation",
@@ -90,7 +90,7 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.ARGUMENTATION,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 10
+        "creditCost": 6
       },
       {
         "id": "emotion",
@@ -100,7 +100,7 @@ const aiAssistants: AIAssistant[] = [
         "promptKey": PROMPT_KEYS.EMOTION,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
-        "creditCost": 10
+        "creditCost": 6
       }
     ]
   },

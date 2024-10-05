@@ -37,7 +37,7 @@
                             <div class="collapse collapse-arrow join-item border border-base-300">
                                 <input type="radio" name="my-accordion-4" <%= index === 0 ? 'checked="checked"' : '' %> /> 
                                 <div class="collapse-title text-lg font-medium">
-                                    <%= operation.name %>
+                                    <%= operation.name %> <small class="text-xs text-gray-500">(<%= operation.creditCost %> Credits)</small></small>
                                 </div>
                                 <div class="collapse-content bg-base-300 p-4"> 
                                     <p><%= operation.description %></p>
