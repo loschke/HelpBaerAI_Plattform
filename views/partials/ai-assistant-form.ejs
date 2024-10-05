@@ -38,11 +38,6 @@
     </div>
 </div>
 
-<div class="relative mb-6">
-    <input type="text" placeholder="Optional: Schwerpunkt oder Fokus der Bearbeitung" class="input input-bordered w-full pr-16" id="mainFocus" maxlength="100" />
-    <div class="absolute bottom-2 right-2 text-sm text-gray-500" id="mainFocusCharCounter">0 / 100</div>
-</div>
-
 <div class="flex flex-wrap gap-2 mb-6">
     <% assistant.operations.forEach(operation => { %>
         <button class="btn bg-gray-700 flex-1 font-ff-clan font-bold" 
@@ -64,25 +59,31 @@
         </svg>
     </button>
     <div id="advancedSettings" class="hidden">
-        <div class="grid grid-cols-3 gap-4">
+        <div class="mb-4">
+            <div class="relative w-full">
+                <input type="text" placeholder="Optional: Schwerpunkt oder Fokus der Bearbeitung" class="input input-bordered w-full pr-16" id="mainFocus" maxlength="100" />
+                <div class="absolute bottom-2 right-2 text-sm text-gray-500" id="mainFocusCharCounter">0 / 100</div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div>
                 <label for="outputLanguage" class="block text-sm font-medium text-base-content">Ausgabesprache</label>
-                <select id="outputLanguage" name="outputLanguage" class="select select-bordered w-full max-w-xs">
+                <select id="outputLanguage" name="outputLanguage" class="select select-bordered w-full">
                     <option value="Deutsch" selected>Deutsch</option>
                     <option value="Englisch">Englisch</option>
                 </select>
             </div>
             <div>
                 <label for="outputFormat" class="block text-sm font-medium text-base-content">Ausgabeformat</label>
-                <select id="outputFormat" name="outputFormat" class="select select-bordered w-full max-w-xs">
+                <select id="outputFormat" name="outputFormat" class="select select-bordered w-full">
                     <option value="HTML" selected>HTML</option>
                     <option value="Markdown">Markdown</option>
                 </select>
             </div>
             <div>
                 <label for="languageModel" class="block text-sm font-medium text-base-content">Sprachmodell</label>
-                <select id="languageModel" name="languageModel" class="select select-bordered w-full max-w-xs">
-                    <option value="" selected> Sprachmodell auswählen</option>
+                <select id="languageModel" name="languageModel" class="select select-bordered w-full">
+                    <option value="" selected>Sprachmodell auswählen</option>
                     <option value="openai/gpt-4o-2024-08-06">GPT4o</option>
                     <option value="openai/gpt-4o-mini">GPT4mini</option>
                     <option value="google/gemini-pro-1.5">Gemini 1.5 Pro</option>
