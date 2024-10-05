@@ -17,14 +17,13 @@ export async function openDb(): Promise<Database> {
   await db.exec(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      email TEXT UNIQUE,
-      password TEXT,
-      firstname TEXT,
-      lastname TEXT,
-      isVerified INTEGER DEFAULT 0,
-      verificationToken TEXT,
-      resetPasswordToken TEXT,
-      resetPasswordExpires TEXT
+      firstname TEXT NOT NULL,
+      email TEXT UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      is_verified INTEGER DEFAULT 0,
+      is_admin INTEGER DEFAULT 0,
+      reset_token TEXT,
+      reset_token_expiry INTEGER
     )
   `);
 
