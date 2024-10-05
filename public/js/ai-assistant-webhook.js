@@ -224,17 +224,20 @@ class AIAssistantForm {
     displayResponse(result) {
         const responseContainer = document.getElementById('webhookResponse');
         if (responseContainer) {
-            responseContainer.innerHTML = this.formatResponseContent(result);
+            // Fügen Sie den HTML-Inhalt in das output-Element ein
+            responseContainer.querySelector('.output').innerHTML = result.output;
+            
+            // Aktualisieren Sie die Metadaten
+            responseContainer.querySelector('.llm-value').textContent = result.llm;
+            responseContainer.querySelector('.prompt-token').textContent = result.prompt_token;
+            responseContainer.querySelector('.completion-token').textContent = result.completion_token;
+            responseContainer.querySelector('.scrape-token').textContent = result.scrape_token;
+            
+            // Zeigen Sie den Container an
             responseContainer.classList.remove('hidden');
         } else {
             console.error('Response container not found');
         }
-    }
-
-    formatResponseContent(result) {
-        // Implementieren Sie hier die Logik zur Formatierung der Webhook-Antwort
-        // Dies hängt von der Struktur der Antwort ab, die Sie vom externen Webhook erhalten
-        return `<pre>${JSON.stringify(result, null, 2)}</pre>`;
     }
 
     handleWebhookError(error) {

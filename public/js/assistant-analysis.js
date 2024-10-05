@@ -272,3 +272,45 @@ if (mainFocusInput && mainFocusCharCounter) {
         mainFocusCharCounter.textContent = `${this.value.length} / 100`;
     });
 }
+
+async function handleSubmit(event) {
+    event.preventDefault();
+    // ... (vorheriger Code)
+
+    try {
+        const response = await fetch('/assistants/' + assistantId + '/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        
+        // Aktualisieren des DOM mit den geparsten Daten
+        const webhookResponseElement = document.getElementById('webhookResponse');
+        
+        // Die Ausgabe direkt in das output-Element einfügen
+        webhookResponseElement.querySelector('.output').innerHTML = result.output;
+        
+        // Metadaten aktualisieren
+        webhookResponseElement.querySelector('.llm-value').textContent = result.llm;
+        webhookResponseElement.querySelector('.prompt-token').textContent = result.prompt_token;
+        webhookResponseElement.querySelector('.completion-token').textContent = result.completion_token;
+        webhookResponseElement.querySelector('.scrape-token').textContent = result.scrape_token;
+        
+        webhookResponseElement.classList.remove('hidden');
+
+        // Scroll to the response
+        scrollToResponse();
+
+    } catch (error) {
+        console.error('Error:', error);
+        // Hier könnten Sie eine Fehlermeldung für den Benutzer anzeigen
+    }
+}

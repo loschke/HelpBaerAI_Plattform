@@ -38,7 +38,7 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-tone-of-voice.txt",
         "promptKey": PROMPT_KEYS.TONE_OF_VOICE,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "testOps"
+        "makeBranch": "mainOps"
       },
       {
         "id": "intention",

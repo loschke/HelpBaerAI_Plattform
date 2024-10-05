@@ -5,6 +5,43 @@ import fetch from 'node-fetch';
 import { openDb } from '../config/database';
 import { getUserById } from '../models/User';
 import { createOperationLog, updateOperationLogSuccess } from '../models/OperationLog';
+import { parseString, OptionsV2 } from 'xml2js';
+import { promisify } from 'util';
+
+const parseXml = promisify<string, OptionsV2, WebhookResponse | null>((xmlString, options, callback) => {
+  // Extrahieren Sie den Inhalt des output-Elements vor dem Parsen
+  const outputRegex = /<output>([\s\S]*?)<\/output>/;
+  let outputContent = '';
+  const match = xmlString.match(outputRegex);
+  if (match) {
+    outputContent = match[1];
+    // Ersetzen Sie den Inhalt des output-Elements durch einen Platzhalter
+    xmlString = xmlString.replace(outputRegex, '<output>__OUTPUT_PLACEHOLDER__</output>');
+  }
+
+  parseString(xmlString, options, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      // Ersetzen Sie den Platzhalter durch den ursprünglichen Inhalt
+      if (result && result.response && result.response.output) {
+        result.response.output = outputContent;
+      }
+      callback(null, result as WebhookResponse);
+    }
+  });
+});
+
+// Definieren Sie einen Typ für die erwartete XML-Struktur
+interface WebhookResponse {
+  response: {
+    output: string;
+    llm: string;
+    prompt_token: string;
+    completion_token: string;
+    scrape_token: string;
+  }
+}
 
 const router = Router();
 
@@ -106,13 +143,23 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
         throw new Error(`Webhook error! status: ${webhookResponse.status}`);
       }
 
-      const webhookResult = await webhookResponse.json();
+      const xmlResponse = await webhookResponse.text();
+      const result = await parseXml(xmlResponse, { explicitArray: false }) as WebhookResponse;
 
-      // Rückgabe der Webhook-Antwort an den Client
-      res.json(webhookResult);
+      // Extrahieren und Formatieren der benötigten Daten
+      const parsedResult = {
+        output: result.response.output,  // Dies ist jetzt der unveränderte HTML-String
+        llm: result.response.llm,
+        prompt_token: parseInt(result.response.prompt_token),
+        completion_token: parseInt(result.response.completion_token),
+        scrape_token: parseInt(result.response.scrape_token)
+      };
+
+      // Senden der formatierten Daten an den Client
+      res.json(parsedResult);
     } else {
       console.error('Webhook URL is not defined in environment variables');
-      // Hier könnten Sie eine alternative Aktion durchführen oder einen Fehler werfen
+      res.status(500).json({ error: 'Webhook URL is not configured' });
     }
   } catch (error) {
     console.error('Error processing request:', error);

@@ -19,6 +19,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/express-session": "^1.18.0",
+    "@types/xml2js": "^0.4.14",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
@@ -33,7 +34,8 @@
     "nodemailer": "^6.9.15",
     "passport": "^0.7.0",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

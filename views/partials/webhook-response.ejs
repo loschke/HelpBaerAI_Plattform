@@ -1,3 +1,16 @@
 <div id="webhookResponse" class="mt-6 p-4 bg-base-200 rounded-lg hidden">
-    <!-- Die Antwort wird hier dynamisch eingefügt -->
+    <div class="output mb-4"></div>
+    <div class="metadata mt-4 text-sm text-gray-500">
+        <div class="llm mb-2">
+            <strong>LLM:</strong> <span class="llm-value"></span>
+        </div>
+        <div class="tokens">
+            <strong>Tokens:</strong>
+            <ul class="list-disc list-inside">
+                <li>Prompt: <span class="prompt-token"></span></li>
+                <li>Completion: <span class="completion-token"></span></li>
+                <li>Scrape: <span class="scrape-token"></span></li>
+            </ul>
+        </div>
+    </div>
 </div>
