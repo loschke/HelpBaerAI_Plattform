@@ -23,7 +23,8 @@ export async function openDb(): Promise<Database> {
       is_verified INTEGER DEFAULT 0,
       is_admin INTEGER DEFAULT 0,
       reset_token TEXT,
-      reset_token_expiry INTEGER
+      reset_token_expiry INTEGER,
+      credits INTEGER DEFAULT 0
     )
   `);
 

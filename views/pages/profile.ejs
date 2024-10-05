@@ -15,6 +15,7 @@
                     <p><strong>Name:</strong> <%= user.firstname %></p>
                     <p><strong>E-Mail:</strong> <%= user.email %></p>
                     <p><strong>Status:</strong> <%= user.isVerified ? 'Verifiziert' : 'Nicht verifiziert' %></p>
+                    <p class="text-2xl font-bold text-accent"><strong>Credits:</strong> <%= user.credits %></p>
                 </div>
                 <div class="mt-8">
                     <a href="/auth/logout" class="btn btn-primary">Ausloggen</a>

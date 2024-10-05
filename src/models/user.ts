@@ -10,6 +10,7 @@ export interface User {
   isAdmin: boolean;
   resetToken?: string;
   resetTokenExpiry?: number;
+  credits: number;
 }
 
 interface DatabaseUser {
@@ -21,6 +22,7 @@ interface DatabaseUser {
   is_admin: number;
   reset_token?: string;
   reset_token_expiry?: number;
+  credits: number;
 }
 
 function convertDatabaseUserToUser(dbUser: DatabaseUser): User {
@@ -29,7 +31,8 @@ function convertDatabaseUserToUser(dbUser: DatabaseUser): User {
     isVerified: dbUser.is_verified === 1,
     isAdmin: dbUser.is_admin === 1,
     resetToken: dbUser.reset_token,
-    resetTokenExpiry: dbUser.reset_token_expiry
+    resetTokenExpiry: dbUser.reset_token_expiry,
+    credits: dbUser.credits
   };
 }
 
@@ -51,8 +54,8 @@ export async function getUserByEmail(db: Database, email: string): Promise<User 
 }
 
 export async function verifyUser(db: Database, userId: number): Promise<void> {
-  await db.run('UPDATE users SET is_verified = 1 WHERE id = ?', [userId]);
-  console.log('User verified:', userId);
+  await db.run('UPDATE users SET is_verified = 1, credits = credits + 100 WHERE id = ?', [userId]);
+  console.log('User verified and 100 credits added:', userId);
 }
 
 export async function getUserById(db: Database, id: number): Promise<User | undefined> {

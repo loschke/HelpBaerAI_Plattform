@@ -47,7 +47,8 @@ async function register(req: Request, res: Response) {
       email, 
       password, 
       isVerified: false, 
-      isAdmin: false // Set isAdmin to false by default for new users
+      isAdmin: false, 
+      credits: 0
     });
     await sendVerificationEmail(email, userId);
 
