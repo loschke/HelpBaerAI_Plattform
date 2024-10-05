@@ -47,7 +47,7 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-intention.txt",
         "promptKey": PROMPT_KEYS.INTENTION,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "testOps"
+        "makeBranch": "mainOps"
       },
       {
         "id": "bias",
@@ -56,7 +56,7 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-bias.txt",
         "promptKey": PROMPT_KEYS.BIAS,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "testOps"
+        "makeBranch": "mainOps"
       },
       {
         "id": "ethics",
@@ -65,7 +65,7 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-ethics.txt",
         "promptKey": PROMPT_KEYS.ETHICS,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "testOps"
+        "makeBranch": "mainOps"
       },
       {
         "id": "sentiment",
@@ -74,7 +74,7 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-sentiment.txt",
         "promptKey": PROMPT_KEYS.SENTIMENT,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "testOps"
+        "makeBranch": "mainOps"
       },
       {
         "id": "argumentation",
@@ -83,7 +83,7 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-argumentation.txt",
         "promptKey": PROMPT_KEYS.ARGUMENTATION,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "testOps"
+        "makeBranch": "mainOps"
       },
       {
         "id": "emotion",
@@ -92,7 +92,7 @@ const aiAssistants: AIAssistant[] = [
         "sampleTextFile": "/sample-texts/schlaubert-emotion.txt",
         "promptKey": PROMPT_KEYS.EMOTION,
         "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "emotion-branch" // New field added
+        "makeBranch": "mainOps"
       }
     ]
   },

@@ -27,12 +27,12 @@
 - Use the following class structure for dark mode and readability:
   - Wrap all content in a `<div class='bg-gray-900 text-gray-100 p-6 rounded-lg shadow-lg'>`
   - Use `class='text-3xl font-bold text-gray-100 mb-4'` for main headings
-  - Use `class='text-2xl font-semibold text-gray-200 mb-3'` for subheadings
-  - Use `class='text-xl font-medium text-gray-300 mb-2'` for sub-subheadings
+  - Use `class='text-2xl font-semibold text-gray-200 mb-4'` for subheadings
+  - Use `class='text-xl font-medium text-gray-300 mb-4'` for sub-subheadings
+  - Use `class='text-gray-300 mb-4'` for paragraphs
   - Use `class='font-bold'` for emphasis on important points
   - Use `class='italic'` for secondary emphasis or definitions
   - Use `class='bg-gray-800 text-gray-300 p-1 rounded'` for inline code
-  - Use `class='border-l-4 border-gray-700 pl-4 italic my-4'` for quotations or important callouts
   - Use `<ul class='list-disc list-inside mb-4'>` for unordered lists
   - Use `<ol class='list-decimal list-inside mb-4'>` for ordered lists
   - Use `<hr class='border-gray-700 my-6'>` for horizontal rules to separate major sections

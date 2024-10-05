@@ -233,6 +233,12 @@ class AIAssistantForm {
             responseContainer.querySelector('.completion-token').textContent = result.completion_token;
             responseContainer.querySelector('.scrape-token').textContent = result.scrape_token;
             
+            // Fügen Sie die Kosteninformationen hinzu
+            responseContainer.querySelector('.prompt-cost').textContent = result.cost.promptCost.toFixed(4);
+            responseContainer.querySelector('.output-cost').textContent = result.cost.outputCost.toFixed(4);
+            responseContainer.querySelector('.scrape-cost').textContent = result.cost.scrapeCost.toFixed(4);
+            responseContainer.querySelector('.total-cost').textContent = result.cost.totalCost.toFixed(4);
+            
             // Zeigen Sie den Container an
             responseContainer.classList.remove('hidden');
         } else {

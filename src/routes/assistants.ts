@@ -7,6 +7,7 @@ import { getUserById } from '../models/User';
 import { createOperationLog, updateOperationLogSuccess } from '../models/OperationLog';
 import { parseString, OptionsV2 } from 'xml2js';
 import { promisify } from 'util';
+import config from '../config/model-costs'; // Ändern Sie den Import-Pfad entsprechend der tatsächlichen Lage Ihrer Konfigurationsdatei
 
 const parseXml = promisify<string, OptionsV2, WebhookResponse | null>((xmlString, options, callback) => {
   // Extrahieren Sie den Inhalt des output-Elements vor dem Parsen
@@ -146,13 +147,28 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
       const xmlResponse = await webhookResponse.text();
       const result = await parseXml(xmlResponse, { explicitArray: false }) as WebhookResponse;
 
+      // Kostenberechnung hinzufügen
+      const llm = result.response.llm as string;
+      const modelCosts = config.modelCosts[llm] || {};
+
+      const promptCost = (modelCosts['llm-prompt'] || 0) * parseInt(result.response.prompt_token) / 1000000;
+      const outputCost = (modelCosts['llm-output'] || 0) * parseInt(result.response.completion_token) / 1000000;
+      const scrapeCost = (modelCosts['scrape-token'] || 0) * parseInt(result.response.scrape_token) / 1000000;
+      const totalCost = promptCost + outputCost + scrapeCost;
+
       // Extrahieren und Formatieren der benötigten Daten
       const parsedResult = {
         output: result.response.output,  // Dies ist jetzt der unveränderte HTML-String
         llm: result.response.llm,
         prompt_token: parseInt(result.response.prompt_token),
         completion_token: parseInt(result.response.completion_token),
-        scrape_token: parseInt(result.response.scrape_token)
+        scrape_token: parseInt(result.response.scrape_token),
+        cost: {
+          promptCost,
+          outputCost,
+          scrapeCost,
+          totalCost
+        }
       };
 
       // Senden der formatierten Daten an den Client
