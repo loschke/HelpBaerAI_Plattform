@@ -180,19 +180,42 @@ function scrollToResponse() {
     }
 }
 
-function initializeLoadingAnimation() {
-    const loadingFactElement = document.getElementById('loadingFact');
-    if (loadingFactElement && window.loadingFacts && window.loadingFacts.length > 0) {
-        const randomFact = window.loadingFacts[Math.floor(Math.random() * window.loadingFacts.length)];
-        loadingFactElement.innerHTML = `
-            <h3 class="font-bold">${randomFact.title}</h3>
-            <p class="mt-2">${randomFact.text}</p>
-            <p class="mt-2 font-semibold">${randomFact.cta}</p>
-        `;
-    } else {
-        console.warn('Loading facts not available or empty');
+function getRandomLoadingFact() {
+    if (window.loadingFacts && window.loadingFacts.length > 0) {
+        return window.loadingFacts[Math.floor(Math.random() * window.loadingFacts.length)];
     }
-    console.log('Loading facts:', window.loadingFacts);
+    return null;
+}
+
+function updateLoadingFact() {
+    const loadingFactElement = document.getElementById('loadingFact');
+    if (loadingFactElement) {
+        const randomFact = getRandomLoadingFact();
+        if (randomFact) {
+            loadingFactElement.innerHTML = `
+                <h3 class="font-bold">${randomFact.title}</h3>
+                <p class="mt-2">${randomFact.text}</p>
+                <p class="mt-2 font-semibold">${randomFact.cta}</p>
+            `;
+        } else {
+            console.warn('Loading facts not available or empty');
+        }
+    }
+}
+
+function showLoadingAnimation() {
+    const loadingAnimation = document.getElementById('loadingAnimation');
+    if (loadingAnimation) {
+        updateLoadingFact();
+        loadingAnimation.classList.remove('hidden');
+    }
+}
+
+function hideLoadingAnimation() {
+    const loadingAnimation = document.getElementById('loadingAnimation');
+    if (loadingAnimation) {
+        loadingAnimation.classList.add('hidden');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -264,9 +287,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 assistantForm.selectedLanguageModel = languageModel;
                 assistantForm.selectedMakeBranch = makeBranch;
                 
-                assistantForm.sendDataToWebhook().catch(error => {
-                    console.error('Error sending data to webhook:', error);
-                });
+                showLoadingAnimation(); // Show loading animation with new fact
+                
+                assistantForm.sendDataToWebhook()
+                    .then(() => {
+                        hideLoadingAnimation(); // Hide loading animation when done
+                    })
+                    .catch(error => {
+                        console.error('Error sending data to webhook:', error);
+                        hideLoadingAnimation(); // Hide loading animation on error
+                    });
             });
         });
     } else {
