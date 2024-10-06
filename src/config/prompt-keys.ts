@@ -5,5 +5,12 @@ export const PROMPT_KEYS = {
   BIAS: 'bias',
   ETHICS: 'ethics',
   TONE_OF_VOICE: 'tone-of-voice',
-  INTENTION: 'intention'
+  INTENTION: 'intention',
+  SHORTEN_TEXT: 'shorten-text',
+  EXPAND_TEXT: 'expand-text',
+  LIST_TO_TEXT: 'list-to-text',
+  TEXT_TO_LIST: 'text-to-list',
+  SUMMARIZE_TEXT: 'summarize-text',
+  EXTRACT_KEY_INSIGHTS: 'extract-key-insights',
+  EXPLAIN_TEXT: 'explain-text',
 };

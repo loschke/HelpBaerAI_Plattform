@@ -1,8 +1,14 @@
 <div class="mb-6">
+    <% if (assistant.title !== "Textbert") { %>
     <div class="tabs tabs-boxed mb-4">
         <a class="tab tab-active" id="textTab">Text eingeben</a>
         <a class="tab" id="urlTab">URL eingeben</a>
     </div>
+    <% } else { %>
+    <div class="tabs tabs-boxed mb-4 hidden">
+        <a class="tab tab-active" id="textTab">Text eingeben</a>
+    </div>
+    <% } %>
     
     <div id="textInput" class="relative">
         <textarea class="textarea textarea-bordered w-full h-64 p-6 pr-16" placeholder="Gib deinen Text hier ein oder nutze einen Beispieltext aus der Hilfesektion..." id="analysisTextarea" maxlength="2000"></textarea>
@@ -21,6 +27,7 @@
         <div class="absolute bottom-2 right-4 text-sm text-gray-500" id="charCounter">0 / 2000</div>
     </div>
     
+    <% if (assistant.title !== "Textbert") { %>
     <div id="urlInput" class="hidden relative">
         <input type="url" placeholder="https://www.beispiel.de" class="input input-bordered w-full pr-16" id="urlInputField" />
         <div class="absolute top-1/2 right-2 transform -translate-y-1/2 flex space-x-2">
@@ -36,11 +43,12 @@
             </i>
         </div>
     </div>
+    <% } %>
 </div>
 
 <div class="flex flex-wrap gap-2 mb-6">
     <% assistant.operations.forEach(operation => { %>
-        <button class="btn bg-gray-700 flex-1 font-ff-clan font-bold" 
+        <button type="button" class="btn bg-gray-700 flex-1 font-ff-clan font-bold" 
                 data-operation-id="<%= operation.id %>" 
                 data-language-model="<%= operation.languageModel %>"
                 data-prompt-template="<%= operation.promptTemplate %>"

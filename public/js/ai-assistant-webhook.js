@@ -17,12 +17,13 @@ class AIAssistantForm {
         this.outputLanguage = document.getElementById('outputLanguage');
         this.outputFormat = document.getElementById('outputFormat');
         this.languageModel = document.getElementById('languageModel');
-        this.operationButtons = document.querySelectorAll('.operation-button');
+        this.operationButtons = document.querySelectorAll('.btn[data-operation-id]');
 
         this.activeTab = 'text';
         this.selectedOperationId = null;
         this.selectedLanguageModel = null;
         this.promptTemplateContent = null;
+        this.selectedMakeBranch = null;
 
         this.initEventListeners();
         this.initWebhookUrl().then(() => {
@@ -31,22 +32,13 @@ class AIAssistantForm {
             console.error('Failed to initialize webhook URL:', error);
         });
 
-        this.form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('Form submitted, calling sendDataToWebhook');
-            this.sendDataToWebhook();
-        });
-
         this.loadingAnimation = document.getElementById('loadingAnimation');
-
-        this.handleOperationClick = this.handleOperationClick.bind(this);
-        this.operationButtons.forEach(button => {
-            button.addEventListener('click', this.handleOperationClick.bind(this));
-        });
 
         this.loginPopup = document.getElementById('loginPopup');
         this.closePopupButton = document.getElementById('closePopup');
-        this.closePopupButton.addEventListener('click', this.hideLoginPopup.bind(this));
+        if (this.closePopupButton) {
+            this.closePopupButton.addEventListener('click', this.hideLoginPopup.bind(this));
+        }
     }
 
     async initWebhookUrl() {
@@ -67,8 +59,8 @@ class AIAssistantForm {
 
     initEventListeners() {
         console.log('Initializing event listeners');
-        this.textTab.addEventListener('click', () => this.switchTab('text'));
-        this.urlTab.addEventListener('click', () => this.switchTab('url'));
+        if (this.textTab) this.textTab.addEventListener('click', () => this.switchTab('text'));
+        if (this.urlTab) this.urlTab.addEventListener('click', () => this.switchTab('url'));
 
         this.operationButtons.forEach(button => {
             button.addEventListener('click', this.handleOperationClick.bind(this));
@@ -95,8 +87,13 @@ class AIAssistantForm {
             if (!this.isUserLoggedIn()) {
                 this.showLoginPopup();
             } else {
-                // Führen Sie hier die gewünschte Aktion für eingeloggte Benutzer aus
-                console.log('Operation für eingeloggten Benutzer ausführen');
+                this.selectedOperationId = button.dataset.operationId;
+                this.selectedLanguageModel = button.dataset.languageModel;
+                this.selectedMakeBranch = button.dataset.makeBranch;
+                console.log('Selected operation:', this.selectedOperationId);
+                console.log('Selected language model:', this.selectedLanguageModel);
+                console.log('Selected make branch:', this.selectedMakeBranch);
+                this.sendDataToWebhook();
             }
         }
     }
@@ -119,7 +116,7 @@ class AIAssistantForm {
 
     getFormData() {
         const formData = {
-            tabType: this.activeTab,  // Hier fügen wir den Tab-Typ hinzu
+            tabType: this.activeTab,
             content: this.activeTab === 'text' ? this.analysisTextarea.value : this.urlInputField.value,
             mainFocus: this.mainFocus.value,
             outputLanguage: this.outputLanguage.value,
@@ -127,7 +124,7 @@ class AIAssistantForm {
             operationId: this.selectedOperationId,
             languageModel: this.languageModel.value || this.selectedLanguageModel,
             promptTemplate: this.promptTemplateContent,
-            makeBranch: this.selectedMakeBranch // Neue Zeile
+            makeBranch: this.selectedMakeBranch
         };
         console.log('Form data:', formData);
         return formData;
@@ -181,7 +178,6 @@ class AIAssistantForm {
     }
 
     getAssistantId() {
-        // Extrahieren Sie die Assistant-ID aus der URL
         const pathParts = window.location.pathname.split('/');
         return pathParts[pathParts.length - 1];
     }
@@ -206,22 +202,18 @@ class AIAssistantForm {
     displayResponse(result) {
         const responseContainer = document.getElementById('webhookResponse');
         if (responseContainer) {
-            // Fügen Sie den HTML-Inhalt in das output-Element ein
             responseContainer.querySelector('.output').innerHTML = result.output;
             
-            // Aktualisieren Sie die Metadaten
             responseContainer.querySelector('.llm-value').textContent = result.llm;
             responseContainer.querySelector('.prompt-token').textContent = result.prompt_token;
             responseContainer.querySelector('.completion-token').textContent = result.completion_token;
             responseContainer.querySelector('.scrape-token').textContent = result.scrape_token;
             
-            // Fügen Sie die Kosteninformationen hinzu
             responseContainer.querySelector('.prompt-cost').textContent = result.cost.promptCost.toFixed(4);
             responseContainer.querySelector('.output-cost').textContent = result.cost.outputCost.toFixed(4);
             responseContainer.querySelector('.scrape-cost').textContent = result.cost.scrapeCost.toFixed(4);
             responseContainer.querySelector('.total-cost').textContent = result.cost.totalCost.toFixed(4);
             
-            // Zeigen Sie den Container an
             responseContainer.classList.remove('hidden');
         } else {
             console.error('Response container not found');
@@ -242,15 +234,24 @@ class AIAssistantForm {
     }
 
     showLoginPopup() {
-        this.loginPopup.style.display = 'flex';
+        if (this.loginPopup) {
+            this.loginPopup.style.display = 'flex';
+        }
     }
 
     hideLoginPopup() {
-        this.loginPopup.style.display = 'none';
+        if (this.loginPopup) {
+            this.loginPopup.style.display = 'none';
+        }
     }
 }
 
 console.log('AIAssistantForm class defined');
 
+// Initialize the form when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new AIAssistantForm('aiAssistantForm');
+});
+
 // Export the class for use in other files
-export default AIAssistantForm
+export default AIAssistantForm;

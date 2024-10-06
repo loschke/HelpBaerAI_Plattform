@@ -20,6 +20,8 @@ function toggleSidepanel() {
 }
 
 function switchTab(tab) {
+    if (assistantType === "Storybert") return; // Keine Tab-Funktionalität für Storybert
+
     const textInput = document.getElementById('textInput');
     const urlInput = document.getElementById('urlInput');
     const textTab = document.getElementById('textTab');
@@ -333,6 +335,7 @@ async function handleSubmit(event) {
             body: JSON.stringify(formData)
         });
 
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -361,3 +364,10 @@ async function handleSubmit(event) {
         // Hier könnten Sie eine Fehlermeldung für den Benutzer anzeigen
     }
 }
+
+const assistantType = window.assistantType;
+
+// Initialize the form when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new AIAssistantForm();
+});

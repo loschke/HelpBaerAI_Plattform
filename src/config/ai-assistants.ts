@@ -113,64 +113,92 @@ const aiAssistants: AIAssistant[] = [
     ]
   },
   {
-    title: 'Storybert',
-    description: 'Durchleuchtet und optimiert Ihre Website von A bis Z.',
-    image: '/images/storybert.png',
-    alt: 'Storybert',
-    task: 'Website-Optimierung',
-    buttonText: 'Mit Storybert optimieren',
-    buttonLink: 'storybert',
-    operations: []
-  },
-  {
-    title: 'Bild-Erstellungs-Assistent',
-    description: 'Verwandelt Ihre Ideen in coole visuelle Inhalte.',
-    image: '/images/projektbert.png',
-    alt: 'Projektbert',
-    task: 'Bildgenerierung',
-    buttonText: 'Bilder erstellen',
-    buttonLink: '/bild-erstellung',
-    operations: []
-  },
-  {
-    title: 'Bild-Analyse-Assistent',
-    description: 'Entschlüsselt die Botschaften und Potenziale Ihrer Bilder.',
-    image: '/images/Pixelbert.png',
-    alt: 'Pixelbert',
-    task: 'Bildanalyse',
-    buttonText: 'Bilder analysieren',
-    buttonLink: '/bild-analyse',
-    operations: []
-  },
-  {
-    title: 'Storyteller-Assistent',
-    description: 'Formt Ihre Unternehmensbotschaft in fesselnde Geschichten.',
-    image: '/images/kritzelbert2.png',
-    alt: 'Kritzelbert',
-    task: 'Content-Erstellung',
-    buttonText: 'Story entwickeln',
-    buttonLink: '/storyteller',
-    operations: []
-  },
-  {
-    title: 'Kreativbert',
-    description: 'Spezialisiert auf Fragen zu Ihrem Unternehmen.',
-    image: '/images/buntbert.png',
-    alt: 'Kreativbert',
-    task: 'Kreative Lösungen',
-    buttonText: 'Ideen generieren',
-    buttonLink: '/kreativbert',
-    operations: []
-  },
-  {
-    title: 'queonext Agents',
-    description: 'Spezialisiert auf Fragen zu Ihrem Unternehmen.',
-    image: '/images/storybert.png',
-    alt: 'queonext Corporate Assistant',
-    task: 'Unternehmensberatung',
-    buttonText: 'Unternehmen beraten',
-    buttonLink: '/queonext-agents',
-    operations: []
+    title: "Textbert",
+    description: "Textbert ist Ihr KI-Assistent für Content- und Textbearbeitung. Er optimiert Ihre Texte durch verschiedene Operationen wie Kürzen, Erweitern, Umwandeln und Analysieren, um Ihre Botschaft klar und effektiv zu vermitteln.",
+    image: "/images/textbert.png",
+    alt: "Textbert - Content- und Textbearbeitung",
+    task: "Textverarbeitung",
+    buttonText: "Textbearbeitung starten",
+    buttonLink: "/text-optimization",
+    operations: [
+      {
+        "id": "shorten-text",
+        "name": "Text kürzen",
+        "description": "Reduziert die Länge des Textes unter Beibehaltung der wichtigsten Informationen und Kernaussagen.",
+        "sampleTextFile": "/sample-texts/textbert-shorten-text.txt",
+        "promptKey": PROMPT_KEYS.SHORTEN_TEXT,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "expand-text",
+        "name": "Text erweitern",
+        "description": "Ergänzt den bestehenden Text mit zusätzlichen Details, Beispielen oder Erklärungen, um ihn umfassender zu gestalten.",
+        "sampleTextFile": "/sample-texts/textbert-expand-text.txt",
+        "promptKey": PROMPT_KEYS.EXPAND_TEXT,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "text-to-list",
+        "name": "Text zu Liste",
+        "description": "Wandelt einen Fließtext in eine strukturierte Liste um, um die Inhalte übersichtlicher zu präsentieren.",
+        "sampleTextFile": "/sample-texts/textbert-text-to-list.txt",
+        "promptKey": PROMPT_KEYS.TEXT_TO_LIST,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 15-25 sek"
+      },
+      {
+        "id": "list-to-text",
+        "name": "Liste zu Text",
+        "description": "Konvertiert eine Liste in einen zusammenhängenden Fließtext für eine narrative Darstellung der Inhalte.",
+        "sampleTextFile": "/sample-texts/textbert-list-to-text.txt",
+        "promptKey": PROMPT_KEYS.LIST_TO_TEXT,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 15-25 sek"
+      },
+      {
+        "id": "summarize-text",
+        "name": "Text zusammenfassen",
+        "description": "Erstellt eine prägnante Zusammenfassung des Textes, die die Hauptpunkte und wichtigsten Informationen hervorhebt.",
+        "sampleTextFile": "/sample-texts/textbert-summarize-text.txt",
+        "promptKey": PROMPT_KEYS.SUMMARIZE_TEXT,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "extract-key-insights",
+        "name": "Key Insights",
+        "description": "Identifiziert und extrahiert die wichtigsten Erkenntnisse und Schlüsselinformationen aus dem gegebenen Text.",
+        "sampleTextFile": "/sample-texts/textbert-extract-key-insights.txt",
+        "promptKey": PROMPT_KEYS.EXTRACT_KEY_INSIGHTS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "explain-text",
+        "name": "Text erklären",
+        "description": "Bietet eine detaillierte Erklärung des Textes, einschließlich Kontext, Bedeutung und möglicher Interpretationen.",
+        "sampleTextFile": "/sample-texts/textbert-explain-text.txt",
+        "promptKey": PROMPT_KEYS.EXPLAIN_TEXT,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 30-40 sek"
+      }
+    ]
   }
 ];
 
