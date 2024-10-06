@@ -16,7 +16,7 @@
         <main class="flex-grow p-4 lg:p-8 flex justify-center">
             <div class="w-full max-w-4xl">
                 <h1 class="text-3xl font-bold mb-4"><%= assistant.task %></h1>
-                
+                <p class="mb-4 text-xl"><%= assistant.description %></p>
                 <form id="aiAssistantForm">
                     <%- include('../partials/ai-assistant-form', { assistant: assistant }) %>
                 </form>

@@ -26,7 +26,7 @@ interface AIAssistant {
 const aiAssistants: AIAssistant[] = [
   {
     title: 'Schlaubärt',
-    description: 'Schlaubert untersucht und optimiert deine Texte mit KI-Technologie. Er analysiert Stil, Intention und Argumentation für maximale Wirkung und liefert wertvolle Verbesserungsvorschläge.',
+    description: 'Im hektischen Businessalltag fehlt oft die Zeit für ausführliche Analysen. Hier springt KI ein. Sie liest Texte – egal ob E-Mails, Präsentationen oder Berichte – und gibt schnell Feedback. Ist der Ton richtig getroffen? Kommt die Botschaft klar rüber? Überzeugt die Argumentation?',
     image: '/images/schlaubert.png',
     alt: 'Schlaubärt - Analyse & Bewertung',
     task: 'Analyse & Bewertung',
@@ -113,10 +113,10 @@ const aiAssistants: AIAssistant[] = [
     ]
   },
   {
-    title: "Textbert",
-    description: "Textbert ist Ihr KI-Assistent für Content- und Textbearbeitung. Er optimiert Ihre Texte durch verschiedene Operationen wie Kürzen, Erweitern, Umwandeln und Analysieren, um Ihre Botschaft klar und effektiv zu vermitteln.",
+    title: "Textbärt",
+    description: "Effiziente Textbearbeitung ist entscheidend für erfolgreiche Kommunikation. KI-Tools optimieren Texte blitzschnell: Berichte kürzen, Notizen erweitern oder Fließtext in Listen umwandeln – die richtige Technologie macht's möglich.",
     image: "/images/textbert.png",
-    alt: "Textbert - Content- und Textbearbeitung",
+    alt: "Textbärt - Content- und Textbearbeitung",
     task: "Textverarbeitung",
     buttonText: "Textbearbeitung starten",
     buttonLink: "/text-optimization",

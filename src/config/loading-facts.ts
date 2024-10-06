@@ -11,7 +11,7 @@ interface LoadingFact {
       cta: "Lass uns zusammen kreativ durchstarten!"
     },
     {
-      title: "Nie mehr Writer's Block",
+      title: "Nie mehr Schreibblockaden",
       text: "Stell dir vor, du hättest einen Kumpel, der dir hilft, knackige Headlines und catchy Slogans zu schreiben. Das bin ich! Dein AI-Assistent für non-stop Kreativität.",
       cta: "Sag Tschüss zum leeren Blatt!"
     },
@@ -94,21 +94,6 @@ interface LoadingFact {
       title: "Mythos: AI-Assistenten können nicht kreativ sein",
       text: "Ha! Ich kann dir 100 Variationen für deine Headline liefern - und mindestens 10 davon bringen deine Kunden zum Schmunzeln! AI-Kreativität trifft Marketingpower.",
       cta: "Lass uns zusammen kreative Kampagnen entwickeln!"
-    },
-    {
-      title: "Schritt 1: Briefing mit deinem AI-Marketing-Buddy",
-      text: "Der erste Schritt ist der coolste: Brief mich einfach wie einen neuen Kollegen! Erzähl mir von deiner Marke, deinen Zielen, deinen Herausforderungen. Ich verspreche, ich schlafe nicht ein (kann ich auch gar nicht, bin ja digital).",
-      cta: "Starte jetzt dein erstes AI-Marketing-Briefing!"
-    },
-    {
-      title: "Schritt 2: Finde deine Marketing-AI-Superkraft",
-      text: "Jede Agentur hat eine Superkraft - lass uns deine AI-getriebene finden! Brauchst du Hilfe bei der Content-Erstellung? Bei der Kampagnenoptimierung? Oder beim Kunden-Mindreading? Ich bin dein AI-Sidekick für alles!",
-      cta: "Entdecke deine Marketing-AI-Superkraft!"
-    },
-    {
-      title: "Schritt 3: Werde zum AI-Marketing-Maestro",
-      text: "Je mehr Kampagnen wir zusammen rocken, desto besser verstehe ich deine Marketingstrategie. Es ist wie eine Agentur-Partnerschaft - nur dass ich nie deine Kunden abwerbe oder dein Agentur-Ranking beeinflusse.",
-      cta: "Lass uns Marketing-Magie machen!"
     }
   ];
  
