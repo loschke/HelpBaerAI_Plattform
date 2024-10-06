@@ -182,44 +182,6 @@ function scrollToResponse() {
     }
 }
 
-function getRandomLoadingFact() {
-    if (window.loadingFacts && window.loadingFacts.length > 0) {
-        return window.loadingFacts[Math.floor(Math.random() * window.loadingFacts.length)];
-    }
-    return null;
-}
-
-function updateLoadingFact() {
-    const loadingFactElement = document.getElementById('loadingFact');
-    if (loadingFactElement) {
-        const randomFact = getRandomLoadingFact();
-        if (randomFact) {
-            loadingFactElement.innerHTML = `
-                <h3 class="font-bold">${randomFact.title}</h3>
-                <p class="mt-2">${randomFact.text}</p>
-                <p class="mt-2 font-semibold">${randomFact.cta}</p>
-            `;
-        } else {
-            console.warn('Loading facts not available or empty');
-        }
-    }
-}
-
-function showLoadingAnimation() {
-    const loadingAnimation = document.getElementById('loadingAnimation');
-    if (loadingAnimation) {
-        updateLoadingFact();
-        loadingAnimation.classList.remove('hidden');
-    }
-}
-
-function hideLoadingAnimation() {
-    const loadingAnimation = document.getElementById('loadingAnimation');
-    if (loadingAnimation) {
-        loadingAnimation.classList.add('hidden');
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded event fired');
     const toggleButton = document.getElementById('toggleSidepanel');
@@ -272,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('analysisForm');
     if (form) {
         console.log('Analysis form found');
-        const assistantForm = new AIAssistantForm('analysisForm');
+        const assistantForm = new AIAssistantForm('aiAssistantForm');
         console.log('AIAssistantForm initialized:', assistantForm);
 
         // Add click event listeners to operation buttons
@@ -289,16 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 assistantForm.selectedLanguageModel = languageModel;
                 assistantForm.selectedMakeBranch = makeBranch;
                 
-                showLoadingAnimation(); // Show loading animation with new fact
-                
-                assistantForm.sendDataToWebhook()
-                    .then(() => {
-                        hideLoadingAnimation(); // Hide loading animation when done
-                    })
-                    .catch(error => {
-                        console.error('Error sending data to webhook:', error);
-                        hideLoadingAnimation(); // Hide loading animation on error
-                    });
+                assistantForm.sendDataToWebhook();
             });
         });
     } else {

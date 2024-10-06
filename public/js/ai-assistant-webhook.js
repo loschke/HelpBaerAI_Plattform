@@ -33,7 +33,14 @@ class AIAssistantForm {
         });
 
         this.loadingAnimation = document.getElementById('loadingAnimation');
+        this.loadingFactElement = document.getElementById('loadingFact');
+        this.loadingFactInterval = null;
 
+        // Laden der Facts vom Server
+        this.loadingFacts = [];
+        this.fetchLoadingFacts();
+
+        // Behalten Sie die Login-Popup-Initialisierung bei
         this.loginPopup = document.getElementById('loginPopup');
         this.closePopupButton = document.getElementById('closePopup');
         if (this.closePopupButton) {
@@ -182,15 +189,57 @@ class AIAssistantForm {
         return pathParts[pathParts.length - 1];
     }
 
+    async fetchLoadingFacts() {
+        try {
+            const response = await fetch('/assistants/loading-facts');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            this.loadingFacts = await response.json();
+            console.log('Loading facts fetched successfully:', this.loadingFacts);
+        } catch (error) {
+            console.error('Failed to fetch loading facts:', error);
+            // Fallback zu statischen Facts, falls vorhanden
+            this.loadingFacts = window.loadingFacts || [];
+        }
+    }
+
+    getRandomLoadingFact() {
+        if (this.loadingFacts.length > 0) {
+            return this.loadingFacts[Math.floor(Math.random() * this.loadingFacts.length)];
+        }
+        return null;
+    }
+
+    updateLoadingFact() {
+        if (this.loadingFactElement) {
+            const randomFact = this.getRandomLoadingFact();
+            if (randomFact) {
+                this.loadingFactElement.innerHTML = `
+                    <h3 class="font-bold text-lg text-accent">${randomFact.title}</h3>
+                    <p class="mt-2">${randomFact.text}</p>
+                    <p class="mt-2 font-semibold">${randomFact.cta}</p>
+                `;
+            }
+        }
+    }
+
     showLoadingAnimation() {
         if (this.loadingAnimation) {
             this.loadingAnimation.classList.remove('hidden');
+            this.updateLoadingFact();
+            // Aktualisiere den Fact alle 10 Sekunden
+            this.loadingFactInterval = setInterval(() => this.updateLoadingFact(), 11000);
         }
     }
 
     hideLoadingAnimation() {
         if (this.loadingAnimation) {
             this.loadingAnimation.classList.add('hidden');
+            if (this.loadingFactInterval) {
+                clearInterval(this.loadingFactInterval);
+                this.loadingFactInterval = null;
+            }
         }
     }
 

@@ -252,4 +252,8 @@ router.put('/api/update-log/:id', asyncHandler(async (req: Request, res: Respons
   res.json({ success: true });
 }));
 
+router.get('/loading-facts', (req, res) => {
+    res.json(loadingFacts);
+});
+
 export default router;
