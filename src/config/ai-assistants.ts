@@ -199,6 +199,160 @@ const aiAssistants: AIAssistant[] = [
         "estimatedTotalTime": "ca. 30-40 sek"
       }
     ]
+  },
+  {
+    title: "Kreativbärt",
+    description: "Kreativbärt hilft dir, neue Ideen und Konzepte zu entwickeln. Er hilft dir, neue Ideen zu entwickeln und zu strukturieren.",
+    image: "/images/kreativbert.png",
+    alt: "Kreativbärt - Konzepte & Ideen",
+    task: "Konzepte & Ideen",
+    buttonText: "Ideen brainstormen",
+    buttonLink: "/concept-generation",
+    operations: [
+      {
+        "id": "find-persona",
+        "name": "Personas finden",
+        "description": "Findet Personas für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/kreativbert-find-persona.txt",
+        "promptKey": PROMPT_KEYS.FIND_PERSONA,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "campaign-angles",
+        "name": "Kampagnenwinkel finden",
+        "description": "Findet Kampagnenwinkel für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/kreativbert-campaign-angles.txt",
+        "promptKey": PROMPT_KEYS.CAMPAIGN_ANGLES,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "headline-ideas",
+        "name": "Headline-Ideen",
+        "description": "Findet Headline-Ideen für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/kreativbert-headline-ideas.txt",
+        "promptKey": PROMPT_KEYS.HEADLINE_IDEAS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 15-25 sek"
+      },
+      {
+        "id": "idea-feedback",
+        "name": "Ideenbewertung",
+        "description": "Bewertet deine Ideen und gibt Feedback.",
+        "sampleTextFile": "/sample-texts/kreativbert-idea-feedback.txt",
+        "promptKey": PROMPT_KEYS.IDEA_FEEDBACK,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "find-intentions",
+        "name": "Intentionen finden",
+        "description": "Findet Intentionen für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/kreativbert-find-intentions.txt",
+        "promptKey": PROMPT_KEYS.FIND_INTENTIONS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "find-topics",
+        "name": "Themen finden",
+        "description": "Findet Themen für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/kreativbert-find-topics.txt",
+        "promptKey": PROMPT_KEYS.FIND_TOPICS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 30-40 sek"
+      },
+    ]
+  },
+  {
+    title: "Storybärt",
+    description: "Storybärt hilft dir, deine Zielgruppe mit den richtigen Worten zu erreichen. Er hilft dir, Stories zu erfinden und zu strukturieren.",
+    image: "/images/storybert.png",
+    alt: "Storybärt - Storytelling",
+    task: "Zielgruppen & Personalisierung",
+    buttonText: "Storytelling starten",
+    buttonLink: "/storytelling",
+    operations: [
+      {
+        "id": "better-Storytelling",
+        "name": "Storytelling verbessern",
+        "description": "Findet Personas für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/storybert-better-storytelling.txt",
+        "promptKey": PROMPT_KEYS.BETTER_STORYTELLING,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "more-emotions",
+        "name": "Mehr Emotionen",
+        "description": "Bringt mehr Emotionen in deine Stories.",
+        "sampleTextFile": "/sample-texts/storybert-more-emotions.txt",
+        "promptKey": PROMPT_KEYS.MORE_EMOTIONS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "simple-language",
+        "name": "Einfachere Sprache",
+        "description": "Findet Headline-Ideen für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/storybert-simple-language.txt",
+        "promptKey": PROMPT_KEYS.SIMPLE_LANGUAGE,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 15-25 sek"
+      },
+      {
+        "id": "complex-language",
+        "name": "Komplexere Sprache",
+        "description": "Findet Bildideen für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/storybert-complex-language.txt",
+        "promptKey": PROMPT_KEYS.COMPLEX_LANGUAGE,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "find-painpoints",
+        "name": "Painpoints finden",
+        "description": "Findet Painpoints für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/storybert-find-painpoints.txt",
+        "promptKey": PROMPT_KEYS.FIND_PAINPOINTS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "image-ideas",
+        "name": "Bildideen finden",
+        "description": "Findet Bildideen für deine Zielgruppe.",
+        "sampleTextFile": "/sample-texts/storybert-image-ideas.txt",
+        "promptKey": PROMPT_KEYS.IMAGE_IDEAS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      }
+    ]
   }
 ];
 
