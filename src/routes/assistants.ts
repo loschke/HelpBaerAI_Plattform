@@ -9,6 +9,7 @@ import { parseString, OptionsV2 } from 'xml2js';
 import { promisify } from 'util';
 import config from '../config/model-costs'; 
 import {getUserCredits, updateUserCredits, logOperation } from '../services/creditService';
+import loadingFacts from '../config/loading-facts';
 
 const parseXml = promisify<string, OptionsV2, WebhookResponse | null>((xmlString, options, callback) => {
   // Extrahieren Sie den Inhalt des output-Elements vor dem Parsen
@@ -73,7 +74,8 @@ router.get('/:assistantId', asyncHandler(async (req: Request, res: Response) => 
 
     res.render('pages/assistant-analysis', { 
       assistant,
-      user: user
+      user: user,
+      loadingFacts: loadingFacts
     });
   } else {
     res.status(404).render('pages/error', { message: 'Assistant not found' });

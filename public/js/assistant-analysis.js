@@ -180,6 +180,21 @@ function scrollToResponse() {
     }
 }
 
+function initializeLoadingAnimation() {
+    const loadingFactElement = document.getElementById('loadingFact');
+    if (loadingFactElement && window.loadingFacts && window.loadingFacts.length > 0) {
+        const randomFact = window.loadingFacts[Math.floor(Math.random() * window.loadingFacts.length)];
+        loadingFactElement.innerHTML = `
+            <h3 class="font-bold">${randomFact.title}</h3>
+            <p class="mt-2">${randomFact.text}</p>
+            <p class="mt-2 font-semibold">${randomFact.cta}</p>
+        `;
+    } else {
+        console.warn('Loading facts not available or empty');
+    }
+    console.log('Loading facts:', window.loadingFacts);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded event fired');
     const toggleButton = document.getElementById('toggleSidepanel');
@@ -257,6 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('Analysis form not found');
     }
+
+    initializeLoadingAnimation();
 });
 
 // Add this line at the end of the file

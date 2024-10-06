@@ -4,6 +4,9 @@
     <%- include('../partials/head') %>
     <title>HelpBärAI - <%= assistant.title %></title>
     <script type="module" src="/js/assistant-analysis.js"></script>
+    <script>
+        window.loadingFacts = <%- JSON.stringify(loadingFacts) %>;
+    </script>
 </head>
 <body class="bg-base-100 text-base-content flex flex-col min-h-screen <%= locals.user ? 'user-logged-in' : '' %>">
     <%- include('../partials/header') %>
