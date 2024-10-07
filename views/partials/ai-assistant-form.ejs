@@ -1,5 +1,5 @@
 <div class="mb-6">
-    <% if (assistant.title !== "Textbärt") { %>
+    <% if (assistant.title === "Schlaubärt") { %>
     <div class="tabs tabs-boxed mb-4">
         <a class="tab tab-active" id="textTab">Text eingeben</a>
         <a class="tab" id="urlTab">URL eingeben</a>
@@ -27,7 +27,7 @@
         <div class="absolute bottom-2 right-4 text-sm text-gray-500" id="charCounter">0 / 2000</div>
     </div>
     
-    <% if (assistant.title !== "Textbärt") { %>
+    <% if (assistant.title === "Schlaubärt" || assistant.title === "Kreativbärt" || assistant.title === "Storybärt") { %>
     <div id="urlInput" class="hidden relative">
         <input type="url" placeholder="https://www.beispiel.de" class="input input-bordered w-full pr-16" id="urlInputField" />
         <div class="absolute top-1/2 right-2 transform -translate-y-1/2 flex space-x-2">
