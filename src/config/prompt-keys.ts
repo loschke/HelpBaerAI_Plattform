@@ -25,4 +25,13 @@ export const PROMPT_KEYS = {
   IDEA_FEEDBACK: 'idea-feedback',
   FIND_INTENTIONS: 'find-intentions',
   FIND_TOPICS: 'find-topics',
+  SEO_KEYWORD_RECOMMENDATIONS: 'seo-keyword-recommendations',
+  SEO_META_GENERATOR: 'seo-meta-generator',
+  SEO_FAQ_GENERATOR: 'seo-faq-generator',
+  WEBSITE_KEY_INSIGHTS: 'website-key-insights',
+  CONTENT_CHECK: 'content-check',
+  SIMILAR_WEBSITES: 'similar-websites',
+  WEBSITE_SUMMARY: 'website-summary',
+  LINKEDIN_POST_IDEAS: 'linkedin-post-ideas',
+  LINKEDIN_TEASER: 'linkedin-teaser',
 };

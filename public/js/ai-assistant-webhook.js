@@ -19,7 +19,9 @@ class AIAssistantForm {
         this.languageModel = document.getElementById('languageModel');
         this.operationButtons = document.querySelectorAll('.btn[data-operation-id]');
 
-        this.activeTab = 'text';
+        this.assistantInputType = document.body.dataset.assistantInputType;
+        this.activeTab = this.assistantInputType === 'url' ? 'url' : 'text';
+        this.initializeInputType();
         this.selectedOperationId = null;
         this.selectedLanguageModel = null;
         this.promptTemplateContent = null;
@@ -45,6 +47,21 @@ class AIAssistantForm {
         this.closePopupButton = document.getElementById('closePopup');
         if (this.closePopupButton) {
             this.closePopupButton.addEventListener('click', this.hideLoginPopup.bind(this));
+        }
+
+        this.assistantInputType = document.body.dataset.assistantInputType;
+    }
+
+    initializeInputType() {
+        if (this.assistantInputType === 'both') {
+            this.textInput.classList.remove('hidden');
+            this.urlInput.classList.add('hidden');
+        } else if (this.assistantInputType === 'url') {
+            this.textInput.classList.add('hidden');
+            this.urlInput.classList.remove('hidden');
+        } else { // 'text'
+            this.textInput.classList.remove('hidden');
+            this.urlInput.classList.add('hidden');
         }
     }
 
@@ -122,9 +139,23 @@ class AIAssistantForm {
     }
 
     getFormData() {
+        let content;
+        let tabType;
+        if (this.assistantInputType === 'both') {
+            tabType = this.activeTab;
+            content = this.activeTab === 'text' ? this.analysisTextarea.value : this.urlInputField.value;
+        } else if (this.assistantInputType === 'text') {
+            tabType = 'text';
+            content = this.analysisTextarea.value;
+        } else {
+            tabType = 'url';
+            content = this.urlInputField.value;
+        }
+
         const formData = {
-            tabType: this.activeTab,
-            content: this.activeTab === 'text' ? this.analysisTextarea.value : this.urlInputField.value,
+            tabType: tabType,
+            inputType: this.assistantInputType,
+            content: content,
             mainFocus: this.mainFocus.value,
             outputLanguage: this.outputLanguage.value,
             outputFormat: this.outputFormat.value,

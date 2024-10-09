@@ -21,6 +21,7 @@ interface AIAssistant {
   buttonText?: string;
   buttonLink?: string;
   operations?: Operation[];
+  inputType: 'both' | 'text' | 'url';
 }
 
 const aiAssistants: AIAssistant[] = [
@@ -32,6 +33,7 @@ const aiAssistants: AIAssistant[] = [
     task: 'Analyse & Bewertung',
     buttonText: 'Analysen starten',
     buttonLink: '/analysis-evaluation',
+    inputType: 'both',
     "operations": [
       {
         "id": "tone-of-voice",
@@ -120,6 +122,7 @@ const aiAssistants: AIAssistant[] = [
     task: "Textverarbeitung",
     buttonText: "Textbearbeitung starten",
     buttonLink: "/text-optimization",
+    inputType: 'text',
     operations: [
       {
         "id": "shorten-text",
@@ -208,6 +211,7 @@ const aiAssistants: AIAssistant[] = [
     task: "Konzepte & Ideen",
     buttonText: "Ideen brainstormen",
     buttonLink: "/concept-generation",
+    inputType: 'both',
     operations: [
       {
         "id": "find-persona",
@@ -285,6 +289,7 @@ const aiAssistants: AIAssistant[] = [
     task: "Zielgruppen & Personalisierung",
     buttonText: "Storytelling starten",
     buttonLink: "/storytelling",
+    inputType: 'both',
     operations: [
       {
         "id": "better-Storytelling",
@@ -351,6 +356,117 @@ const aiAssistants: AIAssistant[] = [
         "makeBranch": "mainOps",
         "creditCost": 3,
         "estimatedTotalTime": "ca. 25-35 sek"
+      }
+    ]
+  },
+  {
+    title: "Webbärt",
+    description: "",
+    image: "/images/webbert.png",
+    alt: "Webbärt - SEO- und Website Analysen",
+    task: "SEO & Website Analysen",
+    buttonText: "Website analysieren",
+    buttonLink: "/website-analysis",
+    inputType: 'url',
+    operations: [
+      {
+        "id": "seo-meta-generator",
+        "name": "SEO-Meta-Generator",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-seo-meta-generator.txt",
+        "promptKey": PROMPT_KEYS.SEO_META_GENERATOR,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "seo-faq-generator",
+        "name": "SEO-FAQ Generator",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-seo-faq-generator.txt",
+        "promptKey": PROMPT_KEYS.SEO_FAQ_GENERATOR,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "seo-keyword-recommendations",
+        "name": "SEO-Keyword-Analyse",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-seo-keyword-recommendations.txt",
+        "promptKey": PROMPT_KEYS.SEO_KEYWORD_RECOMMENDATIONS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },     
+      {
+        "id": "linkedin-teaser",
+        "name": "LinkedIn Teaser",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-linkedin-teaser.txt",
+        "promptKey": PROMPT_KEYS.LINKEDIN_TEASER,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "linkedin-post-ideas",
+        "name": "LinkedIn Post-Ideen",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-linkedin-post-ideas.txt",
+        "promptKey": PROMPT_KEYS.LINKEDIN_POST_IDEAS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "similar-websites",
+        "name": "Ähnliche Websites",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-similar-websites.txt",
+        "promptKey": PROMPT_KEYS.SIMILAR_WEBSITES,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "website-summary",
+        "name": "Website Summary",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-website-summary.txt",
+        "promptKey": PROMPT_KEYS.WEBSITE_SUMMARY,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "website-key-insights",
+        "name": "Key Insights",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-website-key-insights.txt",
+        "promptKey": PROMPT_KEYS.WEBSITE_KEY_INSIGHTS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "content-check",
+        "name": "Content Check",
+        "description": "",
+        "sampleTextFile": "/sample-texts/webbert-content-check.txt",
+        "promptKey": PROMPT_KEYS.CONTENT_CHECK,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 15-25 sek"
       }
     ]
   }

@@ -1,5 +1,7 @@
 import AIAssistantForm from './ai-assistant-webhook.js';
 
+const assistantInputType = document.body.dataset.assistantInputType;
+
 let isSidepanelOpen = false;
 
 function toggleSidepanel() {
@@ -19,8 +21,24 @@ function toggleSidepanel() {
     }
 }
 
+function initializeInputType() {
+    const textInput = document.getElementById('textInput');
+    const urlInput = document.getElementById('urlInput');
+
+    if (assistantInputType === 'both') {
+        textInput.classList.remove('hidden');
+        urlInput.classList.add('hidden');
+    } else if (assistantInputType === 'url') {
+        textInput.classList.add('hidden');
+        urlInput.classList.remove('hidden');
+    } else { // 'text'
+        textInput.classList.remove('hidden');
+        urlInput.classList.add('hidden');
+    }
+}
+
 function switchTab(tab) {
-    if (assistantType === "Storybert") return; // Keine Tab-Funktionalität für Storybert
+    if (assistantInputType !== 'both') return; // Only allow switching for 'both' type
 
     const textInput = document.getElementById('textInput');
     const urlInput = document.getElementById('urlInput');
@@ -28,15 +46,21 @@ function switchTab(tab) {
     const urlTab = document.getElementById('urlTab');
 
     if (tab === 'text') {
-        textInput?.classList.remove('hidden');
-        urlInput?.classList.add('hidden');
-        textTab?.classList.add('tab-active');
-        urlTab?.classList.remove('tab-active');
+        textInput.classList.remove('hidden');
+        urlInput.classList.add('hidden');
+        textTab.classList.add('tab-active');
+        urlTab.classList.remove('tab-active');
     } else {
-        textInput?.classList.add('hidden');
-        urlInput?.classList.remove('hidden');
-        textTab?.classList.remove('tab-active');
-        urlTab?.classList.add('tab-active');
+        textInput.classList.add('hidden');
+        urlInput.classList.remove('hidden');
+        textTab.classList.remove('tab-active');
+        urlTab.classList.add('tab-active');
+    }
+
+    // Update the activeTab in the AIAssistantForm instance
+    const assistantForm = window.assistantForm; // Assuming you've made the instance globally accessible
+    if (assistantForm) {
+        assistantForm.activeTab = tab;
     }
 }
 
