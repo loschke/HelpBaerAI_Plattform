@@ -211,7 +211,7 @@ const aiAssistants: AIAssistant[] = [
     task: "Konzepte & Ideen",
     buttonText: "Ideen brainstormen",
     buttonLink: "/concept-generation",
-    inputType: 'both',
+    inputType: 'text',
     operations: [
       {
         "id": "find-persona",
@@ -289,7 +289,7 @@ const aiAssistants: AIAssistant[] = [
     task: "Zielgruppen & Personalisierung",
     buttonText: "Storytelling starten",
     buttonLink: "/storytelling",
-    inputType: 'both',
+    inputType: 'text',
     operations: [
       {
         "id": "better-Storytelling",
