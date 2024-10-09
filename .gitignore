@@ -3,6 +3,7 @@ node_modules/
 
 # Build output
 dist/
+db_backup/
 
 # Environment variables
 .env
