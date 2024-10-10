@@ -361,18 +361,18 @@ const aiAssistants: AIAssistant[] = [
   },
   {
     title: "Webbärt",
-    description: "",
+    description: "Websites sind wie Schaufenster – sie müssen auffallen und überzeugen. Umfassende Analysetools decken Verbesserungspotenziale auf und liefern konkrete Vorschläge: von SEO-Strategien über Content-Optimierung bis zu Social-Media-Ideen.",
     image: "/images/webbert.png",
     alt: "Webbärt - SEO- und Website Analysen",
     task: "SEO & Website Analysen",
     buttonText: "Website analysieren",
     buttonLink: "/website-analysis",
-    inputType: 'url',
+    inputType: "url",
     operations: [
       {
         "id": "seo-meta-generator",
         "name": "SEO-Meta-Generator",
-        "description": "",
+        "description": "Erstellt optimierte Meta-Tags für Ihre Webseite, um die Sichtbarkeit in Suchmaschinen zu verbessern. Diese Funktion analysiert den Inhalt Ihrer Seite und generiert relevante, keyword-reiche Meta-Titel und Meta-Beschreibungen. Sie berücksichtigt dabei Best Practices für SEO, wie optimale Länge und Keywordplatzierung, um die Chancen auf ein höheres Ranking in den Suchergebnissen zu maximieren.",
         "sampleTextFile": "/sample-texts/webbert-seo-meta-generator.txt",
         "promptKey": PROMPT_KEYS.SEO_META_GENERATOR,
         "languageModel": "anthropic/claude-3.5-sonnet",
@@ -383,7 +383,7 @@ const aiAssistants: AIAssistant[] = [
       {
         "id": "seo-faq-generator",
         "name": "SEO-FAQ Generator",
-        "description": "",
+        "description": "Generiert einen SEO-freundlichen FAQ-Abschnitt für Ihre Website. Diese Funktion analysiert Ihre Inhalte und identifiziert häufig gestellte Fragen zu Ihrem Thema oder Produkt. Sie erstellt dann prägnante, informative Antworten, die sowohl für Besucher nützlich sind als auch für Suchmaschinen optimiert sind. Dies kann dazu beitragen, Ihre Seite in den Featured Snippets von Suchmaschinen zu platzieren und die organische Sichtbarkeit zu erhöhen.",
         "sampleTextFile": "/sample-texts/webbert-seo-faq-generator.txt",
         "promptKey": PROMPT_KEYS.SEO_FAQ_GENERATOR,
         "languageModel": "anthropic/claude-3.5-sonnet",
@@ -394,18 +394,18 @@ const aiAssistants: AIAssistant[] = [
       {
         "id": "seo-keyword-recommendations",
         "name": "SEO-Keyword-Analyse",
-        "description": "",
+        "description": "Führt eine umfassende Keyword-Analyse für Ihre Website durch. Diese Funktion untersucht Ihre Inhalte, Branchentrends und Suchvolumina, um relevante Keywords zu identifizieren. Sie liefert Empfehlungen für Haupt- und Long-Tail-Keywords, die das Potenzial haben, Ihre Suchmaschinenrankings zu verbessern. Die Analyse hilft Ihnen, Ihre Content-Strategie zu optimieren und Lücken in Ihrer Keyword-Abdeckung zu schließen.",
         "sampleTextFile": "/sample-texts/webbert-seo-keyword-recommendations.txt",
         "promptKey": PROMPT_KEYS.SEO_KEYWORD_RECOMMENDATIONS,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
         "creditCost": 3,
         "estimatedTotalTime": "ca. 20-30 sek"
-      },     
+      },
       {
         "id": "linkedin-teaser",
         "name": "LinkedIn Teaser",
-        "description": "",
+        "description": "Erstellt einen fesselnden LinkedIn-Teaser für Ihre Website. Diese Funktion analysiert Ihre Webinhalte und generiert einen kurzen, ansprechenden Text, der die Kernbotschaft Ihrer Seite effektiv für die LinkedIn-Plattform aufbereitet. Der Teaser wird so gestaltet, dass er die Aufmerksamkeit Ihrer Zielgruppe weckt, Neugier erzeugt und zum Klicken und Weiterlesen animiert. Dies hilft Ihnen, Ihre Website-Inhalte effektiv auf LinkedIn zu promoten und mehr qualifizierten Traffic zu generieren.",
         "sampleTextFile": "/sample-texts/webbert-linkedin-teaser.txt",
         "promptKey": PROMPT_KEYS.LINKEDIN_TEASER,
         "languageModel": "anthropic/claude-3.5-sonnet",
@@ -416,7 +416,7 @@ const aiAssistants: AIAssistant[] = [
       {
         "id": "linkedin-post-ideas",
         "name": "LinkedIn Post-Ideen",
-        "description": "",
+        "description": "Generiert kreative und relevante Post-Ideen für Ihre LinkedIn-Seite. Diese Funktion analysiert Ihre Website-Inhalte, Branchentrends und LinkedIn-Best-Practices, um eine Vielzahl von Postvorschlägen zu erstellen. Sie liefert Ideen für verschiedene Postformate wie Textbeiträge, Infografiken oder Umfragen, die auf Ihre Zielgruppe zugeschnitten sind. Diese Vorschläge helfen Ihnen, Ihre LinkedIn-Präsenz zu stärken, das Engagement zu erhöhen und Ihre Expertise zu präsentieren.",
         "sampleTextFile": "/sample-texts/webbert-linkedin-post-ideas.txt",
         "promptKey": PROMPT_KEYS.LINKEDIN_POST_IDEAS,
         "languageModel": "anthropic/claude-3.5-sonnet",
@@ -427,7 +427,7 @@ const aiAssistants: AIAssistant[] = [
       {
         "id": "similar-websites",
         "name": "Ähnliche Websites",
-        "description": "",
+        "description": "Identifiziert Websites, die Ihrer Zielgruppe gefallen könnten. Diese Funktion analysiert Ihre Website-Inhalte, Themen und Zielgruppe, um ähnliche Seiten im Web zu finden. Sie liefert eine Liste von Websites mit verwandten Themen, ähnlicher Ausrichtung oder ergänzenden Inhalten. Diese Informationen können für Wettbewerbsanalysen, Kooperationsmöglichkeiten oder zur Inspiration für Ihre eigene Content-Strategie genutzt werden.",
         "sampleTextFile": "/sample-texts/webbert-similar-websites.txt",
         "promptKey": PROMPT_KEYS.SIMILAR_WEBSITES,
         "languageModel": "anthropic/claude-3.5-sonnet",
@@ -438,7 +438,7 @@ const aiAssistants: AIAssistant[] = [
       {
         "id": "website-summary",
         "name": "Website Summary",
-        "description": "",
+        "description": "Erstellt eine prägnante Zusammenfassung Ihrer Website. Diese Funktion analysiert den gesamten Inhalt Ihrer Seite und destilliert die wichtigsten Informationen in eine klare, leicht verständliche Übersicht. Die Zusammenfassung hebt Ihre Hauptbotschaften, Produkte oder Dienstleistungen sowie Ihre einzigartigen Verkaufsargumente hervor. Dies ist besonders nützlich für schnelle Überblicke, Präsentationen oder als Basis für Marketing-Materialien.",
         "sampleTextFile": "/sample-texts/webbert-website-summary.txt",
         "promptKey": PROMPT_KEYS.WEBSITE_SUMMARY,
         "languageModel": "anthropic/claude-3.5-sonnet",
@@ -449,7 +449,7 @@ const aiAssistants: AIAssistant[] = [
       {
         "id": "website-key-insights",
         "name": "Key Insights",
-        "description": "",
+        "description": "Identifiziert und extrahiert die wichtigsten Erkenntnisse und Schlüsselinformationen aus Ihrer Website. Diese Funktion analysiert Ihre Inhalte tiefgehend, um zentrale Themen, Wertversprechen und einzigartige Aspekte herauszuarbeiten. Sie liefert eine Liste von Key Insights, die Ihre Kernkompetenzen, Marktpositionierung und wichtigsten Botschaften zusammenfassen. Diese Erkenntnisse können für strategische Entscheidungen, Content-Planungen oder zur Verfeinerung Ihrer Markenkommunikation genutzt werden.",
         "sampleTextFile": "/sample-texts/webbert-website-key-insights.txt",
         "promptKey": PROMPT_KEYS.WEBSITE_KEY_INSIGHTS,
         "languageModel": "anthropic/claude-3.5-sonnet",
@@ -460,7 +460,7 @@ const aiAssistants: AIAssistant[] = [
       {
         "id": "content-check",
         "name": "Content Check",
-        "description": "",
+        "description": "Führt eine umfassende Überprüfung der Inhalte Ihrer Website durch. Diese Funktion analysiert Texte auf Rechtschreibung, Grammatik, Konsistenz und Lesbarkeit. Sie identifiziert potenzielle Probleme wie veraltete Informationen, gebrochene Links oder inkonsistente Formatierungen. Darüber hinaus bewertet sie die Qualität und Relevanz der Inhalte für Ihre Zielgruppe und gibt Vorschläge zur Verbesserung. Der Content Check hilft Ihnen, die Professionalität und Effektivität Ihrer Website-Inhalte zu steigern.",
         "sampleTextFile": "/sample-texts/webbert-content-check.txt",
         "promptKey": PROMPT_KEYS.CONTENT_CHECK,
         "languageModel": "anthropic/claude-3.5-sonnet",

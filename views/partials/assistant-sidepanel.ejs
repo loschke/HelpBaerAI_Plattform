@@ -21,9 +21,11 @@
                                 <li>Kosten: <%= operation.creditCost %> Credits</li>
                                 <li>Dauer: <%= operation.estimatedTotalTime %></li>
                             </ul>
+                            <% if (assistant.inputType != 'url') { %>
                             <button class="btn bg-base-100 btn-sm mt-4 load-sample-text" data-filename="<%= operation.sampleTextFile.split('/').pop() %>">
                                 Mustertext einfügen
                             </button>
+                            <% } %>
                         </div>
                     </div>
                 <% }); %>
