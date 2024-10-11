@@ -6,13 +6,12 @@
                     <img src="/images/queonext_signum_white.png" alt="QueoNext Logo" class="h-8">
                 </a>
             </div>
-            <div class="navbar-center hidden lg:flex">
+            <!--<div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
-                    <li><a href="#" class="hover:text-primary">Über HelpBärAI</a></li>
-                    <!--<li><a href="#" class="hover:text-primary">KI erfahren</a></li>-->
-                    <li><a href="#" class="hover:text-primary">queonext.de</a></li>
+                    <li><a href="#" class="hover:text-primary">About</a></li>
+                    <li><a href="https://queonext.de/ai/" target="_blank" class="hover:text-primary">queonext.de AI-Hub</a></li>
                 </ul>
-            </div>
+            </div>-->
             <div class="navbar-end">
                 <% if (locals.user) { %>
                     <a href="/profile" class="text-primary-content px-4 py-2 rounded hover:text-primary">
@@ -26,7 +25,7 @@
                         Login
                     </a>
                     <a href="/auth/register" class="btn btn-accent text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
-                        Ich möchte ausprobieren
+                        Kostenlos ausprobieren
                     </a>
                 <% } %>
                 <div class="dropdown dropdown-end lg:hidden">
@@ -44,7 +43,7 @@
                             <li><a href="/auth/logout" class="hover:text-primary">Logout</a></li>
                         <% } else { %>
                             <li><a href="/auth/login" class="hover:text-primary">Login</a></li>
-                            <li><a href="/auth/register" class="hover:text-primary">Registrieren</a></li>
+                            <li><a href="/auth/register" class="hover:text-primary">Kostenlos ausprobieren</a></li>
                         <% } %>
                     </ul>
                 </div>
