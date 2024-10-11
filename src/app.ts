@@ -15,6 +15,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import webhookRoutes from './routes/webhook';
 import cors from 'cors';
+import newsletterRoutes from './routes/newsletter';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -86,6 +87,7 @@ app.use('/profile', profileRouter);
 app.use('/assistants', assistantsRouter);
 app.use('/', assistantsRouter);
 app.use('/api/sample-text', sampleTextRouter);
+app.use(newsletterRoutes);
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

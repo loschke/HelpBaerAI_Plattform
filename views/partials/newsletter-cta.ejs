@@ -1,0 +1,24 @@
+<div class="w-full max-w-4xl bg-base-300 rounded-xl shadow-2xl overflow-hidden p-6">
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-4">
+        <div class="flex-shrink-0">
+            <h2 class="text-xl font-bold">queonext Newsletter</h2>
+            <p class="text-sm text-gray-300 mt-1">AI Wissen direkt ins Postfach!</p>
+        </div>
+        <form id="newsletterForm" class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 flex-grow">
+            <input type="text" id="firstname" name="firstname" required
+                class="w-full md:w-auto flex-grow px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="Vorname">
+            <input type="email" id="email" name="email" required
+                class="w-full md:w-auto flex-grow px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="E-Mail">
+            <button type="submit"
+                class="w-full md:w-auto px-6 py-2 bg-info hover:bg-primary text-white font-semibold rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Anmelden
+            </button>
+        </form>
+    </div>
+    <p class="text-xs text-gray-400 mt-4 text-center md:text-left">
+        Ihre Daten werden zur Bearbeitung des Newsletters verwendet und zusätzlich erhalten Sie exklusive Informationen zu unseren Angeboten.
+    </p>
+    <div id="newsletterMessage" class="mt-4 text-center hidden"></div>
+</div>

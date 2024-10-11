@@ -48,4 +48,19 @@ async function sendPasswordResetEmail(email: string, resetToken: string) {
   await transporter.sendMail(mailOptions);
 }
 
-export { sendVerificationEmail, sendPasswordResetEmail };
+async function sendNewsletterSignupEmail(firstname: string, email: string): Promise<void> {
+  const mailOptions = {
+    from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM_ADDRESS}>`,
+    to: 'ai@kvix.de',
+    subject: 'Neue Newsletter-Anmeldung auf HelpBärAI',
+    html: `
+      <h1>Neue Newsletter-Anmeldung</h1>
+      <p><strong>Vorname:</strong> ${firstname}</p>
+      <p><strong>E-Mail:</strong> ${email}</p>
+    `
+  };
+
+  await transporter.sendMail(mailOptions);
+}
+
+export { sendVerificationEmail, sendPasswordResetEmail, sendNewsletterSignupEmail };
