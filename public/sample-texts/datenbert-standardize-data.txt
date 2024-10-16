@@ -1,0 +1,11 @@
+ProductID,ProductName,Category,Price,Weight,Length,Width,Height,Rating,StockStatus
+1,Eco-friendly Water Bottle,Kitchen,$24.99,0.5 lbs,9 inches,3 inches,3 inches,4.5,In Stock
+2,Wireless Bluetooth Headphones,Electronics,79.95 USD,0.3 kg,7",5",3",4.2,Low Stock
+3,Organic Cotton T-shirt,Clothing,€29.50,200g,25 cm,40 cm,N/A,3.8,Out of Stock
+4,Stainless Steel Chef's Knife,Kitchen,£45.00,0.4 pounds,13 in.,2 in.,1 in.,4.7,In Stock
+5,Smart Home Security Camera,Electronics,$129.99,350 grams,4 inches,4 inches,6 inches,4.0,In Stock
+6,Yoga Mat,Sports & Outdoors,34.50 EUR,1.2 kg,68 in,24 in,0.25 in,4.3,Low Stock
+7,Portable Power Bank,Electronics,¥3999,200 g,6",3",1",4.6,In Stock
+8,Adjustable Dumbbell Set,Sports & Outdoors,$199.95,40 lbs,16 inches,8 inches,9 inches,4.8,Low Stock
+9,Natural Bamboo Cutting Board,Kitchen,C$39.99,2.5 pounds,18",12",0.75",4.4,In Stock
+10,Wireless Charging Pad,Electronics,59.99 USD,0.15 kg,4 in,4 in,0.5 in,3.9,Out of Stock

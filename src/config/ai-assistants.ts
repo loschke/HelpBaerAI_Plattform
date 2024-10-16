@@ -37,7 +37,7 @@ const aiAssistants: AIAssistant[] = [
     "operations": [
       {
         "id": "tone-of-voice",
-        "name": "Schreibstil",
+        "name": "Schreibstil analysieren",
         "description": "Überprüft den Tonfall des Textes und gibt Empfehlungen für eine ansprechende und einprägsame Sprache. Diese Analyse identifiziert den vorherrschenden Schreibstil (z.B. formell, informell, humorvoll, ernst) und bewertet, ob dieser zum Zielpublikum und Zweck des Textes passt. Sie gibt konkrete Vorschläge zur Verbesserung des Tonfalls, um die Wirkung des Textes zu optimieren.",
         "sampleTextFile": "/sample-texts/schlaubert-tone-of-voice.txt",
         "promptKey": PROMPT_KEYS.TONE_OF_VOICE,
@@ -48,7 +48,7 @@ const aiAssistants: AIAssistant[] = [
       },
       {
         "id": "intention",
-        "name": "Intention",
+        "name": "Intention analysieren",
         "description": "Überprüft den Zweck des Textes und gibt Empfehlungen für eine klare und prägnante Botschaft. Diese Analyse identifiziert das Hauptziel des Textes (z.B. informieren, überzeugen, unterhalten) und bewertet, wie effektiv dieses Ziel erreicht wird. Sie bietet Vorschläge zur Verbesserung der Klarheit und Wirksamkeit der Kernbotschaft, um sicherzustellen, dass die Intention des Autors beim Leser ankommt.",
         "sampleTextFile": "/sample-texts/schlaubert-intention.txt",
         "promptKey": PROMPT_KEYS.INTENTION,
@@ -59,7 +59,7 @@ const aiAssistants: AIAssistant[] = [
       },
       {
         "id": "bias",
-        "name": "Bias",
+        "name": "Bias analysieren",
         "description": "Überprüft den Text auf unbewusste Voreingenommenheit oder Vorurteile und gibt Empfehlungen für eine ausgewogene und faire Darstellung. Diese Analyse identifiziert mögliche Formen von Bias, wie z.B. geschlechtsspezifische, kulturelle oder sozioökonomische Vorurteile. Sie bietet Vorschläge zur Neutralisierung von Bias und zur Förderung einer inklusiven Sprache, die alle Leser respektvoll anspricht.",
         "sampleTextFile": "/sample-texts/schlaubert-bias.txt",
         "promptKey": PROMPT_KEYS.BIAS,
@@ -70,7 +70,7 @@ const aiAssistants: AIAssistant[] = [
       },
       {
         "id": "ethics",
-        "name": "Ethik",
+        "name": "Ethik analysieren",
         "description": "Überprüft den Text auf ethische Implikationen und gibt Empfehlungen für eine moralisch vertretbare und verantwortungsvolle Kommunikation. Diese Analyse untersucht den Inhalt auf potenzielle ethische Probleme wie Falschdarstellungen, Manipulation oder die Verletzung von Persönlichkeitsrechten. Sie bietet Vorschläge zur Verbesserung der ethischen Integrität des Textes und zur Förderung einer vertrauenswürdigen Kommunikation.",
         "sampleTextFile": "/sample-texts/schlaubert-ethics.txt",
         "promptKey": PROMPT_KEYS.ETHICS,
@@ -81,7 +81,7 @@ const aiAssistants: AIAssistant[] = [
       },
       {
         "id": "sentiment",
-        "name": "Stimmung",
+        "name": "Stimmung analysieren",
         "description": "Analysiert den Text und gibt die Stimmung des Textes wieder. Diese Analyse identifiziert die vorherrschende emotionale Tönung des Textes (z.B. positiv, negativ, neutral) und bewertet deren Konsistenz und Angemessenheit im Kontext. Sie bietet Einblicke in die emotionale Wirkung auf den Leser und gibt Empfehlungen zur Optimierung der Stimmung, um die gewünschte Reaktion beim Zielpublikum zu erzielen.",
         "sampleTextFile": "/sample-texts/schlaubert-sentiment.txt",
         "promptKey": PROMPT_KEYS.SENTIMENT,
@@ -92,7 +92,7 @@ const aiAssistants: AIAssistant[] = [
       },
       {
         "id": "argumentation",
-        "name": "Argumentation",
+        "name": "Argumentation analysieren",
         "description": "Analysiert den Text und gibt die Argumentation des Textes wieder. Diese Analyse untersucht die logische Struktur und Überzeugungskraft der präsentierten Argumente. Sie identifiziert Prämissen, Schlussfolgerungen und potenzielle logische Fehlschlüsse. Die Analyse bietet Vorschläge zur Verbesserung der Argumentation, um eine kohärente und überzeugende Darstellung zu gewährleisten.",
         "sampleTextFile": "/sample-texts/schlaubert-argumentation.txt",
         "promptKey": PROMPT_KEYS.ARGUMENTATION,
@@ -103,7 +103,7 @@ const aiAssistants: AIAssistant[] = [
       },
       {
         "id": "emotion",
-        "name": "Emotion",
+        "name": "Emotion analysieren",
         "description": "Analysiert den Text und gibt die Emotion des Textes wieder. Diese Analyse identifiziert und kategorisiert die im Text ausgedrückten oder evozierten Emotionen (z.B. Freude, Trauer, Ärger, Überraschung). Sie bewertet die Intensität und Angemessenheit der emotionalen Aspekte im Kontext des Textziels und der Zielgruppe. Die Analyse bietet Einblicke in die emotionale Wirkung auf den Leser und gibt Empfehlungen zur effektiven Nutzung emotionaler Elemente in der Kommunikation.",
         "sampleTextFile": "/sample-texts/schlaubert-emotion.txt",
         "promptKey": PROMPT_KEYS.EMOTION,
@@ -180,6 +180,28 @@ const aiAssistants: AIAssistant[] = [
         "estimatedTotalTime": "ca. 20-30 sek"
       },
       {
+        "id": "simple-language",
+        "name": "Einfachere Sprache",
+        "description": "Vereinfacht die Sprache Ihrer Texte, um sie zugänglicher und verständlicher zu machen. Diese Funktion analysiert Ihren Schreibstil und schlägt Alternativen für komplexe Wörter oder Satzstrukturen vor. Sie hilft dabei, Ihre Botschaft klarer und direkter zu vermitteln, ohne deren Essenz zu verlieren. Das Ergebnis ist ein Text, der von einem breiteren Publikum leichter verstanden und aufgenommen werden kann, was besonders nützlich für die Kommunikation komplexer Ideen oder für die Ansprache verschiedener Zielgruppen ist.",
+        "sampleTextFile": "/sample-texts/textbert-simple-language.txt",
+        "promptKey": PROMPT_KEYS.SIMPLE_LANGUAGE,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 15-25 sek"
+      },
+      {
+        "id": "complex-language",
+        "name": "Komplexere Sprache",
+        "description": "Verfeinert und bereichert die Sprache Ihrer Texte für ein anspruchsvolleres Publikum. Diese Funktion analysiert Ihren Inhalt und schlägt präzisere, nuanciertere oder fachspezifischere Formulierungen vor. Sie hilft dabei, Ihre Botschaft mit größerer Tiefe und Detailliertheit zu vermitteln, was besonders für akademische, technische oder spezialisierte Zielgruppen wertvoll ist. Das Ergebnis ist ein Text, der Ihre Expertise unterstreicht und Ihrem Publikum ein höheres Maß an Informationen und Einsichten bietet.",
+        "sampleTextFile": "/sample-texts/textbert-complex-language.txt",
+        "promptKey": PROMPT_KEYS.COMPLEX_LANGUAGE,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
         "id": "extract-key-insights",
         "name": "Key Insights",
         "description": "Identifiziert und extrahiert die wichtigsten Erkenntnisse und Schlüsselinformationen aus dem gegebenen Text.",
@@ -189,17 +211,6 @@ const aiAssistants: AIAssistant[] = [
         "makeBranch": "mainOps",
         "creditCost": 3,
         "estimatedTotalTime": "ca. 25-35 sek"
-      },
-      {
-        "id": "explain-text",
-        "name": "Text erklären",
-        "description": "Bietet eine detaillierte Erklärung des Textes, einschließlich Kontext, Bedeutung und möglicher Interpretationen.",
-        "sampleTextFile": "/sample-texts/textbert-explain-text.txt",
-        "promptKey": PROMPT_KEYS.EXPLAIN_TEXT,
-        "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps",
-        "creditCost": 3,
-        "estimatedTotalTime": "ca. 30-40 sek"
       }
     ]
   },
@@ -278,6 +289,50 @@ const aiAssistants: AIAssistant[] = [
         "makeBranch": "mainOps",
         "creditCost": 3,
         "estimatedTotalTime": "ca. 30-40 sek"
+      },
+      {
+        "id": "analogie-generator",
+        "name": "Analogie Generator", 
+        "description": "Entwickelt kreative und treffende Metaphern sowie Analogien, um Produkte oder Dienstleistungen auf bildhafte Weise zu veranschaulichen. Diese Funktion analysiert die Kernaspekte des Angebots und generiert einprägsame sprachliche Bilder, die die Vorteile und Eigenschaften auf innovative Weise kommunizieren. Die erzeugten Metaphern und Analogien helfen, komplexe Konzepte greifbar zu machen und dem Zielpublikum einen neuen, fesselnden Blickwinkel auf das Produkt oder die Dienstleistung zu ermöglichen.",
+        "sampleTextFile": "/sample-texts/kreativbert-analogie-generator.txt",
+        "promptKey": PROMPT_KEYS.ANALOGIE_GENERATOR,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 30-40 sek"
+      },
+      {
+        "id": "cliffhanger",
+        "name": "Cliffhanger",
+        "description": "Generiert fesselnde Cliffhanger-Ideen basierend auf dem aktuellen Stand einer Geschichte. Diese Funktion analysiert die vorhandenen Handlungsstränge, Charakterentwicklungen und Spannungsbögen, um überraschende und emotional aufgeladene Wendungen zu kreieren. Die erzeugten Cliffhanger zielen darauf ab, das Publikum in Atem zu halten, Spekulationen anzuregen und ein starkes Verlangen nach der Fortsetzung der Geschichte zu wecken. Die Vorschläge können dramatische Enthüllungen, unerwartete Gefahren, moralische Dilemmas oder schockierende Ereignisse beinhalten, die perfekt auf den bisherigen Verlauf der Geschichte abgestimmt sind.",
+        "sampleTextFile": "/sample-texts/kreativbert-cliffhanger.txt",
+        "promptKey": PROMPT_KEYS.CLIFFHANGER,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "controversial-ideas",
+        "name": "Kontroverse Ideen", 
+        "description": "Generiert provokante oder kontroverse Konzeptideen basierend auf einer Produktbeschreibung oder einem Kampagnenziel. Diese Funktion zielt darauf ab, Aufmerksamkeit zu erregen und Diskussionen anzuregen, indem sie unkonventionelle und möglicherweise polarisierende Ansätze vorschlägt. Die erzeugten Ideen sind darauf ausgelegt, die Grenzen des Konventionellen zu überschreiten und eine starke Reaktion beim Zielpublikum hervorzurufen, wobei ethische Grenzen und die Markenidentität berücksichtigt werden.",
+        "sampleTextFile": "/sample-texts/kreativbert-controversial-ideas.txt",
+        "promptKey": PROMPT_KEYS.CONTROVERSIAL_IDEAS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 30-40 sek"
+      },
+      {
+        "id": "crossover-concepts",
+        "name": "Crossover Konzept", 
+        "description": "Entwickelt kreative Marketingkonzepte durch Kombination zweier scheinbar unverbundener Themen oder Produkte. Diese Funktion analysiert die einzigartigen Eigenschaften beider Elemente und generiert innovative Ideen, wie sie synergetisch in einer Marketingkampagne vereint werden können. Die erzeugten Crossover-Konzepte zielen darauf ab, Aufmerksamkeit zu erregen, neue Zielgruppen anzusprechen und frische Perspektiven auf bekannte Produkte oder Themen zu eröffnen.",
+        "sampleTextFile": "/sample-texts/kreativbert-crossover-concepts.txt",
+        "promptKey": PROMPT_KEYS.CROSSOVER_CONCEPTS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 30-40 sek"
       }
     ]
   },
@@ -314,28 +369,6 @@ const aiAssistants: AIAssistant[] = [
         "estimatedTotalTime": "ca. 25-35 sek"
       },
       {
-        "id": "simple-language",
-        "name": "Einfachere Sprache",
-        "description": "Vereinfacht die Sprache Ihrer Texte, um sie zugänglicher und verständlicher zu machen. Diese Funktion analysiert Ihren Schreibstil und schlägt Alternativen für komplexe Wörter oder Satzstrukturen vor. Sie hilft dabei, Ihre Botschaft klarer und direkter zu vermitteln, ohne deren Essenz zu verlieren. Das Ergebnis ist ein Text, der von einem breiteren Publikum leichter verstanden und aufgenommen werden kann, was besonders nützlich für die Kommunikation komplexer Ideen oder für die Ansprache verschiedener Zielgruppen ist.",
-        "sampleTextFile": "/sample-texts/storybert-simple-language.txt",
-        "promptKey": PROMPT_KEYS.SIMPLE_LANGUAGE,
-        "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps",
-        "creditCost": 3,
-        "estimatedTotalTime": "ca. 15-25 sek"
-      },
-      {
-        "id": "complex-language",
-        "name": "Komplexere Sprache",
-        "description": "Verfeinert und bereichert die Sprache Ihrer Texte für ein anspruchsvolleres Publikum. Diese Funktion analysiert Ihren Inhalt und schlägt präzisere, nuanciertere oder fachspezifischere Formulierungen vor. Sie hilft dabei, Ihre Botschaft mit größerer Tiefe und Detailliertheit zu vermitteln, was besonders für akademische, technische oder spezialisierte Zielgruppen wertvoll ist. Das Ergebnis ist ein Text, der Ihre Expertise unterstreicht und Ihrem Publikum ein höheres Maß an Informationen und Einsichten bietet.",
-        "sampleTextFile": "/sample-texts/storybert-complex-language.txt",
-        "promptKey": PROMPT_KEYS.COMPLEX_LANGUAGE,
-        "languageModel": "anthropic/claude-3.5-sonnet",
-        "makeBranch": "mainOps",
-        "creditCost": 3,
-        "estimatedTotalTime": "ca. 20-30 sek"
-      },
-      {
         "id": "find-painpoints",
         "name": "Painpoints finden",
         "description": "Identifiziert und analysiert die Schmerzpunkte Ihrer Zielgruppe. Diese Funktion untersucht Markttrends, Kundenrückmeldungen und Branchendaten, um die wichtigsten Herausforderungen und Bedürfnisse Ihres Publikums zu ermitteln. Sie liefert detaillierte Einblicke in die Probleme, die Ihre Zielgruppe am meisten beschäftigen, und zeigt auf, wie Ihre Produkte oder Dienstleistungen diese ansprechen können. Diese Erkenntnisse helfen Ihnen, Ihre Marketingbotschaften gezielter auszurichten und Lösungen zu entwickeln, die direkt auf die Bedürfnisse Ihrer Kunden eingehen.",
@@ -356,6 +389,50 @@ const aiAssistants: AIAssistant[] = [
         "makeBranch": "mainOps",
         "creditCost": 3,
         "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "cultural-adaptation",
+        "name": "Kulturelle Anpassung",
+        "description": "Entwickelt maßgeschneiderte Anpassungsvorschläge, um eine gegebene Geschichte für eine spezifische Kultur oder Region relevanter und ansprechender zu gestalten. Diese Funktion analysiert sowohl die Kernelemente der ursprünglichen Geschichte als auch die kulturellen Besonderheiten, Werte und Präferenzen der Zielkultur. Sie generiert dann kreative Ideen, wie die Geschichte modifiziert werden kann, um kulturelle Resonanz zu erzeugen, ohne dabei ihre wesentliche Botschaft oder ihren Unterhaltungswert zu verlieren. Die Vorschläge können Änderungen in der Handlung, den Charakteren, dem Setting, den Dialogen oder den thematischen Elementen umfassen.",
+        "sampleTextFile": "/sample-texts/storybert-cultural-adaptation.txt",
+        "promptKey": PROMPT_KEYS.CULTURAL_ADAPTATION,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "explain-text",
+        "name": "Text erklären",
+        "description": "Bietet eine detaillierte Erklärung des Textes, einschließlich Kontext, Bedeutung und möglicher Interpretationen.",
+        "sampleTextFile": "/sample-texts/storybert-explain-text.txt",
+        "promptKey": PROMPT_KEYS.EXPLAIN_TEXT,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 30-40 sek"
+      },
+      {
+        "id": "archetype-storytelling",
+        "name": "Zielgruppen Storytelling (Archetypen)",
+        "description": "Transformiert einen gegebenen Text oder Input in drei verschiedene Schreibstile, die auf den Marketing-Archetypen 'Der Weise', 'Der Schöpfer' und 'Der Held' basieren. Diese Funktion analysiert den Eingabetext und generiert drei Varianten, die jeweils die charakteristischen Merkmale, Tonalitäten und Perspektiven der genannten Archetypen widerspiegeln. Der Weise-Stil betont Wissen, Einsicht und Weisheit; der Schöpfer-Stil fokussiert auf Innovation, Kreativität und Selbstausdruck; der Held-Stil hebt Mut, Überwindung von Herausforderungen und inspirierendes Handeln hervor. Diese Umwandlung ermöglicht es, denselben Inhalt auf verschiedene Zielgruppen zuzuschneiden und unterschiedliche emotionale Resonanzen zu erzeugen.",
+        "sampleTextFile": "/sample-texts/storybert-archetype-storytelling.txt",
+        "promptKey": PROMPT_KEYS.ARCHETYPE_STORYTELLING,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 30-40 sek"
+      },
+      {
+        "id": "text-humanizer",
+        "name": "KI Text Humanizer",
+        "description": "Schreibt in einem persönlichen Stil und ersetzt bestimmte Wörter oder Phrasen im Text, um ki-generierte Texte natürlicher wirken zu lassen.",
+        "sampleTextFile": "/sample-texts/storybert-text-humanizer.txt",
+        "promptKey": PROMPT_KEYS.TEXT_HUMANIZER,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 30-40 sek"
       }
     ]
   },
@@ -463,6 +540,117 @@ const aiAssistants: AIAssistant[] = [
         "description": "Führt eine umfassende Überprüfung der Inhalte Ihrer Website durch. Diese Funktion analysiert Texte auf Rechtschreibung, Grammatik, Konsistenz und Lesbarkeit. Sie identifiziert potenzielle Probleme wie veraltete Informationen, gebrochene Links oder inkonsistente Formatierungen. Darüber hinaus bewertet sie die Qualität und Relevanz der Inhalte für Ihre Zielgruppe und gibt Vorschläge zur Verbesserung. Der Content Check hilft Ihnen, die Professionalität und Effektivität Ihrer Website-Inhalte zu steigern.",
         "sampleTextFile": "/sample-texts/webbert-content-check.txt",
         "promptKey": PROMPT_KEYS.CONTENT_CHECK,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 15-25 sek"
+      }
+    ]
+  },
+  {
+    title: "Datenbärt",
+    description: "Daten sind wie ein Geheimspiel – sie müssen aufgedeckt werden und verraten Ihnen, was wirklich zählt. Mit KI-Unterstützung analysieren wir Ihre Daten und liefern klare Erkenntnisse, die Ihnen helfen, Ihre Entscheidungen zu verbessern und Ihre Zukunft zu planen.",
+    image: "/images/projektbert.png",
+    alt: "Datenbärt - Datenanalyse & Datenverarbeitung",
+    task: "Datenanalyse & Datenverarbeitung",
+    buttonText: "Daten analysieren",
+    buttonLink: "/data-analysis",
+    inputType: "text",
+    operations: [
+      {
+        "id": "generate-sample-data",
+        "name": "Daten generieren",
+        "description": "Generiert eine Vielzahl von Daten, die Ihre Datenanalyse unterstützen. ",
+        "sampleTextFile": "/sample-texts/datenbert-generate-sample-data.txt",
+        "promptKey": PROMPT_KEYS.GENERATE_SAMPLE_DATA,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "extract-entities",
+        "name": "Entitäten extrahieren",
+        "description": "Extrahiert relevante Entitäten aus Ihren Daten. Diese Funktion analysiert Ihre Daten und extrahiert wichtige Entitäten wie Personen, Orte, Organisationen oder Daten. ",
+        "sampleTextFile": "/sample-texts/datenbert-extract-entities.txt",
+        "promptKey": PROMPT_KEYS.EXTRACT_ENTITIES,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "transform-data",
+        "name": "Daten transformieren",
+        "description": "Transformiert Ihre Daten in eine für Sie benötigte Form. Diese Funktion analysiert Ihre Daten und transformiert sie in eine für Sie benötigte Form. ",
+        "sampleTextFile": "/sample-texts/datenbert-transform-data.txt",
+        "promptKey": PROMPT_KEYS.TRANSFORM_DATA,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "create-db-schema",
+        "name": "Datenbank-Schema erstellen",
+        "description": "Erstellt ein Datenbank-Schema für Ihre Daten. Diese Funktion analysiert Ihre Daten und erstellt ein Datenbank-Schema für Sie. ",
+        "sampleTextFile": "/sample-texts/datenbert-create-db-schema.txt",
+        "promptKey": PROMPT_KEYS.CREATE_DB_SCHEMA,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "standardize-data",
+        "name": "Daten standardisieren",
+        "description": "Datenstandardisierung: Transformiere Daten in ein einheitliches Format, z. B. durch Normalisierung oder Skalierung.",
+        "sampleTextFile": "/sample-texts/datenbert-standardize-data.txt",
+        "promptKey": PROMPT_KEYS.STANDARDIZE_DATA,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "find-missing-data",
+        "name": "Daten fehlen",
+        "description": "Identifiziert fehlende Daten in Ihren Datenquellen und liefert Vorschläge zur Datenerfassung oder -aufbereitung.",
+        "sampleTextFile": "/sample-texts/datenbert-find-missing-data.txt",
+        "promptKey": PROMPT_KEYS.FIND_MISSING_DATA,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "find-anomalies",
+        "name": "Datenanomalien finden",
+        "description": "Anomalieerkennung: Finde ungewöhnliche Datenpunkte oder Ausreißer in einem Datensatz, z. B. betrügerische Transaktionen.",
+        "sampleTextFile": "/sample-texts/datenbert-find-anomalies.txt",
+        "promptKey": PROMPT_KEYS.FIND_ANOMALIES,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 20-30 sek"
+      },
+      {
+        "id": "find-trends",
+        "name": "Trends finden",
+        "description": "Trendanalyse: Identifiziere Trends und Muster in Zeitreihendaten, z. B. Verkaufszahlen oder Website-Traffic.",
+        "sampleTextFile": "/sample-texts/datenbert-find-trends.txt",
+        "promptKey": PROMPT_KEYS.FIND_TRENDS,
+        "languageModel": "anthropic/claude-3.5-sonnet",
+        "makeBranch": "mainOps",
+        "creditCost": 3,
+        "estimatedTotalTime": "ca. 25-35 sek"
+      },
+      {
+        "id": "clean-data",
+        "name": "Daten reinigen",
+        "description": "Datenbereinigung: Entferne Duplikate, korrigiere Fehler und fülle fehlende Werte.",
+        "sampleTextFile": "/sample-texts/datenbert-clean-data.txt",
+        "promptKey": PROMPT_KEYS.CLEAN_DATA,
         "languageModel": "anthropic/claude-3.5-sonnet",
         "makeBranch": "mainOps",
         "creditCost": 3,

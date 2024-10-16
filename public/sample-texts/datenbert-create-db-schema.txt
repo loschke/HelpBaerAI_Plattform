@@ -1,0 +1,85 @@
+{
+  "bookstore": {
+    "books": [
+      {
+        "id": "1",
+        "title": "The Great Gatsby",
+        "author": {
+          "name": "F. Scott Fitzgerald",
+          "birthYear": 1896
+        },
+        "genre": "Classic",
+        "price": 12.99,
+        "publicationDate": "1925-04-10",
+        "inventory": 50,
+        "reviews": [
+          {
+            "userId": "user123",
+            "rating": 5,
+            "comment": "A masterpiece!",
+            "date": "2023-05-15"
+          },
+          {
+            "userId": "user456",
+            "rating": 4,
+            "comment": "Beautifully written.",
+            "date": "2023-06-02"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "title": "To Kill a Mockingbird",
+        "author": {
+          "name": "Harper Lee",
+          "birthYear": 1926
+        },
+        "genre": "Classic",
+        "price": 14.99,
+        "publicationDate": "1960-07-11",
+        "inventory": 75,
+        "reviews": [
+          {
+            "userId": "user789",
+            "rating": 5,
+            "comment": "Timeless classic.",
+            "date": "2023-04-20"
+          }
+        ]
+      }
+    ],
+    "customers": [
+      {
+        "id": "user123",
+        "name": "John Doe",
+        "email": "john@example.com",
+        "registrationDate": "2023-01-15",
+        "purchaseHistory": [
+          {
+            "bookId": "1",
+            "purchaseDate": "2023-05-10",
+            "price": 12.99
+          }
+        ]
+      },
+      {
+        "id": "user456",
+        "name": "Jane Smith",
+        "email": "jane@example.com",
+        "registrationDate": "2023-02-20",
+        "purchaseHistory": [
+          {
+            "bookId": "1",
+            "purchaseDate": "2023-06-01",
+            "price": 12.99
+          },
+          {
+            "bookId": "2",
+            "purchaseDate": "2023-06-01",
+            "price": 14.99
+          }
+        ]
+      }
+    ]
+  }
+}

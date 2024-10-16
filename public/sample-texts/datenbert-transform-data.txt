@@ -1,0 +1,41 @@
+Input format (JSON):
+jsonCopy{
+  "company": {
+    "name": "Tech Innovations Inc.",
+    "founded": 2010,
+    "location": {
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "USA"
+    },
+    "employees": [
+      {
+        "id": "E001",
+        "name": "John Doe",
+        "position": "Software Engineer",
+        "department": "Engineering",
+        "skills": ["Python", "JavaScript", "AWS"]
+      },
+      {
+        "id": "E002",
+        "name": "Jane Smith",
+        "position": "Product Manager",
+        "department": "Product",
+        "skills": ["Agile", "User Research", "Roadmapping"]
+      }
+    ],
+    "products": [
+      {
+        "name": "AI Assistant",
+        "version": "2.0",
+        "releaseDate": "2023-05-15"
+      },
+      {
+        "name": "Smart Analytics",
+        "version": "1.5",
+        "releaseDate": "2022-11-30"
+      }
+    ]
+  }
+}
+Target format: XML

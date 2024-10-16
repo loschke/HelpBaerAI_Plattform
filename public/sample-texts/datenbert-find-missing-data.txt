@@ -1,0 +1,16 @@
+PatientID,Age,Gender,BloodType,Height,Weight,BloodPressure,Cholesterol,GlucoseLevel,SmokingStatus,ExerciseFrequency,LastCheckup
+1,45,Male,A+,175,80,120/80,190,95,Non-smoker,3 times/week,2023-01-15
+2,32,Female,,168,,110/70,,,Ex-smoker,2 times/week,2023-02-03
+3,58,Male,B-,180,95,140/90,240,110,Smoker,,2022-11-20
+4,,Female,O+,162,55,100/60,170,85,Non-smoker,Daily,2023-03-10
+5,50,Male,AB+,178,88,,210,105,Ex-smoker,1 time/week,
+6,37,Female,A-,165,70,115/75,,,Non-smoker,4 times/week,2023-01-30
+7,62,Male,,173,78,130/85,220,,Smoker,Rarely,2022-12-05
+8,29,Female,B+,,63,105/65,160,90,Non-smoker,,2023-02-22
+9,55,Male,O-,182,105,150/95,,,Ex-smoker,2 times/week,2023-03-18
+10,41,Female,A+,170,,,180,100,Non-smoker,3 times/week,2023-01-08
+11,48,Male,B+,176,83,125/82,200,98,,1 time/week,2022-10-30
+12,33,Female,AB-,160,52,100/70,150,88,Non-smoker,Daily,
+13,60,,O+,179,92,135/88,230,108,Ex-smoker,,2023-02-14
+14,39,Male,A-,,75,118/78,185,93,Smoker,2 times/week,2023-03-05
+15,52,Female,B-,167,68,,,97,Non-smoker,3 times/week,2022-12-19

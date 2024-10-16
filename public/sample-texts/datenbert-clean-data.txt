@@ -1,0 +1,22 @@
+CustomerID,Name,Email,Phone,PurchaseDate,TotalSpent
+1,John Smith,john.smith@email.com,555-1234,2023-01-15,150.00
+2,Jane Doe,jane.doe@email.com,555-5678,2023-02-01,200.50
+3,Alice Johnson,alice.j@email.com,555-9876,2023-02-15,75.25
+4,Bob Williams,bob.w@email.com,555-4321,2023-03-01,300.75
+5,Emma Brown,emma.brown@email.com,555-8765,2023-03-15,125.00
+2,Jane Doe,jane.doe@email.com,555-5678,2023-02-01,200.50
+6,Michael Davis,michael.davis@email.com,555-2468,2023-04-01,250.00
+7,Sarah Wilson,sarah.wilson@email.com,555-1357,2023-04-15,180.25
+8,David Taylor,david.taylr@email.com,555-3690,2023-05-01,95.50
+9,Lisa Anderson,lisa.anderson@email.com,,2023-05-15,220.75
+10,James Martin,james.martin@email.com,555-1598,2023-06-01,175.00
+11,Emily White,emily.white@email.com,555-7531,2023-06-15,
+12,Robert Johnson,robert.johnson@email.com,555-9514,2023-07-01,280.50
+13,Jennifer Brown,jennifer.brown@emai.com,555-7410,2023-07-15,130.25
+14,William Davis,william.davis@email.com,555-8520,2023-08-01,190.75
+15,Jessica Taylor,jessica.taylor@email.com,555-9630,2023-08-15,110.00
+16,John Smith,johnsmith@email.com,555-1234,2023-09-01,165.50
+17,Sarah Wilson,sarah.wilson@email.com,555-1357,2023-09-15,200.25
+18,Michael Davis,michael.davis@email.com,555-2468,2023-10-01,275.00
+19,Emma Brovvn,emma.brown@email.com,555-8765,2023-10-15,145.75
+20,Alice Johnson,alice.j@email.com,555-9876,2O23-11-01,85.50

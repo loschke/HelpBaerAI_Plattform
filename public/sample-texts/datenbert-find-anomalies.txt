@@ -1,0 +1,31 @@
+TransactionID,Date,Time,Amount,MerchantType,Location,CardPresent
+1,2023-05-01,09:15:23,75.50,Grocery,New York,Yes
+2,2023-05-01,10:30:45,25.00,Restaurant,Chicago,Yes
+3,2023-05-01,11:45:12,150.75,Electronics,Los Angeles,Yes
+4,2023-05-01,13:20:18,50.25,Gas Station,Houston,Yes
+5,2023-05-01,14:55:30,200.00,Clothing,Miami,Yes
+6,2023-05-01,16:10:42,30.50,Pharmacy,Seattle,Yes
+7,2023-05-01,17:25:55,100.00,Online Retailer,N/A,No
+8,2023-05-01,18:40:07,45.75,Restaurant,Boston,Yes
+9,2023-05-01,19:55:20,80.25,Grocery,San Francisco,Yes
+10,2023-05-01,21:10:33,60.00,Entertainment,Las Vegas,Yes
+11,2023-05-02,08:00:15,500.00,Electronics,New York,Yes
+12,2023-05-02,09:15:28,35.50,Coffee Shop,Chicago,Yes
+13,2023-05-02,10:30:40,95.75,Clothing,Los Angeles,Yes
+14,2023-05-02,11:45:53,40.25,Gas Station,Houston,Yes
+15,2023-05-02,13:01:05,150.00,Restaurant,Miami,Yes
+16,2023-05-02,14:16:18,70.50,Pharmacy,Seattle,Yes
+17,2023-05-02,15:31:30,5000.00,Online Retailer,N/A,No
+18,2023-05-02,16:46:43,55.25,Grocery,Boston,Yes
+19,2023-05-02,18:01:55,120.75,Electronics,San Francisco,Yes
+20,2023-05-02,19:17:08,85.00,Restaurant,Las Vegas,Yes
+21,2023-05-03,07:45:10,65.50,Grocery,New York,Yes
+22,2023-05-03,09:00:23,30.00,Coffee Shop,Chicago,Yes
+23,2023-05-03,10:15:35,200.75,Clothing,Los Angeles,Yes
+24,2023-05-03,11:30:48,45.25,Gas Station,Houston,Yes
+25,2023-05-03,12:46:00,75.00,Restaurant,Miami,Yes
+26,2023-05-03,14:01:13,25.50,Pharmacy,Seattle,Yes
+27,2023-05-03,15:16:25,10000.00,Online Retailer,N/A,No
+28,2023-05-03,16:31:38,40.75,Grocery,Boston,Yes
+29,2023-05-03,17:46:50,90.25,Electronics,San Francisco,Yes
+30,2023-05-03,19:02:03,3000.00,Jewelry,Las Vegas,Yes
