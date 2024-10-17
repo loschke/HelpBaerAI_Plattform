@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="helpbaerai" class="h-full">
+<head>
+    <title>Admin Dashboard - HelpBärAI</title>
+    <meta name="description" content="Admin Dashboard für HelpBärAI - Verwalten Sie Benutzer und Systemeinstellungen.">
+    <meta name="author" content="Rico Loschke - kvix.de | queonext.de">
+    <%- include('../partials/head') %>
+</head>
+<body class="bg-base-100 text-base-content flex flex-col min-h-screen">
+    <%- include('../partials/header') %>
+    
+    <!-- START Main -->     
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 py-10 lg:py-20">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-ff-clan mb-4 text-white">
+                    <span class="text-primary font-black">Admin</span><br>
+                    Dashboard
+                </h1>
+                <p class="text-xl mb-8 max-w-5xl mx-auto">
+                    Willkommen im Admin-Bereich von HelpBärAI. Hier können Sie Benutzer verwalten und Systemeinstellungen anpassen.
+                </p>
+            </div>
+
+            <!-- Zahlenfelder -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <div class="bg-base-200 p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold mb-2">Registrierte Nutzer</h2>
+                    <p class="text-4xl font-bold text-primary">1,234</p>
+                </div>
+                <div class="bg-base-200 p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold mb-2">Durchgeführte Operationen</h2>
+                    <p class="text-4xl font-bold text-primary">5,678</p>
+                </div>
+                <div class="bg-base-200 p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold mb-2">Kosten der Operationen</h2>
+                    <p class="text-4xl font-bold text-primary">€9,876</p>
+                </div>
+            </div>
+
+            <!-- Benutzer Tabelle -->
+            <section class="mt-16">
+                <h2 class="text-3xl font-bold mb-8">Registrierte Benutzer</h2>
+                <div class="overflow-x-auto">
+                    <table class="table w-full bg-base-200 rounded-lg shadow-lg">
+                        <thead>
+                            <tr>
+                                <th class="bg-base-300">Vorname</th>
+                                <th class="bg-base-300">Email</th>
+                                <th class="bg-base-300">Verbleibende Credits</th>
+                                <th class="bg-base-300">TopUp</th>
+                                <th class="bg-base-300">CRM</th>
+                                <th class="bg-base-300">System</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Max</td>
+                                <td>max@example.com</td>
+                                <td>50</td>
+                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
+                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
+                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
+                            </tr>
+                            <tr>
+                                <td>Anna</td>
+                                <td>anna@example.com</td>
+                                <td>120</td>
+                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
+                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
+                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
+                            </tr>
+                            <tr>
+                                <td>Lisa</td>
+                                <td>lisa@example.com</td>
+                                <td>75</td>
+                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
+                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
+                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
+                            </tr>
+                            <tr>
+                                <td>Tom</td>
+                                <td>tom@example.com</td>
+                                <td>200</td>
+                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
+                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
+                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
+                            </tr>
+                            <tr>
+                                <td>Sarah</td>
+                                <td>sarah@example.com</td>
+                                <td>30</td>
+                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
+                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
+                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- END Main -->
+
+    <%- include('../partials/footer') %>
+</body>
+</html>

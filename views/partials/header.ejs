@@ -14,6 +14,11 @@
             </div>-->
             <div class="navbar-end">
                 <% if (locals.user) { %>
+                    <% if (locals.user.isAdmin) { %>
+                        <a href="/admin/dashboard" class="text-primary-content px-4 py-2 rounded hover:text-primary">
+                            Dashboard
+                        </a>
+                    <% } %>
                     <a href="/profile" class="text-primary-content px-4 py-2 rounded hover:text-primary">
                         Mein Profil
                     </a>
@@ -35,10 +40,10 @@
                         </svg>
                     </label>
                     <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a href="#" class="hover:text-primary">Über HelpBärAI</a></li>
-                        <li><a href="#" class="hover:text-primary">KI erfahren</a></li>
-                        <li><a href="#" class="hover:text-primary">queonext.de</a></li>
                         <% if (locals.user) { %>
+                            <% if (locals.user.isAdmin) { %>
+                                <li><a href="/admin/dashboard" class="hover:text-primary">Dashboard</a></li>
+                            <% } %>
                             <li><a href="/profile" class="hover:text-primary">Mein Profil</a></li>
                             <li><a href="/auth/logout" class="hover:text-primary">Logout</a></li>
                         <% } else { %>
