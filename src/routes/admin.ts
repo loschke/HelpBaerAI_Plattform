@@ -1,4 +1,5 @@
 import express from 'express';
+import { getDashboard } from '../controllers/adminController';
 
 const router = express.Router();
 
@@ -12,13 +13,6 @@ const isAdmin = (req: express.Request, res: express.Response, next: express.Next
 };
 
 // Admin dashboard route
-router.get('/dashboard', isAdmin, async (req, res) => {
-    try {
-        res.render('admin/dashboard', { title: 'Admin Dashboard' });
-    } catch (error) {
-        console.error('Error rendering admin dashboard:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
+router.get('/dashboard', isAdmin, getDashboard);
 
 export default router;

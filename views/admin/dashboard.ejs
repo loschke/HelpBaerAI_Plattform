@@ -42,58 +42,38 @@
             <section class="mt-16">
                 <h2 class="text-3xl font-bold mb-8">Registrierte Benutzer</h2>
                 <div class="overflow-x-auto">
-                    <table class="table w-full bg-base-200 rounded-lg shadow-lg">
+                    <table class="table w-full bg-base-200 rounded-lg shadow-lg" id="userTable">
                         <thead>
                             <tr>
-                                <th class="bg-base-300">Vorname</th>
-                                <th class="bg-base-300">Email</th>
-                                <th class="bg-base-300">Verbleibende Credits</th>
-                                <th class="bg-base-300">TopUp</th>
-                                <th class="bg-base-300">CRM</th>
-                                <th class="bg-base-300">System</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Vorname</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Credits</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Lead</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Verified</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Admin</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Letzter Login</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Aktionen</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Max</td>
-                                <td>max@example.com</td>
-                                <td>50</td>
-                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
-                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
-                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
-                            </tr>
-                            <tr>
-                                <td>Anna</td>
-                                <td>anna@example.com</td>
-                                <td>120</td>
-                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
-                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
-                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
-                            </tr>
-                            <tr>
-                                <td>Lisa</td>
-                                <td>lisa@example.com</td>
-                                <td>75</td>
-                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
-                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
-                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
-                            </tr>
-                            <tr>
-                                <td>Tom</td>
-                                <td>tom@example.com</td>
-                                <td>200</td>
-                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
-                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
-                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
-                            </tr>
-                            <tr>
-                                <td>Sarah</td>
-                                <td>sarah@example.com</td>
-                                <td>30</td>
-                                <td><button class="btn btn-success btn-sm">Add 100 Credits</button></td>
-                                <td><button class="btn btn-info btn-sm">Push to Mautic</button></td>
-                                <td><button class="btn btn-error btn-sm">Nutzer löschen</button></td>
-                            </tr>
+                        <tbody class="divide-y divide-gray-700">
+                            <% users.forEach(user => { %>
+                                <tr class="hover:bg-gray-700 transition-colors">
+                                    <td class="p-3"><%= user.firstname %></td>
+                                    <td class="p-3"><%= user.email %></td>
+                                    <td class="p-3"><%= user.credits %></td>
+                                    <td class="p-3"><%= user.isLead ? 'Ja' : 'Nein' %></td>
+                                    <td class="p-3"><%= user.isVerified ? 'Ja' : 'Nein' %></td>
+                                    <td class="p-3"><%= user.isAdmin ? 'Ja' : 'Nein' %></td>
+                                    <td class="p-3"><%= user.lastLogin ? new Date(user.lastLogin).toLocaleDateString('de-DE') : 'Nie' %></td>
+                                    <td class="p-3">
+                                        <div class="flex space-x-2">
+                                            <button class="px-2 py-1 text-xs font-medium text-green-400 bg-green-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" onclick="addCredits('<%= user.id %>', 100)">Add 100 Credits</button>
+                                            <button class="px-2 py-1 text-xs font-medium text-blue-400 bg-blue-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" onclick="addToMautic('<%= user.id %>')">Add to Mautic</button>
+                                            <button class="px-2 py-1 text-xs font-medium text-red-400 bg-red-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" onclick="deleteUser('<%= user.id %>')">Delete</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
                         </tbody>
                     </table>
                 </div>

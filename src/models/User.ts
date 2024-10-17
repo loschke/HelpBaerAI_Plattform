@@ -11,6 +11,9 @@ export interface User {
   resetToken?: string;
   resetTokenExpiry?: number;
   credits: number;
+  isLead: boolean;
+  createDate: string;
+  lastLogin?: string;
 }
 
 interface DatabaseUser {
@@ -23,6 +26,9 @@ interface DatabaseUser {
   reset_token?: string;
   reset_token_expiry?: number;
   credits: number;
+  is_lead: number;
+  create_date: string;
+  last_login?: string;
 }
 
 function convertDatabaseUserToUser(dbUser: DatabaseUser): User {
@@ -30,18 +36,20 @@ function convertDatabaseUserToUser(dbUser: DatabaseUser): User {
     ...dbUser,
     isVerified: dbUser.is_verified === 1,
     isAdmin: dbUser.is_admin === 1,
+    isLead: dbUser.is_lead === 1,
     resetToken: dbUser.reset_token,
     resetTokenExpiry: dbUser.reset_token_expiry,
-    credits: dbUser.credits
+    createDate: dbUser.create_date,
+    lastLogin: dbUser.last_login
   };
 }
 
-export async function createUser(db: Database, user: Omit<User, 'id'>): Promise<number> {
+export async function createUser(db: Database, user: Omit<User, 'id' | 'createDate' | 'lastLogin'>): Promise<number> {
   const hashedPassword = await bcrypt.hash(user.password, 10);
   console.log('Creating user with hashed password:', hashedPassword);
   const result = await db.run(
-    'INSERT INTO users (firstname, email, password, is_verified, is_admin, credits) VALUES (?, ?, ?, ?, ?, ?)',
-    [user.firstname, user.email, hashedPassword, user.isVerified ? 1 : 0, user.isAdmin ? 1 : 0, user.credits]
+    'INSERT INTO users (firstname, email, password, is_verified, is_admin, credits, is_lead, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+    [user.firstname, user.email, hashedPassword, user.isVerified ? 1 : 0, user.isAdmin ? 1 : 0, user.credits, user.isLead ? 1 : 0, new Date().toISOString()]
   );
   return result.lastID!;
 }
@@ -94,4 +102,28 @@ export async function getUserByResetToken(db: Database, resetToken: string): Pro
 export async function clearResetToken(db: Database, userId: number): Promise<void> {
   await db.run('UPDATE users SET reset_token = NULL, reset_token_expiry = NULL WHERE id = ?', [userId]);
   console.log('Reset token cleared for user:', userId);
+}
+
+export async function updateUserLastLogin(db: Database, userId: number): Promise<void> {
+  await db.run(
+    'UPDATE users SET last_login = ? WHERE id = ?',
+    [new Date().toISOString(), userId]
+  );
+}
+
+export async function getAllUsers(db: Database): Promise<User[]> {
+    const dbUsers = await db.all<DatabaseUser[]>(`
+        SELECT 
+            id, 
+            firstname, 
+            email, 
+            credits, 
+            is_lead, 
+            is_verified, 
+            is_admin, 
+            last_login
+        FROM users
+    `);
+    
+    return dbUsers.map(convertDatabaseUserToUser);
 }

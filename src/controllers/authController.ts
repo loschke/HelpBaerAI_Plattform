@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { openDb } from '../config/database';
-import { createUser, getUserByEmail, User, updateUserPassword, getUserById } from '../models/User';
+import { createUser, getUserByEmail, User, updateUserPassword, getUserById, updateUserLastLogin } from '../models/User';
 import { sendVerificationEmail, sendPasswordResetEmail } from '../services/emailService';
 import bcrypt from 'bcrypt';
 import { Session } from 'express-session';
@@ -48,7 +48,8 @@ async function register(req: Request, res: Response) {
       password, 
       isVerified: false, 
       isAdmin: false, 
-      credits: 0
+      credits: 0,
+      isLead: false // Set isLead to false by default
     });
     await sendVerificationEmail(email, userId);
 
@@ -100,6 +101,9 @@ async function login(req: Request, res: Response) {
       console.log('Login failed: User not verified');
       return res.render('pages/login', { error: 'Bitte bestätigen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden.' });
     }
+
+    // Update last login
+    await updateUserLastLogin(db, user.id!);
 
     // Create a session for the user
     req.session.userId = user.id;

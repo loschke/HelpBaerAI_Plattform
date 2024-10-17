@@ -24,7 +24,10 @@ export async function openDb(): Promise<Database> {
       is_admin INTEGER DEFAULT 0,
       reset_token TEXT,
       reset_token_expiry INTEGER,
-      credits INTEGER DEFAULT 0
+      credits INTEGER DEFAULT 0,
+      is_lead INTEGER DEFAULT 0,
+      create_date TEXT NOT NULL,
+      last_login TEXT
     )
   `);
 
