@@ -42,6 +42,8 @@ export async function openDb(): Promise<Database> {
       success INTEGER NOT NULL,
       response TEXT,
       creditsUsed INTEGER NOT NULL,
+      tokenUsed INTEGER NOT NULL,
+      operationCost DECIMAL(10, 5) NOT NULL,
       FOREIGN KEY (userId) REFERENCES users(id)
     )
   `);

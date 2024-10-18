@@ -14,18 +14,28 @@ export async function updateUserCredits(userId: number, newCredits: number): Pro
   await db.run('UPDATE users SET credits = ? WHERE id = ?', [newCredits, userId]);
 }
 
-export async function logOperation(userId: number, operationId: string, formData: any, response: string, creditsUsed: number): Promise<void> {
+export async function logOperation(
+  userId: number, 
+  operationId: string, 
+  formData: any, 
+  response: string, 
+  creditsUsed: number, 
+  tokenUsed: number, 
+  operationCost: number
+): Promise<void> {
   const db = await openDb();
   
   try {
     await createOperationLog(db, {
       userId,
       operationId,
-      formData: JSON.stringify(formData), // Speichern der tatsächlichen formData
+      formData: JSON.stringify(formData),
       timestamp: new Date().toISOString(),
       success: true,
+      response,
       creditsUsed,
-      response // Hinzufügen des response-Felds
+      tokenUsed,
+      operationCost
     });
   } catch (error) {
     console.error('Error logging operation:', error);

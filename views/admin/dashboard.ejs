@@ -14,27 +14,28 @@
         <div class="container mx-auto px-4 py-10 lg:py-20">
             <div class="text-center mb-16">
                 <h1 class="text-5xl md:text-7xl font-ff-clan mb-4 text-white">
-                    <span class="text-primary font-black">Admin</span><br>
-                    Dashboard
+                    <span class="text-primary font-black">Dashboard</span><br>
+                    Nutzer Verwaltung
                 </h1>
-                <p class="text-xl mb-8 max-w-5xl mx-auto">
-                    Willkommen im Admin-Bereich von HelpBärAI. Hier können Sie Benutzer verwalten und Systemeinstellungen anpassen.
-                </p>
             </div>
 
             <!-- Zahlenfelder -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                 <div class="bg-base-200 p-6 rounded-lg shadow-lg">
                     <h2 class="text-xl font-semibold mb-2">Registrierte Nutzer</h2>
-                    <p class="text-4xl font-bold text-primary">1,234</p>
+                    <p class="text-4xl font-bold text-primary"><%= dashboardData.userCount %></p>
                 </div>
                 <div class="bg-base-200 p-6 rounded-lg shadow-lg">
-                    <h2 class="text-xl font-semibold mb-2">Durchgeführte Operationen</h2>
-                    <p class="text-4xl font-bold text-primary">5,678</p>
+                    <h2 class="text-xl font-semibold mb-2">Anzahl Operationen</h2>
+                    <p class="text-4xl font-bold text-primary"><%= dashboardData.operationCount %></p>
                 </div>
                 <div class="bg-base-200 p-6 rounded-lg shadow-lg">
-                    <h2 class="text-xl font-semibold mb-2">Kosten der Operationen</h2>
-                    <p class="text-4xl font-bold text-primary">€9,876</p>
+                    <h2 class="text-xl font-semibold mb-2">Anzahl Tokens</h2>
+                    <p class="text-4xl font-bold text-primary"><%= dashboardData.totalTokens.toLocaleString() %></p>
+                </div>
+                <div class="bg-base-200 p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold mb-2">Kosten geschätzt</h2>
+                    <p class="text-4xl font-bold text-primary">$<%= dashboardData.totalCost.toFixed(4) %></p>
                 </div>
             </div>
 
@@ -61,10 +62,10 @@
                                     <td class="p-3"><%= user.firstname %></td>
                                     <td class="p-3"><%= user.email %></td>
                                     <td class="p-3"><%= user.credits %></td>
-                                    <td class="p-3"><%= user.isLead ? 'Ja' : 'Nein' %></td>
-                                    <td class="p-3"><%= user.isVerified ? 'Ja' : 'Nein' %></td>
-                                    <td class="p-3"><%= user.isAdmin ? 'Ja' : 'Nein' %></td>
-                                    <td class="p-3"><%= user.lastLogin ? new Date(user.lastLogin).toLocaleDateString('de-DE') : 'Nie' %></td>
+                                    <td class="p-3"><%= user.is_lead ? 'Ja' : 'Nein' %></td>
+                                    <td class="p-3"><%= user.is_verified ? 'Ja' : 'Nein' %></td>
+                                    <td class="p-3"><%= user.is_admin ? 'Ja' : 'Nein' %></td>
+                                    <td class="p-3"><%= user.last_login ? new Date(user.last_login).toLocaleDateString('de-DE') : 'Nie' %></td>
                                     <td class="p-3">
                                         <div class="flex space-x-2">
                                             <button class="px-2 py-1 text-xs font-medium text-green-400 bg-green-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" onclick="addCredits('<%= user.id %>', 100)">Add 100 Credits</button>

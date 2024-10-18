@@ -112,18 +112,5 @@ export async function updateUserLastLogin(db: Database, userId: number): Promise
 }
 
 export async function getAllUsers(db: Database): Promise<User[]> {
-    const dbUsers = await db.all<DatabaseUser[]>(`
-        SELECT 
-            id, 
-            firstname, 
-            email, 
-            credits, 
-            is_lead, 
-            is_verified, 
-            is_admin, 
-            last_login
-        FROM users
-    `);
-    
-    return dbUsers.map(convertDatabaseUserToUser);
+  return db.all<User[]>('SELECT * FROM users');
 }

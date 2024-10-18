@@ -59,7 +59,11 @@ router.get('/:assistantId', asyncHandler(async (req: Request, res: Response) => 
   console.log('Session data in assistants route:', req.session);
 
   const assistantId = req.params.assistantId;
-  const assistant = aiAssistants.find(a => a.buttonLink === `/${assistantId}`);
+  console.log('Requested assistantId:', assistantId);
+  
+  // Änderung hier: Entfernen des führenden Schrägstrichs bei der Suche
+  const assistant = aiAssistants.find(a => a.buttonLink === `/${assistantId}` || a.buttonLink === assistantId);
+  console.log('Found assistant:', assistant ? assistant.title : 'Not found');
 
   if (assistant) {
     let user = null;
@@ -78,6 +82,7 @@ router.get('/:assistantId', asyncHandler(async (req: Request, res: Response) => 
       loadingFacts: loadingFacts
     });
   } else {
+    console.log('Assistant not found, rendering error page');
     res.status(404).render('pages/error', { message: 'Assistant not found' });
   }
 }));
@@ -96,7 +101,7 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
     return;
   }
 
-  const assistant = aiAssistants.find(a => a.buttonLink === `/${assistantId}`);
+  const assistant = aiAssistants.find(a => a.buttonLink === `/${assistantId}` || a.buttonLink === assistantId);
   if (!assistant) {
     res.status(404).json({ error: 'Assistant not found' });
     return;
@@ -172,6 +177,7 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
       const promptCost = (modelCosts['llm-prompt'] || 0) * parseInt(result.response.prompt_token) / 1000000;
       const outputCost = (modelCosts['llm-output'] || 0) * parseInt(result.response.completion_token) / 1000000;
       const scrapeCost = (modelCosts['scrape-token'] || 0) * parseInt(result.response.scrape_token) / 1000000;
+      const totalTokens = parseInt(result.response.prompt_token) + parseInt(result.response.completion_token) + parseInt(result.response.scrape_token);
       const totalCost = promptCost + outputCost + scrapeCost;
 
       // Extrahieren und Formatieren der benötigten Daten
@@ -181,6 +187,7 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
         prompt_token: parseInt(result.response.prompt_token),
         completion_token: parseInt(result.response.completion_token),
         scrape_token: parseInt(result.response.scrape_token),
+        total_tokens: totalTokens,
         cost: {
           promptCost,
           outputCost,
@@ -197,7 +204,9 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
           operationId, 
           preparedData, // Senden der tatsächlichen formData
           result.response.output, // Senden der Webhook-Antwort
-          operation.creditCost
+          operation.creditCost,
+          totalTokens, // tokenUsed
+          totalCost // operationCost
         );
       } catch (logError) {
         console.error('Failed to log operation:', logError);
@@ -232,11 +241,13 @@ router.post('/api/log-operation', asyncHandler(async (req: Request, res: Respons
   const db = await openDb();
   const log = await createOperationLog(db, {
     userId,
-    operationId, // Entfernen Sie 'any'
-    formData, // Entfernen Sie 'any'
-    timestamp: new Date().toISOString(), // Verwenden Sie einen tatsächlichen Zeitstempel
+    operationId, 
+    formData, 
+    timestamp: new Date().toISOString(), 
     success: false,
-    creditsUsed: 0
+    creditsUsed: 0,
+    tokenUsed: 0,
+    operationCost: 0
   });
 
   res.json({ id: log });

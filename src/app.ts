@@ -81,6 +81,23 @@ app.use(async (req: express.Request, res: express.Response, next: express.NextFu
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
+// Redirect middleware for assistants
+app.use((req, res, next) => {
+  const assistantRoutes = [
+    '/concept-generation',
+    '/analysis-evaluation',
+    '/text-optimization',
+    '/storytelling',
+    '/website-analysis',
+    '/data-analysis'
+  ];
+  
+  if (assistantRoutes.includes(req.path)) {
+    return res.redirect(`/assistants${req.path}`);
+  }
+  next();
+});
+
 // Routes
 app.use('/', homeRouter);
 app.use('/auth', authRouter);
