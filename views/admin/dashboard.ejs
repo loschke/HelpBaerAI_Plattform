@@ -26,11 +26,11 @@
                     <p class="text-4xl font-bold text-primary"><%= dashboardData.userCount %></p>
                 </div>
                 <div class="bg-base-200 p-6 rounded-lg shadow-lg">
-                    <h2 class="text-xl font-semibold mb-2">Anzahl Operationen</h2>
+                    <h2 class="text-xl font-semibold mb-2">Durchgeführte Operationen</h2>
                     <p class="text-4xl font-bold text-primary"><%= dashboardData.operationCount %></p>
                 </div>
                 <div class="bg-base-200 p-6 rounded-lg shadow-lg">
-                    <h2 class="text-xl font-semibold mb-2">Anzahl Tokens</h2>
+                    <h2 class="text-xl font-semibold mb-2">Verbrauchte Tokens</h2>
                     <p class="text-4xl font-bold text-primary"><%= dashboardData.totalTokens.toLocaleString() %></p>
                 </div>
                 <div class="bg-base-200 p-6 rounded-lg shadow-lg">
@@ -52,6 +52,7 @@
                                 <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Vorname</th>
                                 <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
                                 <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Credits</th>
+                                <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Ops</th>
                                 <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Lead</th>
                                 <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Verified</th>
                                 <th class="p-3 text-left text-xs font-medium uppercase tracking-wider">Admin</th>
@@ -65,9 +66,10 @@
                                     <td class="p-3"><%= user.firstname %></td>
                                     <td class="p-3"><%= user.email %></td>
                                     <td class="p-3"><%= user.credits %></td>
-                                    <td class="p-3"><%= user.is_lead ? 'Ja' : 'Nein' %></td>
-                                    <td class="p-3"><%= user.is_verified ? 'Ja' : 'Nein' %></td>
-                                    <td class="p-3"><%= user.is_admin ? 'Ja' : 'Nein' %></td>
+                                    <td class="p-3"><%= user.operationCount || 0 %></td>
+                                    <td class="p-3"><%= user.is_lead ? '🎯' : '❌' %></td>
+                                    <td class="p-3"><%= user.is_verified ? '✅' : '❌' %></td>
+                                    <td class="p-3"><%= user.is_admin ? '👑' : '❌' %></td>
                                     <td class="p-3"><%= user.last_login ? new Date(user.last_login).toLocaleDateString('de-DE') : 'Nie' %></td>
                                     <td class="p-3">
                                         <div class="flex space-x-2">

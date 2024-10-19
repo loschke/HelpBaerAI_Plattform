@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getAllUsers, User, addCreditsToUser, deleteUserAndLogs } from '../models/User';
 import { openDb } from '../config/database';
-import { getUserCount, getOperationCount, getTotalTokens, getTotalCost } from '../services/adminService';
+import { getUserCount, getOperationCount, getTotalTokens, getTotalCost, getUserOperationCounts } from '../services/adminService';
 import axios from 'axios';
 import dotenv from 'dotenv';
 
@@ -26,6 +26,13 @@ export async function getDashboard(req: Request, res: Response): Promise<void> {
     const totalTokens = await getTotalTokens(db);
     const totalCost = await getTotalCost(db);
     const users = await getAllUsers(db);
+    const userOperationCounts = await getUserOperationCounts(db);
+
+    // Add operation counts to users
+    const usersWithOperationCounts = users.map(user => ({
+      ...user,
+      operationCount: user.id !== undefined ? userOperationCounts[user.id] || 0 : 0
+    }));
 
     res.render('admin/dashboard', {
       dashboardData: {
@@ -34,7 +41,7 @@ export async function getDashboard(req: Request, res: Response): Promise<void> {
         totalTokens,
         totalCost
       },
-      users
+      users: usersWithOperationCounts
     });
   } catch (error) {
     console.error('Error in getDashboard:', error);
