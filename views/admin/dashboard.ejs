@@ -41,6 +41,9 @@
 
             <!-- Benutzer Tabelle -->
             <section class="mt-16">
+                <a href="/admin/backup" class="btn btn-primary btn-sm mb-8">
+                    Datenbank exportieren
+                </a>
                 <h2 class="text-3xl font-bold mb-8">Registrierte Benutzer</h2>
                 <div class="overflow-x-auto">
                     <table class="table w-full bg-base-200 rounded-lg shadow-lg" id="userTable">
@@ -68,9 +71,9 @@
                                     <td class="p-3"><%= user.last_login ? new Date(user.last_login).toLocaleDateString('de-DE') : 'Nie' %></td>
                                     <td class="p-3">
                                         <div class="flex space-x-2">
-                                            <button class="px-2 py-1 text-xs font-medium text-green-400 bg-green-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" onclick="addCredits('<%= user.id %>', 100)">Add 100 Credits</button>
-                                            <button class="px-2 py-1 text-xs font-medium text-blue-400 bg-blue-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" onclick="addToMautic('<%= user.id %>')">Add to Mautic</button>
-                                            <button class="px-2 py-1 text-xs font-medium text-red-400 bg-red-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" onclick="deleteUser('<%= user.id %>')">Delete</button> 
+                                            <button class="add-credits-btn px-2 py-1 text-xs font-medium text-green-400 bg-green-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" data-user-id="<%= user.id %>">Add 100 Credits</button>
+                                            <button class="add-to-mautic-btn px-2 py-1 text-xs font-medium text-blue-400 bg-blue-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" data-user-id="<%= user.id %>" data-firstname="<%= user.firstname %>" data-email="<%= user.email %>">Add to Mautic</button>
+                                            <button class="delete-user-btn px-2 py-1 text-xs font-medium text-red-400 bg-red-400 bg-opacity-10 rounded hover:bg-opacity-20 transition-colors" data-user-id="<%= user.id %>">Delete</button> 
                                         </div>
                                     </td>
                                 </tr>
@@ -84,5 +87,6 @@
     <!-- END Main -->
 
     <%- include('../partials/footer') %>
+    <script src="/js/admin-dashboard.js"></script>
 </body>
 </html>

@@ -2,16 +2,10 @@
     <div class="container mx-auto px-4">
         <div class="navbar py-4">
             <div class="navbar-start">
-                <a href="/" class="text-primary">
+                <a href="/" class="text-primary mr-2">
                     <img src="/images/queonext_signum_white.png" alt="QueoNext Logo" class="h-8">
-                </a>
+                </a> AI-Labs
             </div>
-            <!--<div class="navbar-center hidden lg:flex">
-                <ul class="menu menu-horizontal px-1">
-                    <li><a href="#" class="hover:text-primary">About</a></li>
-                    <li><a href="https://queonext.de/ai/" target="_blank" class="hover:text-primary">queonext.de AI-Hub</a></li>
-                </ul>
-            </div>-->
             <div class="navbar-end">
                 <% if (locals.user) { %>
                     <% if (locals.user.isAdmin) { %>
@@ -29,7 +23,7 @@
                     <a href="/auth/login" class="text-primary-content px-4 py-2 rounded hover:text-primary">
                         Login
                     </a>
-                    <a href="/auth/register" class="btn btn-accent text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
+                    <a href="/auth/register" class="btn btn-primary text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
                         Kostenlos ausprobieren
                     </a>
                 <% } %>

@@ -19,11 +19,11 @@ async function sendVerificationEmail(email: string, userId: number) {
   const mailOptions = {
     from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM_ADDRESS}>`,
     to: email,
-    subject: 'Verify Your Email',
+    subject: 'HelpBärAI - E-Mail bestätigen',
     html: `
-      <h1>Welcome to Your App!</h1>
-      <p>Please click the link below to verify your email address:</p>
-      <a href="${verificationLink}">Verify Email</a>
+      <h1>Willkommen bei HelpBärAI!</h1>
+      <p>Bitte klicke den Link unten an, um deine E-Mail-Adresse zu bestätigen:</p>
+      <a href="${verificationLink}">E-Mail bestätigen</a>
     `
   };
 
@@ -36,12 +36,12 @@ async function sendPasswordResetEmail(email: string, resetToken: string) {
   const mailOptions = {
     from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM_ADDRESS}>`,
     to: email,
-    subject: 'Reset Your Password',
+    subject: 'HelpBärAI - Passwort zurücksetzen',
     html: `
-      <h1>Password Reset Request</h1>
-      <p>You have requested to reset your password. Please click the link below to set a new password:</p>
-      <a href="${resetLink}">Reset Password</a>
-      <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+      <h1>Passwort zurücksetzen</h1>
+      <p>Du hast eine Anfrage zum Zurücksetzen deines Passworts erhalten. Bitte klicke den Link unten an, um ein neues Passwort zu setzen:</p>
+      <a href="${resetLink}">Passwort zurücksetzen</a>
+      <p>Falls du dies nicht getan hast, bitte ignoriere diese E-Mail und dein Passwort bleibt unverändert.</p>
     `
   };
 
@@ -52,7 +52,7 @@ async function sendNewsletterSignupEmail(firstname: string, email: string): Prom
   const mailOptions = {
     from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM_ADDRESS}>`,
     to: 'ai@kvix.de',
-    subject: 'Neue Newsletter-Anmeldung auf HelpBärAI',
+    subject: 'HelpBärAI - Neue Newsletter-Anmeldung',
     html: `
       <h1>Neue Newsletter-Anmeldung</h1>
       <p><strong>Vorname:</strong> ${firstname}</p>

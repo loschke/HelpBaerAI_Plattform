@@ -114,3 +114,22 @@ export async function updateUserLastLogin(db: Database, userId: number): Promise
 export async function getAllUsers(db: Database): Promise<User[]> {
   return db.all<User[]>('SELECT * FROM users');
 }
+
+export async function addCreditsToUser(db: Database, userId: number, amount: number): Promise<void> {
+  await db.run('UPDATE users SET credits = credits + ? WHERE id = ?', [amount, userId]);
+  console.log(`Added ${amount} credits to user:`, userId);
+}
+
+export async function deleteUserAndLogs(db: Database, userId: number): Promise<void> {
+  await db.run('BEGIN TRANSACTION');
+  try {
+    await db.run('DELETE FROM users WHERE id = ?', [userId]);
+    await db.run('DELETE FROM operation_logs WHERE userId = ?', [userId]);
+    await db.run('COMMIT');
+    console.log('User and associated logs deleted:', userId);
+  } catch (error) {
+    await db.run('ROLLBACK');
+    console.error('Error deleting user and logs:', error);
+    throw error;
+  }
+}
