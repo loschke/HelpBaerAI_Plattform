@@ -10,6 +10,7 @@ import { promisify } from 'util';
 import config from '../config/model-costs'; 
 import {getUserCredits, updateUserCredits, logOperation } from '../services/creditService';
 import loadingFacts from '../config/loading-facts';
+import logger from '../utils/logger';
 
 const parseXml = promisify<string, OptionsV2, WebhookResponse | null>((xmlString, options, callback) => {
   // Extrahieren Sie den Inhalt des output-Elements vor dem Parsen
@@ -55,25 +56,25 @@ const asyncHandler = (fn: AsyncRouteHandler) => (req: Request, res: Response, ne
 };
 
 router.get('/:assistantId', asyncHandler(async (req: Request, res: Response) => {
-  console.log('Session ID in assistants route:', req.sessionID);
-  console.log('Session data in assistants route:', req.session);
+  logger.debug('Session ID in assistants route: %s', req.sessionID);
+  logger.debug('Session data in assistants route: %O', req.session);
 
   const assistantId = req.params.assistantId;
-  console.log('Requested assistantId:', assistantId);
+  logger.debug('Requested assistantId: %s', assistantId);
   
   // Änderung hier: Entfernen des führenden Schrägstrichs bei der Suche
   const assistant = aiAssistants.find(a => a.buttonLink === `/${assistantId}` || a.buttonLink === assistantId);
-  console.log('Found assistant:', assistant ? assistant.title : 'Not found');
+  logger.debug('Found assistant: %O', assistant ? assistant.title : 'Not found');
 
   if (assistant) {
     let user = null;
     if (req.session && req.session.userId) {
-      console.log('User ID from session in assistants route:', req.session.userId);
+      logger.debug('User ID from session in assistants route: %s', req.session.userId);
       const db = await openDb();
       user = await getUserById(db, req.session.userId);
-      console.log('User found in assistants route:', user ? user.email : 'Not found');
+      logger.debug('User found in assistants route: %O', user ? user.email : 'Not found');
     } else {
-      console.log('No user ID in session for assistants route');
+      logger.debug('No user ID in session for assistants route');
     }
 
     res.render('pages/assistant-analysis', { 
@@ -82,15 +83,15 @@ router.get('/:assistantId', asyncHandler(async (req: Request, res: Response) => 
       loadingFacts: loadingFacts
     });
   } else {
-    console.log('Assistant not found, rendering error page');
+    logger.debug('Assistant not found, rendering error page');
     res.status(404).render('pages/error', { message: 'Assistant not found' });
   }
 }));
 
 router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  console.log('Processing request...');
-  console.log('Received request body:', req.body);
-  console.log('Received assistantId:', req.params.assistantId);
+  logger.debug('Processing request...');
+  logger.debug('Received request body: %O', req.body);
+  logger.debug('Received assistantId: %s', req.params.assistantId);
   
   const { assistantId } = req.params;
   const { operationId, tabType, content, mainFocus, outputLanguage, outputFormat, languageModel, promptTemplate } = req.body;
@@ -115,10 +116,10 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
 
   // Check user credits
   const userCredits = await getUserCredits(userId);
-  console.log('User credits:', userCredits);
-  console.log('Operation cost:', operation.creditCost);
+  logger.debug('User credits: %O', userCredits);
+  logger.debug('Operation cost: %O', operation.creditCost);
   if (userCredits < operation.creditCost) {
-    console.log('Insufficient credits');
+    logger.debug('Insufficient credits');
     res.status(403).json({ error: 'Insufficient credits' });
     return;
   }
@@ -126,14 +127,14 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
   try {
     let finalPromptTemplate;
     if (promptTemplate) {
-      console.log('Using client-provided promptTemplate');
+      logger.debug('Using client-provided promptTemplate');
       finalPromptTemplate = promptTemplate;
     } else {
-      console.log('Fetching promptTemplate from server');
+      logger.debug('Fetching promptTemplate from server');
       finalPromptTemplate = await getPromptTemplate(operation.promptKey);
     }
 
-    console.log('Final promptTemplate:', finalPromptTemplate);
+    logger.debug('Final promptTemplate: %O', finalPromptTemplate);
 
     // Vorbereiten der Daten für die Rückgabe an den Client
     const preparedData = {
@@ -148,11 +149,11 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
       makeBranch: req.body.makeBranch // Neue Zeile
     };
 
-    console.log('Prepared data for client:', preparedData);
+    logger.debug('Prepared data for client: %O', preparedData);
 
     // Senden der Daten an den externen Webhook
     const webhookUrl = process.env.AI_ASSISTANT_WEBHOOK_URL;
-    console.log('Webhook URL:', webhookUrl);
+    logger.debug('Webhook URL: %s', webhookUrl);
 
     if (webhookUrl) {
       const webhookResponse = await fetch(webhookUrl, {
@@ -209,7 +210,7 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
           totalCost // operationCost
         );
       } catch (logError) {
-        console.error('Failed to log operation:', logError);
+        logger.error('Failed to log operation: %O', logError);
         // Entscheiden Sie hier, ob Sie den Fehler ignorieren oder die Anfrage abbrechen möchten
       }
 
@@ -220,11 +221,11 @@ router.post('/:assistantId/process', asyncHandler(async (req: Request, res: Resp
         remainingCredits: updatedCredits
       });
     } else {
-      console.error('Webhook URL is not defined in environment variables');
+      logger.error('Webhook URL is not defined in environment variables');
       res.status(500).json({ error: 'Webhook URL is not configured' });
     }
   } catch (error) {
-    console.error('Error processing request:', error);
+    logger.error('Error processing request: %O', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 }));
