@@ -1,4 +1,7 @@
 <div id="webhookResponse" class="mt-6 p-4 bg-base-200 rounded-lg hidden">
+    <div class="text-lg text-accent">
+        Diese Antwort wurde innerhalb 1 Minute für <strong>$ <span class="total-cost"></span></strong> generiert.
+    </div>
     <div class="output mb-4"></div>
     <div class="metadata mt-4 text-sm text-gray-500">
         <div class="llm mb-2">
@@ -15,10 +18,9 @@
         <div class="costs mt-2">
             <strong>Kosten:</strong>
             <ul class="list-disc list-inside">
-                <li>Prompt: <span class="prompt-cost"></span> Cent</li>
-                <li>Output: <span class="output-cost"></span> Cent</li>
-                <li>Scrape: <span class="scrape-cost"></span> Cent</li>
-                <li>Gesamt: <span class="total-cost"></span> Cent</li>
+                <li>Prompt: <span class="prompt-cost"></span> $</li>
+                <li>Output: <span class="output-cost"></span> $</li>
+                <li>Scrape: <span class="scrape-cost"></span> $</li>
             </ul>
         </div>
     </div>
