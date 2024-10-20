@@ -14,10 +14,19 @@ export interface OperationLog {
 }
 
 export async function createOperationLog(db: Database, log: OperationLog): Promise<number> {
+  // Parse the formData JSON
+  const formDataObj = JSON.parse(log.formData);
+  
+  // Remove the promptTemplate from the formData object
+  delete formDataObj.promptTemplate;
+  
+  // Stringify the modified formData object
+  const modifiedFormData = JSON.stringify(formDataObj);
+
   const result = await db.run(
     `INSERT INTO operation_logs (userId, operationId, formData, timestamp, success, response, creditsUsed, tokenUsed, operationCost)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [log.userId, log.operationId, log.formData, log.timestamp, log.success ? 1 : 0, log.response, log.creditsUsed, log.tokenUsed, log.operationCost]
+    [log.userId, log.operationId, modifiedFormData, log.timestamp, log.success ? 1 : 0, log.response, log.creditsUsed, log.tokenUsed, log.operationCost]
   );
   return result.lastID!;
 }
