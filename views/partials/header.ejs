@@ -7,26 +7,28 @@
                 </a> AI-Labs
             </div>
             <div class="navbar-end">
-                <% if (locals.user) { %>
-                    <% if (locals.user.isAdmin) { %>
-                        <a href="/admin/dashboard" class="text-primary-content px-4 py-2 rounded hover:text-primary">
-                            Dashboard
+                <div class="hidden lg:flex lg:items-center">
+                    <% if (locals.user) { %>
+                        <% if (locals.user.isAdmin) { %>
+                            <a href="/admin/dashboard" class="text-primary-content px-4 py-2 rounded hover:text-primary">
+                                Dashboard
+                            </a>
+                        <% } %>
+                        <a href="/profile" class="text-primary-content px-4 py-2 rounded hover:text-primary">
+                            Mein Profil
+                        </a>
+                        <a href="/auth/logout" class="btn btn-primary text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
+                            Logout
+                        </a>
+                    <% } else { %>
+                        <a href="/auth/login" class="text-primary-content px-4 py-2 rounded hover:text-primary">
+                            Login
+                        </a>
+                        <a href="/auth/register" class="btn btn-primary text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
+                            Kostenlos ausprobieren
                         </a>
                     <% } %>
-                    <a href="/profile" class="text-primary-content px-4 py-2 rounded hover:text-primary">
-                        Mein Profil
-                    </a>
-                    <a href="/auth/logout" class="btn btn-primary text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
-                        Logout
-                    </a>
-                <% } else { %>
-                    <a href="/auth/login" class="text-primary-content px-4 py-2 rounded hover:text-primary">
-                        Login
-                    </a>
-                    <a href="/auth/register" class="btn btn-primary text-primary-content px-4 py-2 rounded hover:bg-opacity-90">
-                        Kostenlos ausprobieren
-                    </a>
-                <% } %>
+                </div>
                 <div class="dropdown dropdown-end lg:hidden">
                     <label tabindex="0" class="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
